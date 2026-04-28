@@ -1,18 +1,17 @@
-import { Link } from '@tanstack/react-router';
 import {
   ActionIcon,
   Avatar,
   Group,
   Menu,
   Text,
-  useMantineColorScheme,
   useComputedColorScheme,
+  useMantineColorScheme,
 } from '@mantine/core';
-import { IconMoon, IconSun, IconUser, IconSettings, IconLogout } from '@tabler/icons-react';
-import { useNavigate } from '@tanstack/react-router';
+import { IconLogout, IconMoon, IconSun, IconUser } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
-import { MobileNavBurger } from './MobileNavBurger';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { useAuthStore } from '@/store/authStore';
+import { MobileNavBurger } from './MobileNavBurger';
 
 interface HeaderProps {
   navOpened: boolean;
@@ -39,7 +38,13 @@ export function Header({ navOpened, toggleNav }: HeaderProps) {
     <Group h="100%" px="md" justify="space-between">
       <Group>
         <MobileNavBurger opened={navOpened} toggle={toggleNav} />
-        <Text fw={700} size="lg" component={Link} to="/households" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Text
+          fw={700}
+          size="lg"
+          component={Link}
+          to="/households"
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
           Freezer Tracker
         </Text>
       </Group>
@@ -56,18 +61,16 @@ export function Header({ navOpened, toggleNav }: HeaderProps) {
 
         <Menu shadow="md" width={180}>
           <Menu.Target>
-            <Avatar
-              size="sm"
-              radius="xl"
-              color="blue"
-              style={{ cursor: 'pointer' }}
-            >
+            <Avatar size="sm" radius="xl" color="blue" style={{ cursor: 'pointer' }}>
               {currentUser?.name?.[0]?.toUpperCase() ?? 'U'}
             </Avatar>
           </Menu.Target>
           <Menu.Dropdown>
             <Menu.Label>{currentUser?.name ?? 'Account'}</Menu.Label>
-            <Menu.Item leftSection={<IconUser size={14} />} onClick={() => navigate({ to: '/profile' })}>
+            <Menu.Item
+              leftSection={<IconUser size={14} />}
+              onClick={() => navigate({ to: '/profile' })}
+            >
               My profile
             </Menu.Item>
             <Menu.Divider />

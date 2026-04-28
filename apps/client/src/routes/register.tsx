@@ -1,5 +1,5 @@
-import { createFileRoute, useNavigate, redirect } from '@tanstack/react-router';
-import { useForm } from 'react-hook-form';
+import type { RegisterDto } from '@freezer-tracker/shared';
+import { registerSchema } from '@freezer-tracker/shared';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Anchor,
@@ -13,9 +13,9 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
+import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
+import { useForm } from 'react-hook-form';
 import { useRegister } from '@/hooks/useAuth';
-import { registerSchema } from '@freezer-tracker/shared';
-import type { RegisterDto } from '@freezer-tracker/shared';
 import { useAuthStore } from '@/store/authStore';
 
 export const Route = createFileRoute('/register')({
@@ -76,11 +76,7 @@ function RegisterPage() {
               </Button>
               <Text size="sm" ta="center">
                 Already have an account?{' '}
-                <Anchor
-                  component="button"
-                  type="button"
-                  onClick={() => navigate({ to: '/login' })}
-                >
+                <Anchor component="button" type="button" onClick={() => navigate({ to: '/login' })}>
                   Sign in
                 </Anchor>
               </Text>

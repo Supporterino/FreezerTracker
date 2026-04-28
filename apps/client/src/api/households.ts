@@ -1,10 +1,10 @@
-import { apiClient } from '@/api/client';
 import type {
-  HouseholdResponse,
-  HouseholdDetailResponse,
   CreateHouseholdDto,
+  HouseholdDetailResponse,
+  HouseholdResponse,
   UpdateHouseholdDto,
 } from '@freezer-tracker/shared';
+import { apiClient } from '@/api/client';
 
 export const householdsApi = {
   list: () => apiClient.get('households').json<HouseholdResponse[]>(),
@@ -19,8 +19,7 @@ export const householdsApi = {
 
   delete: (hid: string) => apiClient.delete(`households/${hid}`),
 
-  removeMember: (hid: string, uid: string) =>
-    apiClient.delete(`households/${hid}/members/${uid}`),
+  removeMember: (hid: string, uid: string) => apiClient.delete(`households/${hid}/members/${uid}`),
 
   transferOwnership: (hid: string, newOwnerId: string) =>
     apiClient.patch(`households/${hid}/transfer`, { json: { newOwnerId } }),

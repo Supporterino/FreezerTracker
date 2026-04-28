@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { CompartmentsService } from './compartments.service';
-import { CompartmentsController } from './compartments.controller';
 import { HouseholdsModule } from '../households/households.module';
+import { CompartmentsController } from './compartments.controller';
+import { CompartmentsService } from './compartments.service';
 
 @Module({
   imports: [HouseholdsModule],

@@ -1,16 +1,10 @@
+import { AppShell, Avatar, NavLink, ScrollArea } from '@mantine/core';
+import { IconArchive, IconHome, IconList, IconSettings, IconSnowflake } from '@tabler/icons-react';
 import { Link, useParams } from '@tanstack/react-router';
-import { AppShell, Avatar, NavLink, ScrollArea, Text } from '@mantine/core';
-import {
-  IconArchive,
-  IconHome,
-  IconList,
-  IconSettings,
-  IconSnowflake,
-} from '@tabler/icons-react';
-import { useHouseholds } from '@/hooks/useHouseholds';
 import { useFreezers } from '@/hooks/useFreezer';
-import { useHouseholdStore } from '@/store/householdStore';
+import { useHouseholds } from '@/hooks/useHouseholds';
 import { useAuthStore } from '@/store/authStore';
+import { useHouseholdStore } from '@/store/householdStore';
 
 function FreezerLinks({ hid }: { hid: string }) {
   const { data: freezers } = useFreezers(hid);

@@ -1,10 +1,9 @@
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import type { CreateFreezerDto, FreezerResponse } from '@freezer-tracker/shared';
+import { createFreezerSchema } from '@freezer-tracker/shared';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Modal, Stack, Textarea, TextInput } from '@mantine/core';
-import type { FreezerResponse } from '@freezer-tracker/shared';
-import { createFreezerSchema } from '@freezer-tracker/shared';
-import type { CreateFreezerDto } from '@freezer-tracker/shared';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { useCreateFreezer, useUpdateFreezer } from '@/hooks/useFreezer';
 
 interface FreezerModalProps {
@@ -19,7 +18,12 @@ export function FreezerModal({ opened, onClose, householdId, freezer }: FreezerM
   const createFreezer = useCreateFreezer(householdId);
   const updateFreezer = useUpdateFreezer(householdId, freezer?.id ?? '');
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<CreateFreezerDto>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<CreateFreezerDto>({
     resolver: zodResolver(createFreezerSchema),
     defaultValues: { name: freezer?.name ?? '', description: freezer?.description ?? '' },
   });
@@ -42,7 +46,12 @@ export function FreezerModal({ opened, onClose, householdId, freezer }: FreezerM
   const isPending = createFreezer.isPending || updateFreezer.isPending;
 
   return (
-    <Modal opened={opened} onClose={onClose} title={isEdit ? 'Edit Freezer' : 'Add Freezer'} size="sm">
+    <Modal
+      opened={opened}
+      onClose={onClose}
+      title={isEdit ? 'Edit Freezer' : 'Add Freezer'}
+      size="sm"
+    >
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack>
           <TextInput
@@ -59,8 +68,12 @@ export function FreezerModal({ opened, onClose, householdId, freezer }: FreezerM
             {...register('description')}
           />
           <Group justify="flex-end">
-            <Button variant="default" onClick={onClose} disabled={isPending}>Cancel</Button>
-            <Button type="submit" loading={isPending}>Save</Button>
+            <Button variant="default" onClick={onClose} disabled={isPending}>
+              Cancel
+            </Button>
+            <Button type="submit" loading={isPending}>
+              Save
+            </Button>
           </Group>
         </Stack>
       </form>

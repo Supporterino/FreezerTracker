@@ -1,5 +1,5 @@
-import { create } from 'zustand';
 import type { TokenResponse, UserResponse } from '@freezer-tracker/shared';
+import { create } from 'zustand';
 import { tauriStore } from '@/lib/tauriStore';
 
 interface AuthState {

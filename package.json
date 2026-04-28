@@ -4,7 +4,11 @@
   "workspaces": ["apps/*", "packages/*"],
   "scripts": {
     "dev:server": "bun run --cwd apps/server dev",
-    "dev:client": "bun run --cwd apps/client dev"
+    "dev:client": "bun run --cwd apps/client tauri dev",
+    "lint": "biome lint --write .",
+    "format": "biome format --write .",
+    "check": "biome check --write .",
+    "ci:check": "biome ci ."
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
@@ -12,6 +16,8 @@
     "pg": "^8.20.0"
   },
   "devDependencies": {
-    "@types/pg": "^8.20.0"
+    "@biomejs/biome": "^2.4.13",
+    "@types/pg": "^8.20.0",
+    "lefthook": "^2.1.6"
   }
 }

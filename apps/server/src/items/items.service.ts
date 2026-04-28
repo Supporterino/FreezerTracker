@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { ChangeLogService, FieldDiff } from '../change-log/change-log.service';
-import { CreateItemDto } from './dto/create-item.dto';
-import { UpdateItemDto } from './dto/update-item.dto';
-import { ItemQueryDto } from './dto/item-query.dto';
+import type { ChangeLogService, FieldDiff } from '../change-log/change-log.service';
+import type { PrismaService } from '../prisma/prisma.service';
+import type { CreateItemDto } from './dto/create-item.dto';
+import type { ItemQueryDto } from './dto/item-query.dto';
+import type { UpdateItemDto } from './dto/update-item.dto';
 
 const USER_SELECT = { id: true, name: true, email: true, createdAt: true };
 
@@ -17,7 +17,9 @@ export class ItemsService {
   private async verifyFreezerChain(householdId: string, freezerId: string, compartmentId: string) {
     const freezer = await this.prisma.freezer.findFirst({ where: { id: freezerId, householdId } });
     if (!freezer) throw new NotFoundException('Freezer not found');
-    const compartment = await this.prisma.compartment.findFirst({ where: { id: compartmentId, freezerId } });
+    const compartment = await this.prisma.compartment.findFirst({
+      where: { id: compartmentId, freezerId },
+    });
     if (!compartment) throw new NotFoundException('Compartment not found');
   }
 
@@ -114,14 +116,23 @@ export class ItemsService {
           ...(dto.notes !== undefined && { notes: dto.notes }),
           ...(dto.freezerId !== undefined && { freezerId: dto.freezerId }),
           ...(dto.compartmentId !== undefined && { compartmentId: dto.compartmentId }),
-          ...(dto.expiresAt !== undefined && { expiresAt: dto.expiresAt ? new Date(dto.expiresAt) : null }),
+          ...(dto.expiresAt !== undefined && {
+            expiresAt: dto.expiresAt ? new Date(dto.expiresAt) : null,
+          }),
           updatedById: userId,
         },
         include: { createdBy: { select: USER_SELECT }, updatedBy: { select: USER_SELECT } },
       });
 
       const diffs: FieldDiff[] = [];
-      const trackedFields: Array<keyof typeof current> = ['name', 'quantity', 'notes', 'freezerId', 'compartmentId', 'expiresAt'];
+      const trackedFields: Array<keyof typeof current> = [
+        'name',
+        'quantity',
+        'notes',
+        'freezerId',
+        'compartmentId',
+        'expiresAt',
+      ];
       for (const field of trackedFields) {
         const oldVal = current[field];
         const newVal = (updated as any)[field];

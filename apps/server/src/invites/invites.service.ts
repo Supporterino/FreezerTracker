@@ -1,13 +1,13 @@
+import * as crypto from 'node:crypto';
 import {
   BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import * as crypto from 'crypto';
+import type { ConfigService } from '@nestjs/config';
 import * as qrcode from 'qrcode';
-import { PrismaService } from '../prisma/prisma.service';
-import { ConfigService } from '@nestjs/config';
+import type { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class InvitesService {

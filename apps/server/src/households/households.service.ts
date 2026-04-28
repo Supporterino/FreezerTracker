@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { CreateHouseholdDto } from './dto/create-household.dto';
-import { UpdateHouseholdDto } from './dto/update-household.dto';
+import type { PrismaService } from '../prisma/prisma.service';
+import type { CreateHouseholdDto } from './dto/create-household.dto';
+import type { UpdateHouseholdDto } from './dto/update-household.dto';
 
 @Injectable()
 export class HouseholdsService {
@@ -75,7 +75,8 @@ export class HouseholdsService {
     const newOwnerMember = await this.prisma.householdMember.findUnique({
       where: { householdId_userId: { householdId, userId: newOwnerId } },
     });
-    if (!newOwnerMember) throw new NotFoundException('Target user is not a member of this household');
+    if (!newOwnerMember)
+      throw new NotFoundException('Target user is not a member of this household');
 
     await this.prisma.$transaction([
       this.prisma.household.update({

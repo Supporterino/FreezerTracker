@@ -1,28 +1,22 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { useForm } from 'react-hook-form';
+import type { UpdateHouseholdDto } from '@freezer-tracker/shared';
+import { updateHouseholdSchema } from '@freezer-tracker/shared';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
-import {
-  Button,
-  Divider,
-  Group,
-  Select,
-  Stack,
-  Tabs,
-  Text,
-  TextInput,
-  Title,
-} from '@mantine/core';
+import { Button, Divider, Group, Select, Stack, Tabs, Text, TextInput, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { useHousehold, useUpdateHousehold, useDeleteHousehold, useTransferOwnership } from '@/hooks/useHouseholds';
-import { MemberList } from '@/components/households/MemberList';
-import { InviteQRPanel } from '@/components/households/InviteQRPanel';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { ConfirmModal } from '@/components/common/ConfirmModal';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
-import { updateHouseholdSchema } from '@freezer-tracker/shared';
-import type { UpdateHouseholdDto } from '@freezer-tracker/shared';
+import { InviteQRPanel } from '@/components/households/InviteQRPanel';
+import { MemberList } from '@/components/households/MemberList';
+import {
+  useDeleteHousehold,
+  useHousehold,
+  useTransferOwnership,
+  useUpdateHousehold,
+} from '@/hooks/useHouseholds';
 import { useAuthStore } from '@/store/authStore';
-import { useState } from 'react';
 
 export const Route = createFileRoute('/households/$hid/settings')({
   component: SettingsPage,

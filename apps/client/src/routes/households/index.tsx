@@ -1,28 +1,27 @@
-import { createFileRoute, useNavigate, redirect } from '@tanstack/react-router';
+import type { CreateHouseholdDto } from '@freezer-tracker/shared';
+import { createHouseholdSchema } from '@freezer-tracker/shared';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
-  ActionIcon,
   Button,
   Card,
   Center,
   Group,
   Loader,
+  Modal,
   SimpleGrid,
   Stack,
   Text,
+  TextInput,
   Title,
 } from '@mantine/core';
-import { IconHome, IconPlus } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
-import { useHouseholds } from '@/hooks/useHouseholds';
-import { useHouseholdStore } from '@/store/householdStore';
-import { useAuthStore } from '@/store/authStore';
-import { EmptyState } from '@/components/common/EmptyState';
-import { useCreateHousehold } from '@/hooks/useHouseholds';
+import { IconHome, IconPlus } from '@tabler/icons-react';
+import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Modal, TextInput } from '@mantine/core';
-import { createHouseholdSchema } from '@freezer-tracker/shared';
-import type { CreateHouseholdDto } from '@freezer-tracker/shared';
+import { EmptyState } from '@/components/common/EmptyState';
+import { useCreateHousehold, useHouseholds } from '@/hooks/useHouseholds';
+import { useAuthStore } from '@/store/authStore';
+import { useHouseholdStore } from '@/store/householdStore';
 
 export const Route = createFileRoute('/households/')({
   beforeLoad: () => {
@@ -77,11 +76,7 @@ function HouseholdsPage() {
         {households && households.length > 0 ? (
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
             {households.map((h) => (
-              <Card
-                key={h.id}
-                style={{ cursor: 'pointer' }}
-                onClick={() => handleSelect(h.id)}
-              >
+              <Card key={h.id} style={{ cursor: 'pointer' }} onClick={() => handleSelect(h.id)}>
                 <Group>
                   <IconHome size={24} />
                   <Text fw={600}>{h.name}</Text>

@@ -1,7 +1,7 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { CreateCompartmentDto } from './dto/create-compartment.dto';
-import { UpdateCompartmentDto } from './dto/update-compartment.dto';
+import type { PrismaService } from '../prisma/prisma.service';
+import type { CreateCompartmentDto } from './dto/create-compartment.dto';
+import type { UpdateCompartmentDto } from './dto/update-compartment.dto';
 
 @Injectable()
 export class CompartmentsService {
@@ -35,7 +35,12 @@ export class CompartmentsService {
     });
   }
 
-  async update(householdId: string, freezerId: string, compartmentId: string, dto: UpdateCompartmentDto) {
+  async update(
+    householdId: string,
+    freezerId: string,
+    compartmentId: string,
+    dto: UpdateCompartmentDto,
+  ) {
     await this.verifyChain(householdId, freezerId, compartmentId);
     return this.prisma.compartment.update({
       where: { id: compartmentId },

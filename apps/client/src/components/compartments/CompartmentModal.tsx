@@ -1,11 +1,9 @@
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import type { CompartmentResponse, CreateCompartmentDto } from '@freezer-tracker/shared';
+import { createCompartmentSchema } from '@freezer-tracker/shared';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Modal, NumberInput, Stack, TextInput } from '@mantine/core';
-import { Controller } from 'react-hook-form';
-import type { CompartmentResponse } from '@freezer-tracker/shared';
-import { createCompartmentSchema } from '@freezer-tracker/shared';
-import type { CreateCompartmentDto } from '@freezer-tracker/shared';
+import { useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { useCreateCompartment, useUpdateCompartment } from '@/hooks/useCompartments';
 
 interface CompartmentModalProps {
@@ -27,7 +25,13 @@ export function CompartmentModal({
   const createCompartment = useCreateCompartment(householdId, freezerId);
   const updateCompartment = useUpdateCompartment(householdId, freezerId, compartment?.id ?? '');
 
-  const { register, handleSubmit, control, reset, formState: { errors } } = useForm<CreateCompartmentDto>({
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm<CreateCompartmentDto>({
     resolver: zodResolver(createCompartmentSchema),
     defaultValues: { name: compartment?.name ?? '', position: compartment?.position ?? 0 },
   });
@@ -50,7 +54,12 @@ export function CompartmentModal({
   const isPending = createCompartment.isPending || updateCompartment.isPending;
 
   return (
-    <Modal opened={opened} onClose={onClose} title={isEdit ? 'Edit Compartment' : 'Add Compartment'} size="sm">
+    <Modal
+      opened={opened}
+      onClose={onClose}
+      title={isEdit ? 'Edit Compartment' : 'Add Compartment'}
+      size="sm"
+    >
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack>
           <TextInput
@@ -74,8 +83,12 @@ export function CompartmentModal({
             )}
           />
           <Group justify="flex-end">
-            <Button variant="default" onClick={onClose} disabled={isPending}>Cancel</Button>
-            <Button type="submit" loading={isPending}>Save</Button>
+            <Button variant="default" onClick={onClose} disabled={isPending}>
+              Cancel
+            </Button>
+            <Button type="submit" loading={isPending}>
+              Save
+            </Button>
           </Group>
         </Stack>
       </form>

@@ -1,7 +1,7 @@
+import type { CompartmentResponse } from '@freezer-tracker/shared';
 import { Group, Select, TextInput } from '@mantine/core';
 import { DatePickerInput, type DateValue } from '@mantine/dates';
 import { IconSearch } from '@tabler/icons-react';
-import type { CompartmentResponse } from '@freezer-tracker/shared';
 
 interface ItemFiltersProps {
   search: string;

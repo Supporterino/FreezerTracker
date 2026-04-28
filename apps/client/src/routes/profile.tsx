@@ -1,29 +1,19 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useState } from 'react';
-import {
-  Button,
-  Divider,
-  Group,
-  Paper,
-  Stack,
-  Text,
-  TextInput,
-  Title,
-} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { useQueryClient } from '@tanstack/react-query';
-import { useMutation } from '@tanstack/react-query';
-import { notifications } from '@mantine/notifications';
-import { useAuthStore } from '@/store/authStore';
-import { useSettingsStore } from '@/store/settingsStore';
-import { usersApi } from '@/api/users';
-import { updateUserSchema } from '@freezer-tracker/shared';
 import type { UpdateUserDto } from '@freezer-tracker/shared';
+import { updateUserSchema } from '@freezer-tracker/shared';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button, Group, Paper, Stack, Text, TextInput, Title } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { notifications } from '@mantine/notifications';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { invitesApi } from '@/api/invites';
+import { usersApi } from '@/api/users';
 import { ConfirmModal } from '@/components/common/ConfirmModal';
 import { QRScanner } from '@/components/households/QRScanner';
-import { invitesApi } from '@/api/invites';
+import { useAuthStore } from '@/store/authStore';
+import { useSettingsStore } from '@/store/settingsStore';
 
 export const Route = createFileRoute('/profile')({
   component: ProfilePage,
@@ -82,11 +72,19 @@ function ProfilePage() {
     mutationFn: (code: string) => invitesApi.acceptByCode(code),
     onSuccess: (household) => {
       queryClient.invalidateQueries({ queryKey: ['households'] });
-      notifications.show({ title: 'Joined!', message: `You joined "${household.name}".`, color: 'green' });
+      notifications.show({
+        title: 'Joined!',
+        message: `You joined "${household.name}".`,
+        color: 'green',
+      });
       navigate({ to: '/households/$hid/overview', params: { hid: household.id } });
     },
     onError: () => {
-      notifications.show({ title: 'Error', message: 'Invalid or expired invite code.', color: 'red' });
+      notifications.show({
+        title: 'Error',
+        message: 'Invalid or expired invite code.',
+        color: 'red',
+      });
     },
   });
 
@@ -149,9 +147,7 @@ function ProfilePage() {
       <Paper p="md">
         <Stack gap="sm">
           <Text fw={500}>Join a household</Text>
-          <form
-            onSubmit={inviteCodeForm.handleSubmit((d) => acceptInvite.mutate(d.code))}
-          >
+          <form onSubmit={inviteCodeForm.handleSubmit((d) => acceptInvite.mutate(d.code))}>
             <Group>
               <TextInput
                 placeholder="Enter invite code"

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { HouseholdsService } from './households.service';
-import { HouseholdsController } from './households.controller';
 import { HouseholdMemberGuard } from './guards/household-member.guard';
 import { HouseholdOwnerGuard } from './guards/household-owner.guard';
+import { HouseholdsController } from './households.controller';
+import { HouseholdsService } from './households.service';
 
 @Module({
   controllers: [HouseholdsController],

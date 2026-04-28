@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { ItemsService } from './items.service';
-import { ItemsController } from './items.controller';
-import { HouseholdsModule } from '../households/households.module';
 import { ChangeLogModule } from '../change-log/change-log.module';
+import { HouseholdsModule } from '../households/households.module';
+import { ItemsController } from './items.controller';
+import { ItemsService } from './items.service';
 
 @Module({
   imports: [HouseholdsModule, ChangeLogModule],

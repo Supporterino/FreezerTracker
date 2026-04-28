@@ -1,10 +1,10 @@
+import type { MemberResponse } from '@freezer-tracker/shared';
 import { Avatar, Badge, Button, Group, Table, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import type { MemberResponse } from '@freezer-tracker/shared';
+import { useState } from 'react';
 import { ConfirmModal } from '@/components/common/ConfirmModal';
 import { useRemoveMember } from '@/hooks/useHouseholds';
 import { useAuthStore } from '@/store/authStore';
-import { useState } from 'react';
 
 interface MemberListProps {
   members: MemberResponse[];

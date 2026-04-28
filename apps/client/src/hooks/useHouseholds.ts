@@ -1,7 +1,7 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { notifications } from '@mantine/notifications';
-import { householdsApi } from '@/api/households';
 import type { CreateHouseholdDto, UpdateHouseholdDto } from '@freezer-tracker/shared';
+import { notifications } from '@mantine/notifications';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { householdsApi } from '@/api/households';
 
 export const useHouseholds = () =>
   useQuery({
@@ -22,7 +22,11 @@ export const useCreateHousehold = () => {
     mutationFn: (dto: CreateHouseholdDto) => householdsApi.create(dto),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['households'] });
-      notifications.show({ title: 'Household created', message: 'Your new household is ready.', color: 'green' });
+      notifications.show({
+        title: 'Household created',
+        message: 'Your new household is ready.',
+        color: 'green',
+      });
     },
     onError: () => {
       notifications.show({ title: 'Error', message: 'Failed to create household.', color: 'red' });
@@ -51,10 +55,18 @@ export const useDeleteHousehold = () => {
     mutationFn: (hid: string) => householdsApi.delete(hid),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['households'] });
-      notifications.show({ title: 'Deleted', message: 'Household has been deleted.', color: 'orange' });
+      notifications.show({
+        title: 'Deleted',
+        message: 'Household has been deleted.',
+        color: 'orange',
+      });
     },
     onError: () => {
-      notifications.show({ title: 'Error', message: 'Failed to delete household. Transfer or delete your households first.', color: 'red' });
+      notifications.show({
+        title: 'Error',
+        message: 'Failed to delete household. Transfer or delete your households first.',
+        color: 'red',
+      });
     },
   });
 };
@@ -78,10 +90,18 @@ export const useTransferOwnership = (hid: string) => {
     mutationFn: (newOwnerId: string) => householdsApi.transferOwnership(hid, newOwnerId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['households', hid] });
-      notifications.show({ title: 'Ownership transferred', message: 'Household ownership has been transferred.', color: 'green' });
+      notifications.show({
+        title: 'Ownership transferred',
+        message: 'Household ownership has been transferred.',
+        color: 'green',
+      });
     },
     onError: () => {
-      notifications.show({ title: 'Error', message: 'Failed to transfer ownership.', color: 'red' });
+      notifications.show({
+        title: 'Error',
+        message: 'Failed to transfer ownership.',
+        color: 'red',
+      });
     },
   });
 };

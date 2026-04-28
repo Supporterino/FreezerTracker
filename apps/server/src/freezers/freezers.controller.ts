@@ -1,22 +1,22 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Patch,
-  Delete,
   Body,
-  Param,
-  UseGuards,
+  Controller,
+  Delete,
+  Get,
   HttpCode,
   HttpStatus,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { HouseholdMemberGuard } from '../households/guards/household-member.guard';
 import { HouseholdOwnerGuard } from '../households/guards/household-owner.guard';
-import { FreezersService } from './freezers.service';
-import { CreateFreezerDto } from './dto/create-freezer.dto';
-import { UpdateFreezerDto } from './dto/update-freezer.dto';
+import type { CreateFreezerDto } from './dto/create-freezer.dto';
+import type { UpdateFreezerDto } from './dto/update-freezer.dto';
+import type { FreezersService } from './freezers.service';
 
 @ApiTags('freezers')
 @ApiBearerAuth()

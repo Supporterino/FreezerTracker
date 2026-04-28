@@ -1,6 +1,6 @@
-import { Component, type ErrorInfo, type ReactNode } from 'react';
 import { Alert, Button, Stack, Text } from '@mantine/core';
 import { IconAlertCircle } from '@tabler/icons-react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;

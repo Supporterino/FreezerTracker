@@ -1,7 +1,7 @@
+import type { ChangeLogEntryResponse } from '@freezer-tracker/shared';
 import { Avatar, Group, ScrollArea, Stack, Text } from '@mantine/core';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import type { ChangeLogEntryResponse } from '@freezer-tracker/shared';
 
 dayjs.extend(relativeTime);
 

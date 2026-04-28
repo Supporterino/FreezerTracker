@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
 import { Alert, Button, Stack, Text } from '@mantine/core';
 import { IconAlertCircle, IconCamera } from '@tabler/icons-react';
 import { BrowserQRCodeReader } from '@zxing/browser';
-import { notifications } from '@mantine/notifications';
+import { useEffect, useRef, useState } from 'react';
 
 interface QRScannerProps {
   onScan: (code: string) => void;
@@ -29,14 +28,14 @@ export function QRScanner({ onScan }: QRScannerProps) {
             setScanning(false);
             onScan(result.getText());
           }
-        }
+        },
       );
       controlsRef.current = controls;
     } catch (err) {
       setError(
         err instanceof Error && err.name === 'NotAllowedError'
           ? 'Camera access was denied. Please allow camera access to scan QR codes.'
-          : 'Failed to start camera. Please try again.'
+          : 'Failed to start camera. Please try again.',
       );
       setScanning(false);
     }
@@ -77,11 +76,7 @@ export function QRScanner({ onScan }: QRScannerProps) {
           </Button>
         </Stack>
       ) : (
-        <Button
-          leftSection={<IconCamera size={16} />}
-          variant="light"
-          onClick={startScanning}
-        >
+        <Button leftSection={<IconCamera size={16} />} variant="light" onClick={startScanning}>
           Scan QR code
         </Button>
       )}

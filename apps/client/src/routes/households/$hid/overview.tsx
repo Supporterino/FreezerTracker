@@ -1,14 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router';
 import { Button, Group, SimpleGrid, Stack, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconPlus } from '@tabler/icons-react';
-import { useFreezers } from '@/hooks/useFreezer';
-import { useHousehold } from '@/hooks/useHouseholds';
-import { FreezerCard } from '@/components/freezers/FreezerCard';
-import { FreezerModal } from '@/components/freezers/FreezerModal';
+import { IconPlus, IconSnowflake } from '@tabler/icons-react';
+import { createFileRoute } from '@tanstack/react-router';
 import { EmptyState } from '@/components/common/EmptyState';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
-import { IconSnowflake } from '@tabler/icons-react';
+import { FreezerCard } from '@/components/freezers/FreezerCard';
+import { FreezerModal } from '@/components/freezers/FreezerModal';
+import { useFreezers } from '@/hooks/useFreezer';
+import { useHousehold } from '@/hooks/useHouseholds';
 
 export const Route = createFileRoute('/households/$hid/overview')({
   component: OverviewPage,

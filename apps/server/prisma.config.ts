@@ -1,5 +1,5 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { defineConfig } from 'prisma/config';
 
 // Manually load .env since Bun auto-loads it for app code but not always for the Prisma CLI process

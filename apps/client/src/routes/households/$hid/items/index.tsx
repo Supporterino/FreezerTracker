@@ -1,17 +1,17 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useState } from 'react';
+import type { CompartmentResponse, FreezerItemResponse } from '@freezer-tracker/shared';
+import { Stack, Title } from '@mantine/core';
 import type { DateValue } from '@mantine/dates';
 import { useDisclosure } from '@mantine/hooks';
-import { Stack, Title } from '@mantine/core';
-import { useItems } from '@/hooks/useItems';
-import { useFreezers } from '@/hooks/useFreezer';
-import { ItemGrid } from '@/components/items/ItemGrid';
-import { ItemFilters } from '@/components/items/ItemFilters';
-import { ItemModal } from '@/components/items/ItemModal';
-import { ItemDetailDrawer } from '@/components/items/ItemDetailDrawer';
-import { LoadingSpinner } from '@/components/common/LoadingSpinner';
-import type { FreezerItemResponse, CompartmentResponse } from '@freezer-tracker/shared';
+import { createFileRoute } from '@tanstack/react-router';
 import dayjs from 'dayjs';
+import { useState } from 'react';
+import { LoadingSpinner } from '@/components/common/LoadingSpinner';
+import { ItemDetailDrawer } from '@/components/items/ItemDetailDrawer';
+import { ItemFilters } from '@/components/items/ItemFilters';
+import { ItemGrid } from '@/components/items/ItemGrid';
+import { ItemModal } from '@/components/items/ItemModal';
+import { useFreezers } from '@/hooks/useFreezer';
+import { useItems } from '@/hooks/useItems';
 
 export const Route = createFileRoute('/households/$hid/items/')({
   component: ItemsPage,
@@ -67,11 +67,7 @@ function ItemsPage() {
         onAddFirst={openAdd}
       />
 
-      <ItemModal
-        opened={addOpened}
-        onClose={closeAdd}
-        householdId={hid}
-      />
+      <ItemModal opened={addOpened} onClose={closeAdd} householdId={hid} />
 
       <ItemModal
         opened={!!editItem}

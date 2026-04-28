@@ -1,23 +1,23 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Patch,
-  Delete,
   Body,
-  Param,
-  Request,
-  UseGuards,
+  Controller,
+  Delete,
+  Get,
   HttpCode,
   HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import type { CreateHouseholdDto } from './dto/create-household.dto';
+import type { UpdateHouseholdDto } from './dto/update-household.dto';
 import { HouseholdMemberGuard } from './guards/household-member.guard';
 import { HouseholdOwnerGuard } from './guards/household-owner.guard';
-import { HouseholdsService } from './households.service';
-import { CreateHouseholdDto } from './dto/create-household.dto';
-import { UpdateHouseholdDto } from './dto/update-household.dto';
+import type { HouseholdsService } from './households.service';
 
 @ApiTags('households')
 @ApiBearerAuth()
@@ -65,21 +65,14 @@ export class HouseholdsController {
   @UseGuards(HouseholdOwnerGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Remove a member from the household' })
-  removeMember(
-    @Param('hid') hid: string,
-    @Param('uid') uid: string,
-    @Request() req: any,
-  ) {
+  removeMember(@Param('hid') hid: string, @Param('uid') uid: string, @Request() req: any) {
     return this.householdsService.removeMember(hid, uid, req.user.userId);
   }
 
   @Patch(':hid/transfer')
   @UseGuards(HouseholdOwnerGuard)
   @ApiOperation({ summary: 'Transfer household ownership' })
-  transferOwnership(
-    @Param('hid') hid: string,
-    @Body() body: { newOwnerId: string },
-  ) {
+  transferOwnership(@Param('hid') hid: string, @Body() body: { newOwnerId: string }) {
     return this.householdsService.transferOwnership(hid, body.newOwnerId);
   }
 }

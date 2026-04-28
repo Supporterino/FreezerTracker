@@ -1,20 +1,20 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Delete,
   Body,
-  Param,
-  Request,
-  UseGuards,
+  Controller,
+  Delete,
+  Get,
   HttpCode,
   HttpStatus,
+  Param,
+  Post,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { HouseholdOwnerGuard } from '../households/guards/household-owner.guard';
-import { InvitesService } from './invites.service';
-import { AcceptInviteDto } from './dto/accept-invite.dto';
+import type { AcceptInviteDto } from './dto/accept-invite.dto';
+import type { InvitesService } from './invites.service';
 
 @ApiTags('invites')
 @ApiBearerAuth()

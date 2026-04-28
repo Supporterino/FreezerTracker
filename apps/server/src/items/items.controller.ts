@@ -1,25 +1,25 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Patch,
-  Delete,
   Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
   Param,
+  Patch,
+  Post,
   Query,
   Request,
   UseGuards,
-  HttpCode,
-  HttpStatus,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { HouseholdMemberGuard } from '../households/guards/household-member.guard';
 import { HouseholdOwnerGuard } from '../households/guards/household-owner.guard';
-import { ItemsService } from './items.service';
-import { CreateItemDto } from './dto/create-item.dto';
-import { UpdateItemDto } from './dto/update-item.dto';
-import { ItemQueryDto } from './dto/item-query.dto';
+import type { CreateItemDto } from './dto/create-item.dto';
+import type { ItemQueryDto } from './dto/item-query.dto';
+import type { UpdateItemDto } from './dto/update-item.dto';
+import type { ItemsService } from './items.service';
 
 @ApiTags('items')
 @ApiBearerAuth()

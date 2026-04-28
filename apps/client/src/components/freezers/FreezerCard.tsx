@@ -1,7 +1,7 @@
-import { Badge, Card, Group, Stack, Text } from '@mantine/core';
-import { useNavigate } from '@tanstack/react-router';
-import { IconSnowflake } from '@tabler/icons-react';
 import type { FreezerResponse } from '@freezer-tracker/shared';
+import { Badge, Card, Group, Stack, Text } from '@mantine/core';
+import { IconSnowflake } from '@tabler/icons-react';
+import { useNavigate } from '@tanstack/react-router';
 import { useItems } from '@/hooks/useItems';
 
 interface FreezerCardProps {

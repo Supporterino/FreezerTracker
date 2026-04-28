@@ -1,7 +1,7 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import type { CreateItemDto, ItemQueryDto, UpdateItemDto } from '@freezer-tracker/shared';
 import { notifications } from '@mantine/notifications';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { itemsApi } from '@/api/items';
-import type { CreateItemDto, UpdateItemDto, ItemQueryDto } from '@freezer-tracker/shared';
 
 export const useItems = (hid: string, filters?: ItemQueryDto) =>
   useQuery({
@@ -30,7 +30,11 @@ export const useCreateItem = (hid: string) => {
     mutationFn: (dto: CreateItemDto) => itemsApi.create(hid, dto),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['items', hid] });
-      notifications.show({ title: 'Item added', message: 'Item was added to the freezer.', color: 'green' });
+      notifications.show({
+        title: 'Item added',
+        message: 'Item was added to the freezer.',
+        color: 'green',
+      });
     },
     onError: () => {
       notifications.show({ title: 'Error', message: 'Failed to add item.', color: 'red' });
@@ -74,7 +78,11 @@ export const useHardDeleteItem = (hid: string) => {
       queryClient.invalidateQueries({ queryKey: ['items', hid, 'archive'] });
     },
     onError: () => {
-      notifications.show({ title: 'Error', message: 'Failed to permanently delete item.', color: 'red' });
+      notifications.show({
+        title: 'Error',
+        message: 'Failed to permanently delete item.',
+        color: 'red',
+      });
     },
   });
 };

@@ -1,9 +1,9 @@
-import { SimpleGrid, Text } from '@mantine/core';
+import type { CompartmentResponse, FreezerItemResponse } from '@freezer-tracker/shared';
+import { SimpleGrid } from '@mantine/core';
 import { IconSnowflake } from '@tabler/icons-react';
-import type { FreezerItemResponse, CompartmentResponse } from '@freezer-tracker/shared';
-import { ItemCard } from './ItemCard';
 import { EmptyState } from '@/components/common/EmptyState';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
+import { ItemCard } from './ItemCard';
 
 interface ItemGridProps {
   items: FreezerItemResponse[];

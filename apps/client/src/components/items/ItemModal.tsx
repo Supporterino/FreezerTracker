@@ -1,25 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Button,
-  Group,
-  Modal,
-  Select,
-  Stack,
-  Textarea,
-  TextInput,
-} from '@mantine/core';
+import type { CreateItemDto, FreezerItemResponse, UpdateItemDto } from '@freezer-tracker/shared';
+import { Button, Group, Modal, Select, Stack, Textarea, TextInput } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { useMediaQuery } from '@mantine/hooks';
-import dayjs from 'dayjs';
-import type { FreezerItemResponse, FreezerDetailResponse } from '@freezer-tracker/shared';
-import { createItemSchema, updateItemSchema } from '@freezer-tracker/shared';
-import type { CreateItemDto, UpdateItemDto } from '@freezer-tracker/shared';
-import { useCreateItem, useUpdateItem } from '@/hooks/useItems';
-import { useFreezers } from '@/hooks/useFreezer';
+import { useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { useCompartments } from '@/hooks/useCompartments';
-import { z } from 'zod';
+import { useFreezers } from '@/hooks/useFreezer';
+import { useCreateItem, useUpdateItem } from '@/hooks/useItems';
 
 interface ItemModalProps {
   opened: boolean;
@@ -52,7 +39,7 @@ export function ItemModal({
 
   const { data: freezers } = useFreezers(householdId);
   const [selectedFreezerId, setSelectedFreezerId] = useState<string>(
-    item?.freezerId ?? defaultFreezerId ?? ''
+    item?.freezerId ?? defaultFreezerId ?? '',
   );
   const { data: compartments } = useCompartments(householdId, selectedFreezerId);
 

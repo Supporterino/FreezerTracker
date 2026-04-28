@@ -1,5 +1,10 @@
-import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
+import {
+  type CanActivate,
+  type ExecutionContext,
+  ForbiddenException,
+  Injectable,
+} from '@nestjs/common';
+import type { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class HouseholdOwnerGuard implements CanActivate {

@@ -1,19 +1,11 @@
-import {
-  ActionIcon,
-  Badge,
-  Card,
-  Group,
-  Stack,
-  Text,
-  Tooltip,
-} from '@mantine/core';
+import type { CompartmentResponse, FreezerItemResponse } from '@freezer-tracker/shared';
+import { ActionIcon, Badge, Card, Group, Stack, Text, Tooltip } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconEdit, IconNotes, IconTrash } from '@tabler/icons-react';
 import dayjs from 'dayjs';
-import type { FreezerItemResponse, CompartmentResponse } from '@freezer-tracker/shared';
-import { ExpiryBadge } from './ExpiryBadge';
 import { ConfirmModal } from '@/components/common/ConfirmModal';
 import { useDeleteItem } from '@/hooks/useItems';
+import { ExpiryBadge } from './ExpiryBadge';
 
 interface ItemCardProps {
   item: FreezerItemResponse;
@@ -69,12 +61,20 @@ export function ItemCard({ item, compartment, householdId, onEdit, onViewDetail 
           )}
         </Stack>
 
-        <Card.Section inheritPadding py="xs" mt="xs" style={{ borderTop: '1px solid var(--mantine-color-default-border)' }}>
+        <Card.Section
+          inheritPadding
+          py="xs"
+          mt="xs"
+          style={{ borderTop: '1px solid var(--mantine-color-default-border)' }}
+        >
           <Group justify="space-between">
             <ActionIcon
               variant="subtle"
               size="sm"
-              onClick={(e) => { e.stopPropagation(); onEdit(item); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit(item);
+              }}
               aria-label="Edit item"
             >
               <IconEdit size={16} />
@@ -83,7 +83,10 @@ export function ItemCard({ item, compartment, householdId, onEdit, onViewDetail 
               variant="subtle"
               color="red"
               size="sm"
-              onClick={(e) => { e.stopPropagation(); openConfirm(); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                openConfirm();
+              }}
               aria-label="Delete item"
             >
               <IconTrash size={16} />

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { FreezersService } from './freezers.service';
-import { FreezersController } from './freezers.controller';
 import { HouseholdsModule } from '../households/households.module';
+import { FreezersController } from './freezers.controller';
+import { FreezersService } from './freezers.service';
 
 @Module({
   imports: [HouseholdsModule],

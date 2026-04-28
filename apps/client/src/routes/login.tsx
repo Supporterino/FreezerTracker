@@ -1,5 +1,5 @@
-import { createFileRoute, useNavigate, redirect } from '@tanstack/react-router';
-import { useForm } from 'react-hook-form';
+import type { LoginDto } from '@freezer-tracker/shared';
+import { loginSchema } from '@freezer-tracker/shared';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Anchor,
@@ -13,9 +13,9 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
+import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
+import { useForm } from 'react-hook-form';
 import { useLogin } from '@/hooks/useAuth';
-import { loginSchema } from '@freezer-tracker/shared';
-import type { LoginDto } from '@freezer-tracker/shared';
 import { useAuthStore } from '@/store/authStore';
 
 export const Route = createFileRoute('/login')({

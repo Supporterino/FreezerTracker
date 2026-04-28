@@ -1,17 +1,13 @@
+import type { FreezerItemResponse } from '@freezer-tracker/shared';
+import { ActionIcon, Card, Group, Stack, Text, Title } from '@mantine/core';
+import { IconArchive, IconTrash } from '@tabler/icons-react';
 import { createFileRoute } from '@tanstack/react-router';
+import dayjs from 'dayjs';
 import { useState } from 'react';
-import { Group, Stack, Title } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconArchive } from '@tabler/icons-react';
-import { useArchivedItems, useHardDeleteItem } from '@/hooks/useItems';
-import { useCompartments } from '@/hooks/useCompartments';
+import { ConfirmModal } from '@/components/common/ConfirmModal';
 import { EmptyState } from '@/components/common/EmptyState';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
-import { ConfirmModal } from '@/components/common/ConfirmModal';
-import { Badge, Card, Group as MGroup, Text, ActionIcon } from '@mantine/core';
-import { IconTrash } from '@tabler/icons-react';
-import type { FreezerItemResponse } from '@freezer-tracker/shared';
-import dayjs from 'dayjs';
+import { useArchivedItems, useHardDeleteItem } from '@/hooks/useItems';
 
 export const Route = createFileRoute('/households/$hid/archive')({
   component: ArchivePage,

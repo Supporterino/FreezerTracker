@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { CreateFreezerDto } from './dto/create-freezer.dto';
-import { UpdateFreezerDto } from './dto/update-freezer.dto';
+import type { PrismaService } from '../prisma/prisma.service';
+import type { CreateFreezerDto } from './dto/create-freezer.dto';
+import type { UpdateFreezerDto } from './dto/update-freezer.dto';
 
 @Injectable()
 export class FreezersService {
@@ -38,7 +38,10 @@ export class FreezersService {
     await this.verifyFreezerBelongsToHousehold(freezerId, householdId);
     return this.prisma.freezer.update({
       where: { id: freezerId },
-      data: { ...(dto.name && { name: dto.name }), ...(dto.description !== undefined && { description: dto.description }) },
+      data: {
+        ...(dto.name && { name: dto.name }),
+        ...(dto.description !== undefined && { description: dto.description }),
+      },
     });
   }
 

@@ -1,12 +1,12 @@
-import { apiClient } from '@/api/client';
 import type {
-  FreezerItemResponse,
+  ChangeLogEntryResponse,
   CreateItemDto,
-  UpdateItemDto,
+  FreezerItemResponse,
   ItemQueryDto,
   PaginatedResponse,
-  ChangeLogEntryResponse,
+  UpdateItemDto,
 } from '@freezer-tracker/shared';
+import { apiClient } from '@/api/client';
 
 export const itemsApi = {
   list: (hid: string, params?: ItemQueryDto) =>
@@ -14,7 +14,7 @@ export const itemsApi = {
       .get(`households/${hid}/items`, {
         searchParams: params
           ? (Object.fromEntries(
-              Object.entries(params).filter(([, v]) => v !== undefined)
+              Object.entries(params).filter(([, v]) => v !== undefined),
             ) as Record<string, string>)
           : undefined,
       })
@@ -32,8 +32,7 @@ export const itemsApi = {
   update: (hid: string, iid: string, dto: UpdateItemDto) =>
     apiClient.patch(`households/${hid}/items/${iid}`, { json: dto }).json<FreezerItemResponse>(),
 
-  softDelete: (hid: string, iid: string) =>
-    apiClient.delete(`households/${hid}/items/${iid}`),
+  softDelete: (hid: string, iid: string) => apiClient.delete(`households/${hid}/items/${iid}`),
 
   hardDelete: (hid: string, iid: string) =>
     apiClient.delete(`households/${hid}/items/${iid}/permanent`),

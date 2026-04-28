@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import { Alert, Button, Code, CopyButton, Group, Loader, Stack, Text, Title } from '@mantine/core';
-import { IconAlertCircle, IconCopy, IconQrcode } from '@tabler/icons-react';
-import { QRCodeSVG } from 'qrcode.react';
+import type { InviteResponse } from '@freezer-tracker/shared';
+import { Button, Code, CopyButton, Group, Stack, Text, Title } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
+import { IconCopy, IconQrcode } from '@tabler/icons-react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QRCodeSVG } from 'qrcode.react';
+import { useState } from 'react';
 import { invitesApi } from '@/api/invites';
-import type { InviteResponse } from '@freezer-tracker/shared';
-import { notifications } from '@mantine/notifications';
 
 dayjs.extend(relativeTime);
 
@@ -60,7 +60,9 @@ export function InviteQRPanel({ householdId }: InviteQRPanelProps) {
       {activeInvite && (
         <Stack align="center" gap="sm">
           <QRCodeSVG value={activeInvite.code} size={200} />
-          <Code block fz="sm">{activeInvite.code}</Code>
+          <Code block fz="sm">
+            {activeInvite.code}
+          </Code>
           <CopyButton value={activeInvite.code}>
             {({ copied, copy }) => (
               <Button leftSection={<IconCopy size={14} />} variant="light" size="sm" onClick={copy}>
@@ -76,12 +78,16 @@ export function InviteQRPanel({ householdId }: InviteQRPanelProps) {
 
       {invites && invites.length > 0 && (
         <Stack gap="xs">
-          <Text size="sm" fw={500}>Active invites</Text>
+          <Text size="sm" fw={500}>
+            Active invites
+          </Text>
           {invites.map((inv) => (
             <Group key={inv.id} justify="space-between">
               <Code fz="xs">{inv.code}</Code>
               <Group gap="xs">
-                <Text size="xs" c="dimmed">Expires {dayjs(inv.expiresAt).fromNow()}</Text>
+                <Text size="xs" c="dimmed">
+                  Expires {dayjs(inv.expiresAt).fromNow()}
+                </Text>
                 <Button
                   size="xs"
                   variant="subtle"

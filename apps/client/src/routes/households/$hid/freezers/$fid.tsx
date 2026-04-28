@@ -1,22 +1,21 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useState } from 'react';
-import type { DateValue } from '@mantine/dates';
-import { ActionIcon, Breadcrumbs, Group, Stack, Text, Title } from '@mantine/core';
-import { IconPlus } from '@tabler/icons-react';
-import { useDisclosure } from '@mantine/hooks';
-import dayjs from 'dayjs';
-import { useItems } from '@/hooks/useItems';
-import { useFreezer } from '@/hooks/useFreezer';
-import { useCompartments } from '@/hooks/useCompartments';
-import { useHousehold } from '@/hooks/useHouseholds';
-import { useHouseholdStore } from '@/store/householdStore';
-import { ItemGrid } from '@/components/items/ItemGrid';
-import { ItemFilters } from '@/components/items/ItemFilters';
-import { ItemModal } from '@/components/items/ItemModal';
-import { ItemDetailDrawer } from '@/components/items/ItemDetailDrawer';
-import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import type { FreezerItemResponse } from '@freezer-tracker/shared';
-import { Link } from '@tanstack/react-router';
+import { ActionIcon, Breadcrumbs, Group, Stack, Text, Title } from '@mantine/core';
+import type { DateValue } from '@mantine/dates';
+import { useDisclosure } from '@mantine/hooks';
+import { IconPlus } from '@tabler/icons-react';
+import { createFileRoute, Link } from '@tanstack/react-router';
+import dayjs from 'dayjs';
+import { useState } from 'react';
+import { LoadingSpinner } from '@/components/common/LoadingSpinner';
+import { ItemDetailDrawer } from '@/components/items/ItemDetailDrawer';
+import { ItemFilters } from '@/components/items/ItemFilters';
+import { ItemGrid } from '@/components/items/ItemGrid';
+import { ItemModal } from '@/components/items/ItemModal';
+import { useCompartments } from '@/hooks/useCompartments';
+import { useFreezer } from '@/hooks/useFreezer';
+import { useHousehold } from '@/hooks/useHouseholds';
+import { useItems } from '@/hooks/useItems';
+import { useHouseholdStore } from '@/store/householdStore';
 
 export const Route = createFileRoute('/households/$hid/freezers/$fid')({
   component: FreezerView,
@@ -59,7 +58,13 @@ function FreezerView() {
         <Text component={Link} to="/households" size="sm" c="dimmed">
           Households
         </Text>
-        <Text component={Link}           to="/households/$hid/overview" params={{ hid } as any} size="sm" c="dimmed">
+        <Text
+          component={Link}
+          to="/households/$hid/overview"
+          params={{ hid } as any}
+          size="sm"
+          c="dimmed"
+        >
           {household?.name}
         </Text>
         <Text size="sm">{freezer?.name}</Text>
@@ -101,12 +106,7 @@ function FreezerView() {
         <IconPlus size={24} />
       </ActionIcon>
 
-      <ItemModal
-        opened={addOpened}
-        onClose={closeAdd}
-        householdId={hid}
-        defaultFreezerId={fid}
-      />
+      <ItemModal opened={addOpened} onClose={closeAdd} householdId={hid} defaultFreezerId={fid} />
 
       <ItemModal
         opened={!!editItem}

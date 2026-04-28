@@ -1,6 +1,7 @@
-import ky, { type KyInstance } from 'ky';
 import { fetch as tauriFetch } from '@tauri-apps/plugin-http';
+import ky, { type KyInstance } from 'ky';
 import { useAuthStore } from '@/store/authStore';
+
 // ⚠️ Do NOT import settingsStore here — circular dependency risk.
 // baseUrl is injected via reinitialiseClient() called from main.tsx.
 
@@ -30,7 +31,10 @@ function buildClient(baseUrl: string): KyInstance {
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ refreshToken }),
                 });
-                const refreshed = await (res as Response).json() as { accessToken: string; refreshToken: string };
+                const refreshed = (await (res as Response).json()) as {
+                  accessToken: string;
+                  refreshToken: string;
+                };
                 setTokens(refreshed);
                 const newHeaders = new Headers(request.headers);
                 newHeaders.set('Authorization', `Bearer ${refreshed.accessToken}`);

@@ -1,5 +1,5 @@
-import { IsNumber, IsOptional, IsString, Min, MinLength } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsNumber, IsOptional, IsString, Min, MinLength } from 'class-validator';
 
 export class CreateCompartmentDto {
   @ApiProperty()

@@ -1,7 +1,17 @@
-import { Button, Divider, Drawer, Group, Loader, ScrollArea, Stack, Table, Text, Title } from '@mantine/core';
+import type { CompartmentResponse, FreezerItemResponse } from '@freezer-tracker/shared';
+import {
+  Button,
+  Divider,
+  Drawer,
+  Group,
+  Loader,
+  ScrollArea,
+  Stack,
+  Table,
+  Title,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import dayjs from 'dayjs';
-import type { FreezerItemResponse, CompartmentResponse } from '@freezer-tracker/shared';
 import { ChangeHistoryList } from '@/components/history/ChangeHistoryList';
 import { useChangeLog } from '@/hooks/useChangeLog';
 import { ItemModal } from './ItemModal';
@@ -23,10 +33,7 @@ export function ItemDetailDrawer({
 }: ItemDetailDrawerProps) {
   const [editOpened, { open: openEdit, close: closeEdit }] = useDisclosure(false);
 
-  const { data: history, isLoading: historyLoading } = useChangeLog(
-    householdId,
-    item?.id ?? ''
-  );
+  const { data: history, isLoading: historyLoading } = useChangeLog(householdId, item?.id ?? '');
 
   if (!item) return null;
 
@@ -91,11 +98,7 @@ export function ItemDetailDrawer({
 
           <Title order={5}>Change History</Title>
 
-          {historyLoading ? (
-            <Loader size="sm" />
-          ) : (
-            <ChangeHistoryList entries={history ?? []} />
-          )}
+          {historyLoading ? <Loader size="sm" /> : <ChangeHistoryList entries={history ?? []} />}
         </Stack>
       </Drawer>
 
