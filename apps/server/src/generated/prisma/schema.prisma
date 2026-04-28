@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+
+  memberships     HouseholdMember[]
+  ownedHouseholds Household[]       @relation("HouseholdOwner")
+  refreshTokens   RefreshToken[]
+  createdItems    FreezerItem[]     @relation("CreatedItems")
+  updatedItems    FreezerItem[]     @relation("UpdatedItems")
+  changeLogs      ItemChangeLog[]
+}
+
+model RefreshToken {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+}
+
+model Household {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  ownerId   String
+  owner     User     @relation("HouseholdOwner", fields: [ownerId], references: [id])
+
+  members  HouseholdMember[]
+  freezers Freezer[]
+  items    FreezerItem[]
+  invites  HouseholdInvite[]
+}
+
+model HouseholdMember {
+  id          String        @id @default(cuid())
+  householdId String
+  household   Household     @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role        HouseholdRole @default(MEMBER)
+  joinedAt    DateTime      @default(now())
+
+  @@unique([householdId, userId])
+}
+
+enum HouseholdRole {
+  OWNER
+  MEMBER
+}
+
+model HouseholdInvite {
+  id           String    @id @default(cuid())
+  householdId  String
+  household    Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  code         String    @unique
+  expiresAt    DateTime
+  usedAt       DateTime?
+  usedByUserId String?
+  createdAt    DateTime  @default(now())
+}
+
+model Freezer {
+  id          String    @id @default(cuid())
+  householdId String
+  household   Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  createdAt   DateTime  @default(now())
+
+  compartments Compartment[]
+  items        FreezerItem[]
+}
+
+model Compartment {
+  id        String  @id @default(cuid())
+  freezerId String
+  freezer   Freezer @relation(fields: [freezerId], references: [id], onDelete: Cascade)
+  name      String
+  position  Int     @default(0)
+
+  items FreezerItem[]
+}
+
+model FreezerItem {
+  id            String      @id @default(cuid())
+  householdId   String
+  household     Household   @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  freezerId     String
+  freezer       Freezer     @relation(fields: [freezerId], references: [id])
+  compartmentId String
+  compartment   Compartment @relation(fields: [compartmentId], references: [id])
+  name          String
+  quantity      String
+  notes         String?
+  storedAt      DateTime    @default(now())
+  expiresAt     DateTime?
+  deletedAt     DateTime?
+  createdById   String
+  createdBy     User        @relation("CreatedItems", fields: [createdById], references: [id])
+  updatedById   String
+  updatedBy     User        @relation("UpdatedItems", fields: [updatedById], references: [id])
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  changeLogs ItemChangeLog[]
+}
+
+model ItemChangeLog {
+  id          String      @id @default(cuid())
+  itemId      String
+  item        FreezerItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  changedById String
+  changedBy   User        @relation(fields: [changedById], references: [id])
+  changedAt   DateTime    @default(now())
+  fieldName   String
+  oldValue    String?
+  newValue    String?
+}
