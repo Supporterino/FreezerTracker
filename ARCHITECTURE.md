@@ -131,7 +131,7 @@ ItemChangeLog
 | Forms | React Hook Form **7.x** + Zod **3.x** validation |
 | QR code display | `qrcode.react` **4.x** |
 | QR code scanning | Tauri plugin (camera) or `@zxing/browser` **0.2.x** inside webview |
-| HTTP client | `ky` **2.x** (lightweight fetch wrapper) |
+| HTTP client | `ky` **2.x** + `@tauri-apps/plugin-http` **2.x** (Tauri fetch passed into ky for mobile compatibility) |
 | Build | Vite **8.x** (bundled by Tauri) |
 | Language | TypeScript **6.x** strict mode |
 

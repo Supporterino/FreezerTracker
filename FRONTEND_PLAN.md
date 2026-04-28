@@ -13,7 +13,7 @@
 | Icons | `@tabler/icons-react` **3.41.1** |
 | QR display | `qrcode.react` **4.2.0** |
 | QR scan | `@zxing/browser` **0.2.0** (webview camera access) |
-| HTTP client | `ky` **2.0.2** |
+| HTTP client | `ky` **2.0.2** + `@tauri-apps/plugin-http` **2.x** (custom fetch for mobile) |
 | Build | Vite **8.0.10** (via Tauri) |
 | Color scheme | Dark/light + OS preference via Mantine `ColorSchemeScript` |
 | Primary color | Blue (Mantine default) |
@@ -74,6 +74,7 @@ This scaffolds `apps/client/` with:
 - `zustand@5`
 - `react-hook-form@7` `zod@^3.24.0` `@hookform/resolvers@3` — **pin Zod to v3**, see version note above
 - `ky@2`
+- `@tauri-apps/plugin-http@2` — **required for mobile (iOS/Android)**; provides a `fetch`-compatible implementation routed through Rust (see §4 for wiring)
 - `qrcode.react@4`
 - `@zxing/browser@0.2`
 - `dayjs@1` — required by `@mantine/dates`
@@ -206,16 +207,35 @@ export const theme = createTheme({
 
 ## 2. Tauri Plugin Configuration
 
-### 2.1 Enable `plugin-store` in `src-tauri/Cargo.toml`
+### 2.1 Enable `plugin-store` and `plugin-http` in `src-tauri/Cargo.toml`
 
-Add `tauri-plugin-store` as a dependency and register it in `src-tauri/src/main.rs`:
+Add both plugins as dependencies and register them in `src-tauri/src/main.rs`:
 
 ```rust
 tauri::Builder::default()
+    .plugin(tauri_plugin_http::init())       // required for all HTTP on mobile
     .plugin(tauri_plugin_store::Builder::default().build())
     .run(tauri::generate_context!())
     .expect("error running app");
 ```
+
+Configure allowed HTTP origins in `src-tauri/capabilities/default.json`:
+
+```json
+{
+  "permissions": [
+    "store:default",
+    {
+      "identifier": "http:default",
+      "allow": [{ "url": "https://*" }, { "url": "http://*" }]
+    }
+  ]
+}
+```
+
+> The `http:default` permission with `https://*` + `http://*` allows the user-configured
+> server URL (which is not known at build time) to be reached. If you want to lock this
+> down further in production, the operator can rebuild with a specific origin allowlist.
 
 ### 2.2 Enable camera plugin for QR scanning
 
@@ -344,6 +364,7 @@ Settings, the singleton is replaced in-place by calling `reinitialiseClient()`.
 
 ```typescript
 import ky, { type KyInstance } from 'ky';
+import { fetch as tauriFetch } from '@tauri-apps/plugin-http';
 import { useAuthStore } from '@/store/authStore';
 // ⚠️ Do NOT import settingsStore here — circular dependency risk.
 // baseUrl is injected via reinitialiseClient() called from main.tsx.
@@ -356,6 +377,12 @@ let apiClient: KyInstance = buildClient(_baseUrl);
 function buildClient(baseUrl: string): KyInstance {
   return ky.create({
     prefixUrl: baseUrl ? `${baseUrl}/api/v1` : '/',
+    // Use Tauri's fetch implementation instead of the browser's globalThis.fetch.
+    // On desktop this is functionally identical; on iOS/Android the browser webview
+    // does not expose a working fetch — all HTTP must go through the Rust layer via
+    // @tauri-apps/plugin-http. Passing it here means ky keeps all its hooks,
+    // retry logic, and ergonomics while using the correct transport on every platform.
+    fetch: tauriFetch as typeof fetch,
     hooks: {
       beforeRequest: [
         (request) => {
@@ -369,13 +396,16 @@ function buildClient(baseUrl: string): KyInstance {
             const { refreshToken, setTokens, logout } = useAuthStore.getState();
             if (refreshToken) {
               try {
-                // Use bare ky (not apiClient) to avoid interceptor loop
-                const refreshed = await ky.post(`${_baseUrl}/api/v1/auth/refresh`, {
-                  json: { refreshToken },
-                }).json<{ accessToken: string; refreshToken: string }>();
+                // Use bare tauriFetch (not apiClient) to avoid interceptor loop
+                const res = await tauriFetch(`${_baseUrl}/api/v1/auth/refresh`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ refreshToken }),
+                });
+                const refreshed = await res.json() as { accessToken: string; refreshToken: string };
                 setTokens(refreshed);
                 request.headers.set('Authorization', `Bearer ${refreshed.accessToken}`);
-                return ky(request);
+                return tauriFetch(request as unknown as URL, { headers: request.headers });
               } catch {
                 // Refresh failed — force logout
               }
