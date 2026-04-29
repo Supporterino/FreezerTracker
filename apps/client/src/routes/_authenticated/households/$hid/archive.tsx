@@ -9,7 +9,7 @@ import { EmptyState } from '@/components/common/EmptyState';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { useArchivedItems, useHardDeleteItem } from '@/hooks/useItems';
 
-export const Route = createFileRoute('/households/$hid/archive')({
+export const Route = createFileRoute('/_authenticated/households/$hid/archive')({
   component: ArchivePage,
 });
 

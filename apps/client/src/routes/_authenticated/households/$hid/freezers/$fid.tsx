@@ -18,7 +18,7 @@ import { useHousehold } from '@/hooks/useHouseholds';
 import { useItems } from '@/hooks/useItems';
 import { useHouseholdStore } from '@/store/householdStore';
 
-export const Route = createFileRoute('/households/$hid/freezers/$fid')({
+export const Route = createFileRoute('/_authenticated/households/$hid/freezers/$fid')({
   component: FreezerView,
 });
 

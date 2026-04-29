@@ -18,7 +18,7 @@ import {
 } from '@/hooks/useHouseholds';
 import { useAuthStore } from '@/store/authStore';
 
-export const Route = createFileRoute('/households/$hid/settings')({
+export const Route = createFileRoute('/_authenticated/households/$hid/settings')({
   component: SettingsPage,
 });
 

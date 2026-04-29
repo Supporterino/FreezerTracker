@@ -13,7 +13,7 @@ import { ItemModal } from '@/components/items/ItemModal';
 import { useFreezers } from '@/hooks/useFreezer';
 import { useItems } from '@/hooks/useItems';
 
-export const Route = createFileRoute('/households/$hid/items/')({
+export const Route = createFileRoute('/_authenticated/households/$hid/items/')({
   component: ItemsPage,
 });
 

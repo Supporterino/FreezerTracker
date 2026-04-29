@@ -9,7 +9,7 @@ import { FreezerModal } from '@/components/freezers/FreezerModal';
 import { useFreezers } from '@/hooks/useFreezer';
 import { useHousehold } from '@/hooks/useHouseholds';
 
-export const Route = createFileRoute('/households/$hid/overview')({
+export const Route = createFileRoute('/_authenticated/households/$hid/overview')({
   component: OverviewPage,
 });
 

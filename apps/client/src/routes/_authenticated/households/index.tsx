@@ -19,21 +19,16 @@ import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 import { IconHome, IconPlus, IconUsersGroup } from '@tabler/icons-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { invitesApi } from '@/api/invites';
 import { EmptyState } from '@/components/common/EmptyState';
 import { QRScanner } from '@/components/households/QRScanner';
 import { useCreateHousehold, useHouseholds } from '@/hooks/useHouseholds';
-import { useAuthStore } from '@/store/authStore';
 import { useHouseholdStore } from '@/store/householdStore';
 
-export const Route = createFileRoute('/households/')({
-  beforeLoad: () => {
-    const token = useAuthStore.getState().accessToken;
-    if (!token) throw redirect({ to: '/login' });
-  },
+export const Route = createFileRoute('/_authenticated/households/')({
   component: HouseholdsPage,
 });
 

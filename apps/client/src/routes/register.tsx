@@ -5,7 +5,6 @@ import {
   Anchor,
   Box,
   Button,
-  Center,
   Paper,
   PasswordInput,
   Stack,
@@ -42,50 +41,48 @@ function RegisterPage() {
   };
 
   return (
-    <Center mih="100vh" bg="var(--mantine-color-body)">
-      <Box w={400} p="md">
-        <Title order={2} ta="center" mb="xs">
-          Freezer Tracker
-        </Title>
-        <Text c="dimmed" size="sm" ta="center" mb="lg">
-          Create a new account
-        </Text>
-        <Paper p="xl">
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <Stack>
-              <TextInput
-                label="Name"
-                placeholder="Your name"
-                data-autofocus
-                {...form.register('name')}
-                error={form.formState.errors.name?.message}
-              />
-              <TextInput
-                label="Email"
-                placeholder="you@example.com"
-                {...form.register('email')}
-                error={form.formState.errors.email?.message}
-              />
-              <PasswordInput
-                label="Password"
-                placeholder="At least 8 characters"
-                {...form.register('password')}
-                error={form.formState.errors.password?.message}
-              />
-              <Button type="submit" loading={register.isPending} fullWidth mt="xs">
-                Create account
-              </Button>
-              <ServerUrlDisclosure />
-              <Text size="sm" ta="center">
-                Already have an account?{' '}
-                <Anchor component="button" type="button" onClick={() => navigate({ to: '/login' })}>
-                  Sign in
-                </Anchor>
-              </Text>
-            </Stack>
-          </form>
-        </Paper>
-      </Box>
-    </Center>
+    <Box maw={400} mx="auto" pt="15vh" px="md">
+      <Title order={2} ta="center" mb="xs">
+        Freezer Tracker
+      </Title>
+      <Text c="dimmed" size="sm" ta="center" mb="lg">
+        Create a new account
+      </Text>
+      <Paper p="xl" withBorder>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <Stack>
+            <TextInput
+              label="Name"
+              placeholder="Your name"
+              data-autofocus
+              {...form.register('name')}
+              error={form.formState.errors.name?.message}
+            />
+            <TextInput
+              label="Email"
+              placeholder="you@example.com"
+              {...form.register('email')}
+              error={form.formState.errors.email?.message}
+            />
+            <PasswordInput
+              label="Password"
+              placeholder="At least 8 characters"
+              {...form.register('password')}
+              error={form.formState.errors.password?.message}
+            />
+            <Button type="submit" loading={register.isPending} fullWidth mt="xs">
+              Create account
+            </Button>
+            <ServerUrlDisclosure />
+            <Text size="sm" ta="center">
+              Already have an account?{' '}
+              <Anchor component="button" type="button" onClick={() => navigate({ to: '/login' })}>
+                Sign in
+              </Anchor>
+            </Text>
+          </Stack>
+        </form>
+      </Paper>
+    </Box>
   );
 }
