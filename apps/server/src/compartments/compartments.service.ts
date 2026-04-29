@@ -1,5 +1,5 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
-import type { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import type { CreateCompartmentDto } from './dto/create-compartment.dto';
 import type { UpdateCompartmentDto } from './dto/update-compartment.dto';
 

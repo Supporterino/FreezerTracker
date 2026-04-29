@@ -19,7 +19,7 @@ import { HouseholdOwnerGuard } from '../households/guards/household-owner.guard'
 import type { CreateItemDto } from './dto/create-item.dto';
 import type { ItemQueryDto } from './dto/item-query.dto';
 import type { UpdateItemDto } from './dto/update-item.dto';
-import type { ItemsService } from './items.service';
+import { ItemsService } from './items.service';
 
 @ApiTags('items')
 @ApiBearerAuth()

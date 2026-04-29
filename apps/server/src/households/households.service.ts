@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import type { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import type { CreateHouseholdDto } from './dto/create-household.dto';
 import type { UpdateHouseholdDto } from './dto/update-household.dto';
 

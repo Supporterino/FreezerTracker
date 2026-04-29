@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import type { ChangeLogService, FieldDiff } from '../change-log/change-log.service';
-import type { PrismaService } from '../prisma/prisma.service';
+import { ChangeLogService, type FieldDiff } from '../change-log/change-log.service';
+import { PrismaService } from '../prisma/prisma.service';
 import type { CreateItemDto } from './dto/create-item.dto';
 import type { ItemQueryDto } from './dto/item-query.dto';
 import type { UpdateItemDto } from './dto/update-item.dto';

@@ -14,7 +14,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { HouseholdMemberGuard } from '../households/guards/household-member.guard';
 import { HouseholdOwnerGuard } from '../households/guards/household-owner.guard';
-import type { CompartmentsService } from './compartments.service';
+import { CompartmentsService } from './compartments.service';
 import type { CreateCompartmentDto } from './dto/create-compartment.dto';
 import type { UpdateCompartmentDto } from './dto/update-compartment.dto';
 

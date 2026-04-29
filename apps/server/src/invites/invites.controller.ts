@@ -14,7 +14,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { HouseholdOwnerGuard } from '../households/guards/household-owner.guard';
 import type { AcceptInviteDto } from './dto/accept-invite.dto';
-import type { InvitesService } from './invites.service';
+import { InvitesService } from './invites.service';
 
 @ApiTags('invites')
 @ApiBearerAuth()

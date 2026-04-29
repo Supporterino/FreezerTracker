@@ -17,7 +17,7 @@ import type { CreateHouseholdDto } from './dto/create-household.dto';
 import type { UpdateHouseholdDto } from './dto/update-household.dto';
 import { HouseholdMemberGuard } from './guards/household-member.guard';
 import { HouseholdOwnerGuard } from './guards/household-owner.guard';
-import type { HouseholdsService } from './households.service';
+import { HouseholdsService } from './households.service';
 
 @ApiTags('households')
 @ApiBearerAuth()

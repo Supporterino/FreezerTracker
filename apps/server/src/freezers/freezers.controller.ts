@@ -16,7 +16,7 @@ import { HouseholdMemberGuard } from '../households/guards/household-member.guar
 import { HouseholdOwnerGuard } from '../households/guards/household-owner.guard';
 import type { CreateFreezerDto } from './dto/create-freezer.dto';
 import type { UpdateFreezerDto } from './dto/update-freezer.dto';
-import type { FreezersService } from './freezers.service';
+import { FreezersService } from './freezers.service';
 
 @ApiTags('freezers')
 @ApiBearerAuth()
