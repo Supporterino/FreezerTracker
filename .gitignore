@@ -4,9 +4,6 @@ dist/
 build/
 *.lockb.bak
 
-# Prisma
-apps/server/prisma/migrations/
-
 # Tauri build artifacts
 apps/client/src-tauri/target/
 
