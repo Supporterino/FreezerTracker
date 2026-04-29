@@ -10,7 +10,7 @@ COPY packages/shared/package.json ./packages/shared/package.json
 COPY apps/server/package.json ./apps/server/package.json
 
 # Install all workspace dependencies from the monorepo root
-RUN bun install --frozen-lockfile
+RUN bun install
 
 # Copy shared package source (required by apps/server at runtime)
 COPY packages/shared/ ./packages/shared/
