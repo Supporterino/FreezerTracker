@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # ──────────────────────────────────────────────────────────────
-# release-server.sh — bump server version, build & push Docker image,
-#                     package & push Helm chart (OCI)
+# release-server.sh — bump server + chart versions, commit, tag
+#
+# Docker image build/push and Helm chart packaging/push are
+# handled by GitHub Actions (see .github/workflows/server-release.yml).
 #
 # Usage:
 #   ./scripts/release-server.sh --patch
 #   ./scripts/release-server.sh --minor
 #   ./scripts/release-server.sh --major
-#   ./scripts/release-server.sh --patch --skip-push
 #   ./scripts/release-server.sh --minor --chart-bump minor
-#   ./scripts/release-server.sh --minor --registry ghcr.io/myorg/myimage
 # ──────────────────────────────────────────────────────────────
 set -euo pipefail
 
@@ -19,11 +19,8 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 SERVER_PKG="$ROOT_DIR/apps/server/package.json"
 CHART_DIR="$ROOT_DIR/helm/freezer-tracker-chart"
 CHART_YAML="$CHART_DIR/Chart.yaml"
-REGISTRY="ghcr.io/supporterino/freezer-tracker"
-CHART_REGISTRY="oci://ghcr.io/supporterino"
 BUMP=""
 CHART_BUMP=""
-SKIP_PUSH=false
 
 # ── Helpers ───────────────────────────────────────────────────
 
@@ -40,13 +37,12 @@ Options:
   --chart-bump TYPE    Also bump the Helm chart version (major|minor|patch).
                        If omitted the chart version stays unchanged; only
                        appVersion is updated to match the new server version.
-  --skip-push          Build artifacts but do not push to any registry
-  --registry URL       Override Docker image registry
-                       (default: $REGISTRY)
-  --chart-registry URL Override Helm OCI registry
-                        (default: $CHART_REGISTRY)
-                        The chart name from Chart.yaml is appended automatically.
   -h, --help           Show this help message
+
+After running this script, push the commit and tag:
+  git push origin main --tags
+
+GitHub Actions will then build the Docker image and push the Helm chart.
 EOF
   exit 1
 }
@@ -95,15 +91,12 @@ get_chart_field() {
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --major)          BUMP="major"; shift ;;
-    --minor)          BUMP="minor"; shift ;;
-    --patch)          BUMP="patch"; shift ;;
-    --chart-bump)     CHART_BUMP="$2"; shift 2 ;;
-    --skip-push)      SKIP_PUSH=true; shift ;;
-    --registry)       REGISTRY="$2"; shift 2 ;;
-    --chart-registry) CHART_REGISTRY="$2"; shift 2 ;;
-    -h|--help)        usage ;;
-    *)                die "Unknown argument: $1" ;;
+    --major)      BUMP="major"; shift ;;
+    --minor)      BUMP="minor"; shift ;;
+    --patch)      BUMP="patch"; shift ;;
+    --chart-bump) CHART_BUMP="$2"; shift 2 ;;
+    -h|--help)    usage ;;
+    *)            die "Unknown argument: $1" ;;
   esac
 done
 
@@ -148,76 +141,15 @@ git add apps/server/package.json helm/freezer-tracker-chart/Chart.yaml
 git commit -m "chore(server): release v${NEW_VERSION}"
 git tag "server/v${NEW_VERSION}"
 
-echo "==> Created commit and tag server/v${NEW_VERSION}"
-
-# ── Docker build ──────────────────────────────────────────────
-
-IMAGE_VERSIONED="${REGISTRY}:v${NEW_VERSION}"
-IMAGE_LATEST="${REGISTRY}:latest"
-
-echo "==> Building Docker image: ${IMAGE_VERSIONED}"
-
-docker build \
-  --platform linux/amd64 \
-  -f apps/server/Dockerfile \
-  -t "$IMAGE_VERSIONED" \
-  -t "$IMAGE_LATEST" \
-  .
-
-echo "==> Built: ${IMAGE_VERSIONED}"
-
-# ── Helm package ──────────────────────────────────────────────
-
-echo "==> Packaging Helm chart (version: ${NEW_CHART_VERSION}, appVersion: ${NEW_VERSION})..."
-
-HELM_PKG_DIR=$(mktemp -d)
-helm package "$CHART_DIR" --destination "$HELM_PKG_DIR"
-
-CHART_TGZ=$(ls "$HELM_PKG_DIR"/*.tgz)
-echo "    Packaged: $CHART_TGZ"
-
-# ── Push ──────────────────────────────────────────────────────
-
-if [[ "$SKIP_PUSH" == true ]]; then
-  echo "==> Skipping push (--skip-push)"
-  echo "    Chart package: $CHART_TGZ"
-else
-  # ── Docker push ─────────────────────────────────────────────
-  echo "==> Pushing Docker image to ${REGISTRY}..."
-
-  # Ensure logged in to GHCR. Uses GITHUB_TOKEN if available,
-  # otherwise relies on existing Docker credential store.
-  if [[ -n "${GITHUB_TOKEN:-}" ]]; then
-    echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$(git config user.name || echo 'token')" --password-stdin
-  fi
-
-  docker push "$IMAGE_VERSIONED"
-  docker push "$IMAGE_LATEST"
-
-  DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' "$IMAGE_VERSIONED" 2>/dev/null || echo "n/a")
-  echo "==> Pushed: ${IMAGE_VERSIONED}"
-  echo "    Digest: ${DIGEST}"
-
-  # ── Helm OCI push ──────────────────────────────────────────
-  echo "==> Pushing Helm chart to ${CHART_REGISTRY}..."
-
-  # helm expects the OCI registry login via `helm registry login`
-  if [[ -n "${GITHUB_TOKEN:-}" ]]; then
-    echo "$GITHUB_TOKEN" | helm registry login ghcr.io -u "$(git config user.name || echo 'token')" --password-stdin
-  fi
-
-  helm push "$CHART_TGZ" "$CHART_REGISTRY"
-
-  echo "==> Pushed: ${CHART_REGISTRY}/freezer-tracker-chart:v${NEW_CHART_VERSION}"
-fi
-
-# ── Cleanup ───────────────────────────────────────────────────
-
-rm -rf "$HELM_PKG_DIR"
-
 echo ""
-echo "Done. Don't forget to push the git tag:"
+echo "==> Created commit and tag server/v${NEW_VERSION}"
+echo ""
+echo "Push to trigger CI:"
 echo "  git push origin main --tags"
 echo ""
+echo "GitHub Actions will:"
+echo "  • Build & push Docker image to ghcr.io (amd64 + arm64)"
+echo "  • Package & push Helm chart to ghcr.io OCI registry"
+echo ""
 echo "Users can install the chart via:"
-echo "  helm install freezer-api ${CHART_REGISTRY}/freezer-tracker-chart --version v${NEW_CHART_VERSION}"
+echo "  helm install freezer-api oci://ghcr.io/supporterino/freezer-tracker-chart --version ${NEW_CHART_VERSION}"

@@ -28,6 +28,9 @@ RUN rm -rf node_modules/.cache
 # Stage 2: lean production image
 # ──────────────────────────────────────────────────────────────
 FROM oven/bun:1.3.13-slim AS runtime
+
+LABEL org.opencontainers.image.source="https://github.com/Supporterino/FreezerTracker"
+LABEL org.opencontainers.image.description="FreezerMan server API"
 WORKDIR /app
 
 # Copy the fully-prepared workspace from builder

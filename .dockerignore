@@ -1,0 +1,37 @@
+# Git
+.git
+.gitignore
+
+# CI / editor
+.github
+.vscode
+.idea
+.editorconfig
+
+# Client app (not needed for server image)
+apps/client
+
+# Documentation
+*.md
+!packages/shared/README.md
+
+# GrayMatter
+.graymatter
+
+# Node modules (reinstalled in Docker)
+node_modules
+
+# Helm chart
+helm
+
+# Scripts
+scripts
+
+# Icons
+icon
+
+# Config files not needed in image
+biome.json
+lefthook.yml
+opencode.json
+docker-compose.yml

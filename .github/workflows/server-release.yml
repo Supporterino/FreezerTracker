@@ -1,0 +1,88 @@
+name: Server Release
+
+on:
+  push:
+    tags:
+      - "server/v*"
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  CHART_NAME: freezer-tracker-chart
+  CHART_DIR: helm/freezer-tracker-chart
+
+jobs:
+  # ── Docker image ────────────────────────────────────────────
+  docker:
+    name: Build & push Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Lowercase image name
+        id: repo
+        run: echo "image_name=${GITHUB_REPOSITORY_OWNER,,}/freezer-tracker" >> "$GITHUB_OUTPUT"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ steps.repo.outputs.image_name }}
+          tags: |
+            type=match,pattern=server/v(.*),group=1
+            type=raw,value=latest
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/server/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ── Helm chart ──────────────────────────────────────────────
+  helm:
+    name: Package & push Helm chart
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Lowercase owner
+        id: repo
+        run: echo "owner=${GITHUB_REPOSITORY_OWNER,,}" >> "$GITHUB_OUTPUT"
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Log in to GHCR (Helm OCI)
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
+
+      - name: Package chart
+        run: helm package "${{ env.CHART_DIR }}" --destination /tmp/helm-pkg
+
+      - name: Push chart
+        run: |
+          CHART_TGZ=$(ls /tmp/helm-pkg/${{ env.CHART_NAME }}-*.tgz)
+          helm push "$CHART_TGZ" "oci://${{ env.REGISTRY }}/${{ steps.repo.outputs.owner }}"
