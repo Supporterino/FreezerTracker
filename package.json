@@ -5,6 +5,7 @@
   "scripts": {
     "dev:server": "bun run --cwd apps/server dev",
     "dev:client": "bun run --cwd apps/client tauri dev",
+    "dev:client_ios": "bun run --cwd apps/client tauri ios dev",
     "lint": "biome lint --write .",
     "format": "biome format --write .",
     "check": "biome check --write .",

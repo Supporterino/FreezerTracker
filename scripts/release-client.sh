@@ -198,7 +198,7 @@ build_ios() {
   require_apple_creds
 
   cd "$CLIENT_DIR"
-  bun run tauri ios build --release
+  bun run tauri ios build --export-method app-store-connect
 
   # Locate the built .ipa
   IPA=$(find src-tauri/gen/apple/build -name '*.ipa' 2>/dev/null | head -1)
@@ -214,8 +214,8 @@ build_ios() {
   xcrun altool --upload-app \
     -f "$IPA" \
     -t ios \
-    -u "$APPLE_ID" \
-    -p "$APPLE_APP_PASSWORD"
+    --apiKey    "$APPLE_API_KEY" \
+    --apiIssuer "$APPLE_API_ISSUER"
 
   echo "    Uploaded: $IPA"
 }
