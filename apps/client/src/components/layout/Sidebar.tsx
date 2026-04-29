@@ -1,5 +1,12 @@
-import { AppShell, Avatar, NavLink, ScrollArea } from '@mantine/core';
-import { IconArchive, IconHome, IconList, IconSettings, IconSnowflake } from '@tabler/icons-react';
+import { AppShell, Avatar, Divider, NavLink, ScrollArea } from '@mantine/core';
+import {
+  IconArchive,
+  IconHome,
+  IconHomePlus,
+  IconList,
+  IconSettings,
+  IconSnowflake,
+} from '@tabler/icons-react';
 import { Link, useParams } from '@tanstack/react-router';
 import { useFreezers } from '@/hooks/useFreezer';
 import { useHouseholds } from '@/hooks/useHouseholds';
@@ -45,6 +52,14 @@ export function Sidebar({ closeNav }: { closeNav: () => void }) {
   return (
     <>
       <AppShell.Section grow component={ScrollArea}>
+        <NavLink
+          label="All households"
+          leftSection={<IconHomePlus size={16} />}
+          component={Link}
+          to="/households"
+          onClick={closeNav}
+        />
+        <Divider my={4} />
         {(households ?? []).map((h) => (
           <NavLink
             key={h.id}

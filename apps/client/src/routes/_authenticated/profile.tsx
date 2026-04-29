@@ -126,12 +126,11 @@ function ProfilePage() {
       </Paper>
 
       {/* Server URL — collapsible advanced section */}
-      <Paper radius="md" withBorder>
+      <Paper radius="md" withBorder style={{ overflow: 'visible' }}>
         <UnstyledButton
-          w="100%"
-          p="md"
           onClick={toggleServer}
-          style={{ borderRadius: 'var(--mantine-radius-md)' }}
+          p="md"
+          style={{ display: 'block', width: '100%', borderRadius: 'var(--mantine-radius-md)' }}
         >
           <Group justify="space-between">
             <Group gap="sm">
