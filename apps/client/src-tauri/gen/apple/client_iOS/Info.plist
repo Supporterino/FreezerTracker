@@ -43,6 +43,6 @@
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>NSCameraUsageDescription</key>
-	<string>FreezerTracker needs camera access to scan QR codes for joining households.</string>
+	<string>FreezerMan needs camera access to scan QR codes for joining households.</string>
 </dict>
 </plist>

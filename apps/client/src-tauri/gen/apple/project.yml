@@ -10,7 +10,7 @@ configs:
 settingGroups:
   app:
     base:
-      PRODUCT_NAME: FreezerTracker
+      PRODUCT_NAME: FreezerMan
       PRODUCT_BUNDLE_IDENTIFIER: de.supporterino.freezertracker
 targetTemplates:
   app:
@@ -53,7 +53,7 @@ targets:
           - UIInterfaceOrientationLandscapeRight
         CFBundleShortVersionString: 0.1.0
         CFBundleVersion: "0.1.0"
-        NSCameraUsageDescription: "FreezerTracker needs camera access to scan QR codes for joining households."
+        NSCameraUsageDescription: "FreezerMan needs camera access to scan QR codes for joining households."
     entitlements:
       path: client_iOS/client_iOS.entitlements
     scheme:

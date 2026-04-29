@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "FreezerTracker",
+  "productName": "FreezerMan",
   "version": "0.1.3",
   "identifier": "de.supporterino.freezertracker",
   "build": {
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "FreezerTracker",
+        "title": "FreezerMan",
         "width": 800,
         "height": 600
       }
