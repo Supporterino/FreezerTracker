@@ -16,10 +16,15 @@ import {
 } from '@mantine/core';
 
 import { useDisclosure } from '@mantine/hooks';
-import { IconHome, IconPlus } from '@tabler/icons-react';
+import { notifications } from '@mantine/notifications';
+import { IconHome, IconPlus, IconUsersGroup } from '@tabler/icons-react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { invitesApi } from '@/api/invites';
 import { EmptyState } from '@/components/common/EmptyState';
+import { QRScanner } from '@/components/households/QRScanner';
 import { useCreateHousehold, useHouseholds } from '@/hooks/useHouseholds';
 import { useAuthStore } from '@/store/authStore';
 import { useHouseholdStore } from '@/store/householdStore';
@@ -34,7 +39,10 @@ export const Route = createFileRoute('/households/')({
 
 function HouseholdsPage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [opened, { open, close }] = useDisclosure(false);
+  const [joinOpened, { open: openJoin, close: closeJoin }] = useDisclosure(false);
+  const [showScanner, setShowScanner] = useState(false);
   const { data: households, isLoading } = useHouseholds();
   const setActiveHousehold = useHouseholdStore((s) => s.setActiveHousehold);
   const createHousehold = useCreateHousehold();
@@ -42,6 +50,10 @@ function HouseholdsPage() {
   const form = useForm<CreateHouseholdDto>({
     resolver: zodResolver(createHouseholdSchema),
     defaultValues: { name: '' },
+  });
+
+  const inviteForm = useForm<{ code: string }>({
+    defaultValues: { code: '' },
   });
 
   const handleSelect = (id: string) => {
@@ -54,6 +66,44 @@ function HouseholdsPage() {
     close();
     form.reset();
     handleSelect(created.id);
+  };
+
+  const acceptInvite = useMutation({
+    mutationFn: (code: string) => invitesApi.acceptByCode(code),
+    onSuccess: (household) => {
+      queryClient.invalidateQueries({ queryKey: ['households'] });
+      notifications.show({
+        title: 'Joined!',
+        message: `You joined "${household.name}".`,
+        color: 'green',
+      });
+      closeJoin();
+      inviteForm.reset();
+      setShowScanner(false);
+      handleSelect(household.id);
+    },
+    onError: () => {
+      notifications.show({
+        title: 'Error',
+        message: 'Invalid or expired invite code.',
+        color: 'red',
+      });
+    },
+  });
+
+  const handleJoinSubmit = (data: { code: string }) => {
+    acceptInvite.mutate(data.code);
+  };
+
+  const handleScan = (code: string) => {
+    setShowScanner(false);
+    acceptInvite.mutate(code);
+  };
+
+  const handleCloseJoin = () => {
+    closeJoin();
+    inviteForm.reset();
+    setShowScanner(false);
   };
 
   if (isLoading) {
@@ -75,9 +125,19 @@ function HouseholdsPage() {
       >
         <Group justify="space-between" align="center" wrap="wrap" gap="sm">
           <Title order={3}>Your Households</Title>
-          <Button size="sm" leftSection={<IconPlus size={16} />} onClick={open}>
-            New household
-          </Button>
+          <Group gap="sm">
+            <Button
+              size="sm"
+              variant="light"
+              leftSection={<IconUsersGroup size={16} />}
+              onClick={openJoin}
+            >
+              Join household
+            </Button>
+            <Button size="sm" leftSection={<IconPlus size={16} />} onClick={open}>
+              New household
+            </Button>
+          </Group>
         </Group>
 
         {households && households.length > 0 ? (
@@ -128,6 +188,49 @@ function HouseholdsPage() {
             </Group>
           </Stack>
         </form>
+      </Modal>
+
+      <Modal opened={joinOpened} onClose={handleCloseJoin} title="Join a Household">
+        <Stack>
+          <form onSubmit={inviteForm.handleSubmit(handleJoinSubmit)}>
+            <Stack gap="sm">
+              <TextInput
+                label="Invite code"
+                placeholder="Paste your invite code here"
+                data-autofocus
+                {...inviteForm.register('code', { required: true })}
+              />
+              <Group justify="flex-end">
+                <Button
+                  variant="default"
+                  onClick={handleCloseJoin}
+                  disabled={acceptInvite.isPending}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" loading={acceptInvite.isPending}>
+                  Join
+                </Button>
+              </Group>
+            </Stack>
+          </form>
+          <Text size="sm" c="dimmed" ta="center">
+            or
+          </Text>
+          {showScanner ? (
+            <QRScanner onScan={handleScan} />
+          ) : (
+            <Button
+              variant="light"
+              size="sm"
+              leftSection={<IconUsersGroup size={16} />}
+              onClick={() => setShowScanner(true)}
+              disabled={acceptInvite.isPending}
+            >
+              Scan QR code instead
+            </Button>
+          )}
+        </Stack>
       </Modal>
     </>
   );
