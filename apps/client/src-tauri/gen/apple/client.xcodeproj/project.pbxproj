@@ -353,7 +353,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.supporterino.freezertracker;
-				PRODUCT_NAME = FreezerTracker;
+				PRODUCT_NAME = "FreezerTracker";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = arm64;
@@ -452,7 +452,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.supporterino.freezertracker;
-				PRODUCT_NAME = FreezerTracker;
+				PRODUCT_NAME = "FreezerTracker";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = arm64;
