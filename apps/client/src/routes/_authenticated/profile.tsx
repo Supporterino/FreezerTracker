@@ -142,7 +142,7 @@ function ProfilePage() {
             {serverOpen ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
           </Group>
         </UnstyledButton>
-        <Collapse in={serverOpen}>
+        <Collapse expanded={serverOpen}>
           <Divider />
           <form onSubmit={serverForm.handleSubmit(handleServerSave)}>
             <Stack gap="sm" p="md">
