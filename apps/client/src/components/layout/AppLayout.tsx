@@ -9,7 +9,7 @@ interface AppLayoutProps {
 }
 
 export function AppLayout({ children }: AppLayoutProps) {
-  const [navOpened, { toggle: toggleNav }] = useDisclosure(false);
+  const [navOpened, { toggle: toggleNav, close: closeNav }] = useDisclosure(false);
 
   return (
     <AppShell
@@ -26,7 +26,7 @@ export function AppLayout({ children }: AppLayoutProps) {
       </AppShell.Header>
 
       <AppShell.Navbar>
-        <Sidebar />
+        <Sidebar closeNav={closeNav} />
       </AppShell.Navbar>
 
       <AppShell.Main>{children}</AppShell.Main>

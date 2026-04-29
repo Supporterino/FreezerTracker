@@ -14,6 +14,7 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
+
 import { useDisclosure } from '@mantine/hooks';
 import { IconHome, IconPlus } from '@tabler/icons-react';
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
@@ -57,18 +58,24 @@ function HouseholdsPage() {
 
   if (isLoading) {
     return (
-      <Center mih="100vh">
+      <Center mih="100dvh">
         <Loader />
       </Center>
     );
   }
 
   return (
-    <Center mih="100vh" bg="var(--mantine-color-body)">
-      <Stack w="100%" maw={600} p="md">
-        <Group justify="space-between" align="center">
+    <>
+      <Stack
+        w="100%"
+        maw={600}
+        mx="auto"
+        p={{ base: 'sm', sm: 'md' }}
+        pt={{ base: 'md', sm: 'xl' }}
+      >
+        <Group justify="space-between" align="center" wrap="wrap" gap="sm">
           <Title order={3}>Your Households</Title>
-          <Button leftSection={<IconPlus size={16} />} onClick={open}>
+          <Button size="sm" leftSection={<IconPlus size={16} />} onClick={open}>
             New household
           </Button>
         </Group>
@@ -76,8 +83,14 @@ function HouseholdsPage() {
         {households && households.length > 0 ? (
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
             {households.map((h) => (
-              <Card key={h.id} style={{ cursor: 'pointer' }} onClick={() => handleSelect(h.id)}>
-                <Group>
+              <Card
+                key={h.id}
+                withBorder
+                shadow="sm"
+                style={{ cursor: 'pointer' }}
+                onClick={() => handleSelect(h.id)}
+              >
+                <Group gap="sm" align="center">
                   <IconHome size={24} />
                   <Text fw={600}>{h.name}</Text>
                 </Group>
@@ -116,6 +129,6 @@ function HouseholdsPage() {
           </Stack>
         </form>
       </Modal>
-    </Center>
+    </>
   );
 }

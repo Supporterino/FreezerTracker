@@ -15,6 +15,7 @@ import {
 } from '@mantine/core';
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
+import { ServerUrlDisclosure } from '@/components/common/ServerUrlDisclosure';
 import { useRegister } from '@/hooks/useAuth';
 import { useAuthStore } from '@/store/authStore';
 
@@ -74,6 +75,7 @@ function RegisterPage() {
               <Button type="submit" loading={register.isPending} fullWidth mt="xs">
                 Create account
               </Button>
+              <ServerUrlDisclosure />
               <Text size="sm" ta="center">
                 Already have an account?{' '}
                 <Anchor component="button" type="button" onClick={() => navigate({ to: '/login' })}>

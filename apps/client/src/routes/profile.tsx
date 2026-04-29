@@ -1,9 +1,10 @@
 import type { UpdateUserDto } from '@freezer-tracker/shared';
 import { updateUserSchema } from '@freezer-tracker/shared';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Group, Paper, Stack, Text, TextInput, Title } from '@mantine/core';
+import { ActionIcon, Button, Group, Paper, Stack, Text, TextInput, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
+import { IconArrowLeft } from '@tabler/icons-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
@@ -105,13 +106,18 @@ function ProfilePage() {
 
   return (
     <Stack gap="md" maw={520} mx="auto">
-      <Title order={3}>Profile</Title>
+      <Group align="center">
+        <ActionIcon variant="subtle" onClick={() => navigate({ to: '/households' })}>
+          <IconArrowLeft size={18} />
+        </ActionIcon>
+        <Title order={3}>Profile</Title>
+      </Group>
 
       <Paper p="md">
         <form onSubmit={nameForm.handleSubmit((d) => updateName.mutate(d))}>
           <Stack gap="sm">
-            <Text fw={500}>Display name</Text>
             <TextInput
+              label="Display name"
               placeholder="Your name"
               {...nameForm.register('name')}
               error={nameForm.formState.errors.name?.message}

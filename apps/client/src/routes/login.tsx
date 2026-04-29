@@ -15,6 +15,7 @@ import {
 } from '@mantine/core';
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
+import { ServerUrlDisclosure } from '@/components/common/ServerUrlDisclosure';
 import { useLogin } from '@/hooks/useAuth';
 import { useAuthStore } from '@/store/authStore';
 
@@ -67,6 +68,7 @@ function LoginPage() {
               <Button type="submit" loading={login.isPending} fullWidth mt="xs">
                 Sign in
               </Button>
+              <ServerUrlDisclosure />
               <Text size="sm" ta="center">
                 No account?{' '}
                 <Anchor

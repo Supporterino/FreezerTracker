@@ -6,10 +6,16 @@ import { useHouseholds } from '@/hooks/useHouseholds';
 import { useAuthStore } from '@/store/authStore';
 import { useHouseholdStore } from '@/store/householdStore';
 
-function FreezerLinks({ hid }: { hid: string }) {
+function FreezerLinks({
+  hid,
+  closeNav,
+  activeFid,
+}: {
+  hid: string;
+  closeNav: () => void;
+  activeFid?: string;
+}) {
   const { data: freezers } = useFreezers(hid);
-  const activeFreezerIdMap = useHouseholdStore((s) => s.activeFreezerIdMap);
-  const currentFreezerId = activeFreezerIdMap[hid];
 
   return (
     <>
@@ -18,19 +24,20 @@ function FreezerLinks({ hid }: { hid: string }) {
           key={f.id}
           label={f.name}
           leftSection={<IconSnowflake size={16} />}
-          active={currentFreezerId === f.id}
+          active={activeFid === f.id}
           component={Link}
           to="/households/$hid/freezers/$fid"
           params={{ hid, fid: f.id } as any}
           childrenOffset={28}
+          onClick={closeNav}
         />
       ))}
     </>
   );
 }
 
-export function Sidebar() {
-  const params = useParams({ strict: false }) as { hid?: string };
+export function Sidebar({ closeNav }: { closeNav: () => void }) {
+  const params = useParams({ strict: false }) as { hid?: string; fid?: string };
   const activeHouseholdId = useHouseholdStore((s) => s.activeHouseholdId);
   const { data: households } = useHouseholds();
   const currentUser = useAuthStore((s) => s.currentUser);
@@ -46,13 +53,14 @@ export function Sidebar() {
             defaultOpened={h.id === activeHouseholdId}
             active={params.hid === h.id}
           >
-            <FreezerLinks hid={h.id} />
+            <FreezerLinks hid={h.id} closeNav={closeNav} activeFid={params.fid} />
             <NavLink
               label="All items"
               leftSection={<IconList size={16} />}
               component={Link}
               to="/households/$hid/items"
               params={{ hid: h.id } as any}
+              onClick={closeNav}
             />
             <NavLink
               label="Archive"
@@ -60,6 +68,7 @@ export function Sidebar() {
               component={Link}
               to="/households/$hid/archive"
               params={{ hid: h.id } as any}
+              onClick={closeNav}
             />
             <NavLink
               label="Settings"
@@ -67,6 +76,7 @@ export function Sidebar() {
               component={Link}
               to="/households/$hid/settings"
               params={{ hid: h.id } as any}
+              onClick={closeNav}
             />
           </NavLink>
         ))}
@@ -83,6 +93,7 @@ export function Sidebar() {
           }
           component={Link}
           to="/profile"
+          onClick={closeNav}
         />
       </AppShell.Section>
     </>

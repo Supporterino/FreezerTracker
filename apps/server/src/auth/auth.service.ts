@@ -64,11 +64,14 @@ export class AuthService {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expiresIn: this.configService.get<string>('jwt.accessExpiresIn') as any,
     });
-    const refreshToken = this.jwtService.sign(payload, {
-      secret: this.configService.get<string>('jwt.refreshSecret'),
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      expiresIn: this.configService.get<string>('jwt.refreshExpiresIn') as any,
-    });
+    const refreshToken = this.jwtService.sign(
+      { ...payload, jti: crypto.randomUUID() },
+      {
+        secret: this.configService.get<string>('jwt.refreshSecret'),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        expiresIn: this.configService.get<string>('jwt.refreshExpiresIn') as any,
+      },
+    );
 
     // Parse expiry for DB record
     const refreshExpiresIn = this.configService.get<string>('jwt.refreshExpiresIn') || '30d';

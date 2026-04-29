@@ -1,13 +1,12 @@
 import path from 'node:path';
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
+import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
-// @ts-expect-error process is a nodejs global
 const host = process.env.TAURI_DEV_HOST;
 
 export default defineConfig({
-  plugins: [TanStackRouterVite(), react()],
+  plugins: [tanstackRouter(), react()],
 
   resolve: {
     alias: {
@@ -35,7 +34,6 @@ export default defineConfig({
 
   envPrefix: ['VITE_', 'TAURI_'],
   build: {
-    // @ts-expect-error process is a nodejs global
     target: process.env.TAURI_PLATFORM === 'windows' ? 'chrome105' : 'safari13',
   },
 });

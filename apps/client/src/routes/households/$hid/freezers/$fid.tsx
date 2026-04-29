@@ -1,12 +1,13 @@
 import type { FreezerItemResponse } from '@freezer-tracker/shared';
-import { ActionIcon, Breadcrumbs, Group, Stack, Text, Title } from '@mantine/core';
+import { ActionIcon, Breadcrumbs, Button, Group, Stack, Text, Title } from '@mantine/core';
 import type { DateValue } from '@mantine/dates';
 import { useDisclosure } from '@mantine/hooks';
-import { IconPlus } from '@tabler/icons-react';
+import { IconLayoutGrid, IconPlus } from '@tabler/icons-react';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
+import { CompartmentManager } from '@/components/compartments/CompartmentManager';
 import { ItemDetailDrawer } from '@/components/items/ItemDetailDrawer';
 import { ItemFilters } from '@/components/items/ItemFilters';
 import { ItemGrid } from '@/components/items/ItemGrid';
@@ -44,6 +45,7 @@ function FreezerView() {
   });
 
   const [addOpened, { open: openAdd, close: closeAdd }] = useDisclosure(false);
+  const [manageOpened, { open: openManage, close: closeManage }] = useDisclosure(false);
   const [editItem, setEditItem] = useState<FreezerItemResponse | null>(null);
   const [detailItem, setDetailItem] = useState<FreezerItemResponse | null>(null);
 
@@ -72,6 +74,14 @@ function FreezerView() {
 
       <Group justify="space-between">
         <Title order={3}>{freezer?.name}</Title>
+        <Button
+          variant="light"
+          size="sm"
+          leftSection={<IconLayoutGrid size={16} />}
+          onClick={openManage}
+        >
+          Manage compartments
+        </Button>
       </Group>
 
       <ItemFilters
@@ -123,6 +133,8 @@ function FreezerView() {
         opened={!!detailItem}
         onClose={() => setDetailItem(null)}
       />
+
+      <CompartmentManager opened={manageOpened} onClose={closeManage} hid={hid} fid={fid} />
     </Stack>
   );
 }
