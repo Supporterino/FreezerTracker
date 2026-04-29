@@ -1,25 +1,13 @@
 import type { CreateItemDto, FreezerItemResponse, UpdateItemDto } from '@freezer-tracker/shared';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Modal, Select, Stack, Textarea, TextInput } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { useMediaQuery } from '@mantine/hooks';
+import { notifications } from '@mantine/notifications';
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { useCompartments } from '@/hooks/useCompartments';
 import { useFreezers } from '@/hooks/useFreezer';
 import { useCreateItem, useUpdateItem } from '@/hooks/useItems';
-
-// Form-level schema — dates stay as Date objects; ISO conversion happens in onSubmit
-const itemFormSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  quantity: z.string().min(1, 'Quantity is required'),
-  freezerId: z.string().min(1, 'Freezer is required'),
-  compartmentId: z.string().min(1, 'Compartment is required'),
-  notes: z.string().optional(),
-  storedAt: z.date().nullable().optional(),
-  expiresAt: z.date().nullable().optional(),
-});
 
 interface ItemModalProps {
   opened: boolean;
@@ -68,7 +56,6 @@ export function ItemModal({
     watch,
     formState: { errors },
   } = useForm<FormValues>({
-    resolver: zodResolver(itemFormSchema),
     defaultValues: {
       name: item?.name ?? '',
       quantity: item?.quantity ?? '',
@@ -139,26 +126,35 @@ export function ItemModal({
       size="md"
       fullScreen={isMobile}
     >
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(onSubmit, () => {
+          notifications.show({
+            title: 'Check required fields',
+            message: 'Please fill in all required fields before saving.',
+            color: 'red',
+          });
+        })}
+      >
         <Stack>
           <TextInput
             label="Name"
             placeholder="e.g. Chicken breast"
             data-autofocus
-            {...register('name')}
+            {...register('name', { required: 'Name is required' })}
             error={errors.name?.message}
           />
 
           <TextInput
             label="Quantity"
             placeholder="e.g. 500g, 2 packs"
-            {...register('quantity')}
+            {...register('quantity', { required: 'Quantity is required' })}
             error={errors.quantity?.message}
           />
 
           <Controller
             name="freezerId"
             control={control}
+            rules={{ required: 'Freezer is required' }}
             render={({ field }) => (
               <Select
                 label="Freezer"
@@ -174,6 +170,7 @@ export function ItemModal({
           <Controller
             name="compartmentId"
             control={control}
+            rules={{ required: 'Compartment is required' }}
             render={({ field }) => (
               <Select
                 label="Compartment"

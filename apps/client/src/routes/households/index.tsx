@@ -123,22 +123,24 @@ function HouseholdsPage() {
         p={{ base: 'sm', sm: 'md' }}
         pt={{ base: 'md', sm: 'xl' }}
       >
-        <Group justify="space-between" align="center" wrap="wrap" gap="sm">
-          <Title order={3}>Your Households</Title>
-          <Group gap="sm">
+        <Stack gap="sm">
+          <Group justify="space-between" align="center">
+            <Title order={3}>Your Households</Title>
+          </Group>
+          <SimpleGrid cols={{ base: 2, sm: 2 }} spacing="sm">
             <Button
-              size="sm"
               variant="light"
               leftSection={<IconUsersGroup size={16} />}
               onClick={openJoin}
+              fullWidth
             >
               Join household
             </Button>
-            <Button size="sm" leftSection={<IconPlus size={16} />} onClick={open}>
+            <Button leftSection={<IconPlus size={16} />} onClick={open} fullWidth>
               New household
             </Button>
-          </Group>
-        </Group>
+          </SimpleGrid>
+        </Stack>
 
         {households && households.length > 0 ? (
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
