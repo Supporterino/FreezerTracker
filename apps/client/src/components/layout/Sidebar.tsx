@@ -7,7 +7,7 @@ import {
   IconSettings,
   IconSnowflake,
 } from '@tabler/icons-react';
-import { Link, useParams } from '@tanstack/react-router';
+import { Link, useLocation, useParams } from '@tanstack/react-router';
 import { useFreezers } from '@/hooks/useFreezer';
 import { useHouseholds } from '@/hooks/useHouseholds';
 import { useAuthStore } from '@/store/authStore';
@@ -45,6 +45,7 @@ function FreezerLinks({
 
 export function Sidebar({ closeNav }: { closeNav: () => void }) {
   const params = useParams({ strict: false }) as { hid?: string; fid?: string };
+  const { pathname } = useLocation();
   const activeHouseholdId = useHouseholdStore((s) => s.activeHouseholdId);
   const { data: households } = useHouseholds();
   const currentUser = useAuthStore((s) => s.currentUser);
@@ -57,6 +58,7 @@ export function Sidebar({ closeNav }: { closeNav: () => void }) {
           leftSection={<IconHomePlus size={16} />}
           component={Link}
           to="/households"
+          active={pathname === '/households' || pathname === '/households/'}
           onClick={closeNav}
         />
         <Divider my={4} />
