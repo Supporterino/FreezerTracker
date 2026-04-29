@@ -53,6 +53,7 @@ targets:
           - UIInterfaceOrientationLandscapeRight
         CFBundleShortVersionString: 0.1.0
         CFBundleVersion: "0.1.0"
+        NSCameraUsageDescription: "FreezerTracker needs camera access to scan QR codes for joining households."
     entitlements:
       path: client_iOS/client_iOS.entitlements
     scheme:

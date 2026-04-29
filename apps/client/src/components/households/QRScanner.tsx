@@ -22,21 +22,34 @@ export function QRScanner({ onScan }: QRScannerProps) {
       const controls = await codeReader.decodeFromVideoDevice(
         undefined,
         videoRef.current!,
-        (result) => {
+        (result, err) => {
           if (result) {
             controlsRef.current?.stop();
             setScanning(false);
             onScan(result.getText());
+          } else if (err && !(err instanceof Error && err.name === 'NotFoundException')) {
+            // NotFoundException fires every frame when no QR is visible — ignore it
+            controlsRef.current?.stop();
+            setScanning(false);
+            setError('Failed to read camera stream. Please try again.');
           }
         },
       );
       controlsRef.current = controls;
     } catch (err) {
-      setError(
-        err instanceof Error && err.name === 'NotAllowedError'
-          ? 'Camera access was denied. Please allow camera access to scan QR codes.'
-          : 'Failed to start camera. Please try again.',
-      );
+      const name = err instanceof Error ? err.name : '';
+      let message = 'Failed to start camera. Please try again.';
+      if (name === 'NotAllowedError') {
+        message = 'Camera access was denied. Please allow camera access in Settings and try again.';
+      } else if (name === 'NotFoundError') {
+        message = 'No camera was found on this device.';
+      } else if (name === 'NotSupportedError' || name === 'SecurityError') {
+        message =
+          'Camera access is not supported in this context. Make sure the app has camera permission in iOS Settings.';
+      } else if (name === 'NotReadableError' || name === 'AbortError') {
+        message = 'Camera is in use by another app. Please close other apps and try again.';
+      }
+      setError(message);
       setScanning(false);
     }
   };
