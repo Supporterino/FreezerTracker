@@ -50,7 +50,20 @@ export class ItemsService {
   }
 
   async findAll(householdId: string, query: ItemQueryDto) {
-    const { freezerId, compartmentIds, search, expiresBefore, page = 1, limit = 20 } = query;
+    const {
+      freezerId,
+      compartmentIds: rawCompartmentIds,
+      search,
+      expiresBefore,
+      page = 1,
+      limit = 20,
+    } = query;
+    // Coerce defensively: NestJS may deliver a plain string when only one query param is sent
+    const compartmentIds = rawCompartmentIds
+      ? Array.isArray(rawCompartmentIds)
+        ? rawCompartmentIds
+        : [rawCompartmentIds as unknown as string]
+      : undefined;
     const skip = (page - 1) * limit;
 
     const where: any = {
