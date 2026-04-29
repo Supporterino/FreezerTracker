@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "freezer-tracker-server.fullname" . }}
+  name: {{ include "freezer-tracker-chart.fullname" . }}
   labels:
-    {{- include "freezer-tracker-server.labels" . | nindent 4 }}
+    {{- include "freezer-tracker-chart.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "freezer-tracker-server.selectorLabels" . | nindent 6 }}
+      {{- include "freezer-tracker-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
@@ -17,13 +17,13 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
       labels:
-        {{- include "freezer-tracker-server.selectorLabels" . | nindent 8 }}
+        {{- include "freezer-tracker-chart.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "freezer-tracker-server.serviceAccountName" . }}
+      serviceAccountName: {{ include "freezer-tracker-chart.serviceAccountName" . }}
       {{- with .Values.podSecurityContext }}
       securityContext:
         {{- toYaml . | nindent 8 }}
@@ -42,7 +42,7 @@ spec:
               protocol: TCP
           envFrom:
             - configMapRef:
-                name: {{ include "freezer-tracker-server.fullname" . }}
+                name: {{ include "freezer-tracker-chart.fullname" . }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}

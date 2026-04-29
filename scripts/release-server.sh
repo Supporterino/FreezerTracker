@@ -17,10 +17,10 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 SERVER_PKG="$ROOT_DIR/apps/server/package.json"
-CHART_DIR="$ROOT_DIR/helm/freezer-tracker-server"
+CHART_DIR="$ROOT_DIR/helm/freezer-tracker-chart"
 CHART_YAML="$CHART_DIR/Chart.yaml"
-REGISTRY="ghcr.io/supporterino/freezer-tracker-server"
-CHART_REGISTRY="oci://ghcr.io/supporterino/charts"
+REGISTRY="ghcr.io/supporterino/freezer-tracker"
+CHART_REGISTRY="oci://ghcr.io/supporterino"
 BUMP=""
 CHART_BUMP=""
 SKIP_PUSH=false
@@ -44,7 +44,8 @@ Options:
   --registry URL       Override Docker image registry
                        (default: $REGISTRY)
   --chart-registry URL Override Helm OCI registry
-                       (default: $CHART_REGISTRY)
+                        (default: $CHART_REGISTRY)
+                        The chart name from Chart.yaml is appended automatically.
   -h, --help           Show this help message
 EOF
   exit 1
@@ -143,7 +144,7 @@ fi
 # ── Git commit + tag ──────────────────────────────────────────
 
 cd "$ROOT_DIR"
-git add apps/server/package.json helm/freezer-tracker-server/Chart.yaml
+git add apps/server/package.json helm/freezer-tracker-chart/Chart.yaml
 git commit -m "chore(server): release v${NEW_VERSION}"
 git tag "server/v${NEW_VERSION}"
 
@@ -207,7 +208,7 @@ else
 
   helm push "$CHART_TGZ" "$CHART_REGISTRY"
 
-  echo "==> Pushed: ${CHART_REGISTRY}/freezer-tracker-server:${NEW_CHART_VERSION}"
+  echo "==> Pushed: ${CHART_REGISTRY}/freezer-tracker-chart:v${NEW_CHART_VERSION}"
 fi
 
 # ── Cleanup ───────────────────────────────────────────────────
@@ -219,4 +220,4 @@ echo "Done. Don't forget to push the git tag:"
 echo "  git push origin main --tags"
 echo ""
 echo "Users can install the chart via:"
-echo "  helm install freezer-api ${CHART_REGISTRY}/freezer-tracker-server --version ${NEW_CHART_VERSION}"
+echo "  helm install freezer-api ${CHART_REGISTRY}/freezer-tracker-chart --version v${NEW_CHART_VERSION}"
