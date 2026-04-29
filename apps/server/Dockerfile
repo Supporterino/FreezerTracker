@@ -1,8 +1,11 @@
-FROM oven/bun:1.3.13 AS base
+# ──────────────────────────────────────────────────────────────
+# Stage 1: install dependencies and generate Prisma client
+# ──────────────────────────────────────────────────────────────
+FROM oven/bun:1.3.13 AS builder
 WORKDIR /app
 
 # Copy monorepo workspace manifests and lockfile first (layer caching)
-COPY package.json bunfig.toml bun.lockb ./
+COPY package.json bunfig.toml bun.lock ./
 COPY packages/shared/package.json ./packages/shared/package.json
 COPY apps/server/package.json ./apps/server/package.json
 
@@ -17,6 +20,25 @@ COPY apps/server/ ./apps/server/
 
 WORKDIR /app/apps/server
 RUN bunx prisma generate
+
+# Remove dev-only files that aren't needed at runtime
+RUN rm -rf node_modules/.cache
+
+# ──────────────────────────────────────────────────────────────
+# Stage 2: lean production image
+# ──────────────────────────────────────────────────────────────
+FROM oven/bun:1.3.13-slim AS runtime
+WORKDIR /app
+
+# Copy the fully-prepared workspace from builder
+COPY --from=builder /app/package.json /app/bunfig.toml /app/bun.lock ./
+COPY --from=builder /app/node_modules/ ./node_modules/
+COPY --from=builder /app/packages/shared/ ./packages/shared/
+COPY --from=builder /app/apps/server/ ./apps/server/
+
+WORKDIR /app/apps/server
+
+EXPOSE 3000
 
 # Run migrations then start the server.
 # 'prisma migrate deploy' applies any pending migrations against the live DB at startup.

@@ -1,0 +1,117 @@
+# -- Number of pod replicas
+replicaCount: 1
+
+image:
+  # -- Container image repository
+  repository: ghcr.io/supporterino/freezer-tracker-server
+  # -- Image pull policy
+  pullPolicy: IfNotPresent
+  # -- Overrides the image tag (defaults to Chart appVersion)
+  tag: ""
+
+# -- Image pull secrets for private registries
+imagePullSecrets: []
+
+# -- Override the chart name
+nameOverride: ""
+# -- Override the full release name
+fullnameOverride: ""
+
+serviceAccount:
+  # -- Create a ServiceAccount
+  create: true
+  # -- Annotations for the ServiceAccount
+  annotations: {}
+  # -- Override ServiceAccount name (defaults to fullname)
+  name: ""
+
+# -- Pod-level annotations
+podAnnotations: {}
+
+# -- Pod-level security context
+podSecurityContext: {}
+  # fsGroup: 1000
+
+# -- Container-level security context
+securityContext: {}
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  # -- Service type
+  type: ClusterIP
+  # -- Service port
+  port: 3000
+
+ingress:
+  # -- Enable ingress
+  enabled: false
+  # -- Ingress class name (e.g. nginx, traefik)
+  className: ""
+  # -- Ingress annotations
+  annotations: {}
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+  # -- Ingress host
+  host: ""
+  # -- TLS configuration
+  tls: []
+  #  - secretName: freezer-tracker-tls
+  #    hosts:
+  #      - api.example.com
+
+# ──────────────────────────────────────────────────────────────
+# Environment variables
+#
+# The server expects the following env vars. The database is NOT
+# deployed by this chart — provide a connection string to your
+# existing PostgreSQL instance.
+# ──────────────────────────────────────────────────────────────
+env:
+  # -- PostgreSQL connection string (required)
+  DATABASE_URL: ""
+  # -- JWT access-token signing secret (required)
+  JWT_SECRET: ""
+  # -- JWT refresh-token signing secret (required)
+  JWT_REFRESH_SECRET: ""
+  # -- Access token lifetime (default: 15m)
+  JWT_ACCESS_EXPIRES_IN: "15m"
+  # -- Refresh token lifetime (default: 30d)
+  JWT_REFRESH_EXPIRES_IN: "30d"
+  # -- Server listen port (should match service.port)
+  PORT: "3000"
+  # -- Node environment
+  NODE_ENV: "production"
+
+# -- Resource requests and limits
+resources: {}
+  # limits:
+  #   cpu: 500m
+  #   memory: 256Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# -- Node selector constraints
+nodeSelector: {}
+
+# -- Tolerations
+tolerations: []
+
+# -- Affinity rules
+affinity: {}
+
+# -- Liveness probe configuration
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+  initialDelaySeconds: 15
+  periodSeconds: 20
+
+# -- Readiness probe configuration
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 10

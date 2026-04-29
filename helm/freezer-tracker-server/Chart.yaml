@@ -1,0 +1,11 @@
+apiVersion: v2
+name: freezer-tracker-server
+description: Helm chart for the FreezerTracker NestJS backend API
+type: application
+version: 0.1.0
+appVersion: "0.0.1"
+maintainers:
+  - name: Supporterino
+    url: https://github.com/Supporterino
+sources:
+  - https://github.com/Supporterino/FreezerTracker
