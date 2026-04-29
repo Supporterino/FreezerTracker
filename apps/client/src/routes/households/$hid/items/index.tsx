@@ -22,12 +22,12 @@ function ItemsPage() {
   const { data: freezers } = useFreezers(hid);
 
   const [search, setSearch] = useState('');
-  const [compartmentId, setCompartmentId] = useState<string | null>(null);
+  const [compartmentIds, setCompartmentIds] = useState<string[]>([]);
   const [expiresBefore, setExpiresBefore] = useState<DateValue>(null);
 
   const { data: itemsData, isLoading } = useItems(hid, {
     search: search || undefined,
-    compartmentId: compartmentId ?? undefined,
+    compartmentIds: compartmentIds.length ? compartmentIds : undefined,
     expiresBefore: expiresBefore ? dayjs(expiresBefore).toISOString() : undefined,
   });
 
@@ -50,8 +50,8 @@ function ItemsPage() {
       <ItemFilters
         search={search}
         onSearchChange={setSearch}
-        compartmentId={compartmentId}
-        onCompartmentChange={setCompartmentId}
+        compartmentIds={compartmentIds}
+        onCompartmentChange={setCompartmentIds}
         expiresBefore={expiresBefore}
         onExpiresBeforeChange={setExpiresBefore}
         compartments={allCompartments}

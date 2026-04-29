@@ -79,7 +79,7 @@ export interface UpdateUserDto {
 
 export interface ItemQueryDto {
   freezerId?: string;
-  compartmentId?: string;
+  compartmentIds?: string[];
   search?: string;
   expiresBefore?: string;
   page?: number;

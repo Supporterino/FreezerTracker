@@ -34,13 +34,13 @@ function FreezerView() {
   const { data: compartments } = useCompartments(hid, fid);
 
   const [search, setSearch] = useState('');
-  const [compartmentId, setCompartmentId] = useState<string | null>(null);
+  const [compartmentIds, setCompartmentIds] = useState<string[]>([]);
   const [expiresBefore, setExpiresBefore] = useState<DateValue>(null);
 
   const { data: itemsData, isLoading: itemsLoading } = useItems(hid, {
     freezerId: fid,
     search: search || undefined,
-    compartmentId: compartmentId ?? undefined,
+    compartmentIds: compartmentIds.length ? compartmentIds : undefined,
     expiresBefore: expiresBefore ? dayjs(expiresBefore).toISOString() : undefined,
   });
 
@@ -87,8 +87,8 @@ function FreezerView() {
       <ItemFilters
         search={search}
         onSearchChange={setSearch}
-        compartmentId={compartmentId}
-        onCompartmentChange={setCompartmentId}
+        compartmentIds={compartmentIds}
+        onCompartmentChange={setCompartmentIds}
         expiresBefore={expiresBefore}
         onExpiresBeforeChange={setExpiresBefore}
         compartments={compartments ?? []}

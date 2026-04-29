@@ -1,13 +1,13 @@
 import type { CompartmentResponse } from '@freezer-tracker/shared';
-import { Group, Select, Stack, TextInput } from '@mantine/core';
+import { Group, MultiSelect, Stack, TextInput } from '@mantine/core';
 import { DatePickerInput, type DateValue } from '@mantine/dates';
 import { IconSearch } from '@tabler/icons-react';
 
 interface ItemFiltersProps {
   search: string;
   onSearchChange: (v: string) => void;
-  compartmentId: string | null;
-  onCompartmentChange: (v: string | null) => void;
+  compartmentIds: string[];
+  onCompartmentChange: (v: string[]) => void;
   expiresBefore: DateValue;
   onExpiresBeforeChange: (v: DateValue) => void;
   compartments: CompartmentResponse[];
@@ -16,7 +16,7 @@ interface ItemFiltersProps {
 export function ItemFilters({
   search,
   onSearchChange,
-  compartmentId,
+  compartmentIds,
   onCompartmentChange,
   expiresBefore,
   onExpiresBeforeChange,
@@ -31,11 +31,11 @@ export function ItemFilters({
         onChange={(e) => onSearchChange(e.currentTarget.value)}
       />
       <Group grow>
-        <Select
+        <MultiSelect
           placeholder="All compartments"
           clearable
           data={compartments.map((c) => ({ value: c.id, label: c.name }))}
-          value={compartmentId}
+          value={compartmentIds}
           onChange={onCompartmentChange}
         />
         <DatePickerInput

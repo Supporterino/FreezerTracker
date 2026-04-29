@@ -50,14 +50,14 @@ export class ItemsService {
   }
 
   async findAll(householdId: string, query: ItemQueryDto) {
-    const { freezerId, compartmentId, search, expiresBefore, page = 1, limit = 20 } = query;
+    const { freezerId, compartmentIds, search, expiresBefore, page = 1, limit = 20 } = query;
     const skip = (page - 1) * limit;
 
     const where: any = {
       householdId,
       deletedAt: null,
       ...(freezerId && { freezerId }),
-      ...(compartmentId && { compartmentId }),
+      ...(compartmentIds?.length && { compartmentId: { in: compartmentIds } }),
       ...(search && { name: { contains: search, mode: 'insensitive' } }),
       ...(expiresBefore && { expiresAt: { lt: new Date(expiresBefore) } }),
     };

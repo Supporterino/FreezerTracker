@@ -9,16 +9,22 @@ import type {
 import { apiClient } from '@/api/client';
 
 export const itemsApi = {
-  list: (hid: string, params?: ItemQueryDto) =>
-    apiClient
-      .get(`households/${hid}/items`, {
-        searchParams: params
-          ? (Object.fromEntries(
-              Object.entries(params).filter(([, v]) => v !== undefined),
-            ) as Record<string, string>)
-          : undefined,
-      })
-      .json<PaginatedResponse<FreezerItemResponse>>(),
+  list: (hid: string, params?: ItemQueryDto) => {
+    const searchParams = new URLSearchParams();
+    if (params) {
+      for (const [key, value] of Object.entries(params)) {
+        if (value === undefined) continue;
+        if (Array.isArray(value)) {
+          for (const v of value) searchParams.append(key, String(v));
+        } else {
+          searchParams.set(key, String(value));
+        }
+      }
+    }
+    return apiClient
+      .get(`households/${hid}/items`, { searchParams })
+      .json<PaginatedResponse<FreezerItemResponse>>();
+  },
 
   listArchive: (hid: string) =>
     apiClient.get(`households/${hid}/items/archive`).json<FreezerItemResponse[]>(),
