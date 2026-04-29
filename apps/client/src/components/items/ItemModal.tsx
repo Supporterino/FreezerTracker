@@ -25,8 +25,8 @@ type FormValues = {
   freezerId: string;
   compartmentId: string;
   notes?: string;
-  storedAt?: Date | null;
-  expiresAt?: Date | null;
+  storedAt?: Date | string | null;
+  expiresAt?: Date | string | null;
 };
 
 export function ItemModal({
@@ -93,14 +93,21 @@ export function ItemModal({
   }, [opened, item, defaultFreezerId, reset]);
 
   const onSubmit = async (data: FormValues) => {
+    const toISO = (v: Date | string | null | undefined): string | undefined => {
+      if (!v) return undefined;
+      if (v instanceof Date) return v.toISOString();
+      const d = new Date(v);
+      return Number.isNaN(d.getTime()) ? undefined : d.toISOString();
+    };
+
     const payload = {
       name: data.name,
       quantity: data.quantity,
       freezerId: data.freezerId,
       compartmentId: data.compartmentId,
       notes: data.notes || undefined,
-      storedAt: data.storedAt ? data.storedAt.toISOString() : undefined,
-      expiresAt: data.expiresAt ? data.expiresAt.toISOString() : undefined,
+      storedAt: toISO(data.storedAt),
+      expiresAt: toISO(data.expiresAt),
     };
 
     try {
@@ -191,7 +198,7 @@ export function ItemModal({
               <DatePickerInput
                 label="Stored date"
                 placeholder="Today"
-                value={field.value ?? null}
+                value={field.value ? new Date(field.value) : null}
                 onChange={field.onChange}
                 dropdownType={isMobile ? 'modal' : 'popover'}
               />
@@ -206,7 +213,7 @@ export function ItemModal({
                 label="Expiry date"
                 placeholder="Optional"
                 clearable
-                value={field.value ?? null}
+                value={field.value ? new Date(field.value) : null}
                 onChange={field.onChange}
                 dropdownType={isMobile ? 'modal' : 'popover'}
               />
