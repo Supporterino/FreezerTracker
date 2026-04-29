@@ -45,7 +45,7 @@ export function Header({ navOpened, toggleNav }: HeaderProps) {
           to="/households"
           style={{ textDecoration: 'none', color: 'inherit' }}
         >
-          Freezer Tracker
+          FreezerMan
         </Text>
       </Group>
 

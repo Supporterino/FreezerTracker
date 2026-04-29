@@ -31,7 +31,7 @@ export function ServerUrlDisclosure() {
             placeholder="http://localhost:3000"
             defaultValue={serverBaseUrl}
             onBlur={handleBlur}
-            description="Base URL of the FreezerTracker backend"
+            description="Base URL of the FreezerMan backend"
           />
         </Stack>
       </Collapse>

@@ -148,7 +148,7 @@ function ProfilePage() {
             <Stack gap="sm" p="md">
               <TextInput
                 label="Server URL"
-                description="Base URL of your self-hosted Freezer Tracker server"
+                description="Base URL of your self-hosted FreezerMan server"
                 placeholder="https://freezer.myhome.local"
                 {...serverForm.register('serverBaseUrl')}
               />

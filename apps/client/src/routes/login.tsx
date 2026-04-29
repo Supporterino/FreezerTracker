@@ -43,7 +43,7 @@ function LoginPage() {
   return (
     <Box maw={400} mx="auto" pt="15vh" px="md">
       <Title order={2} ta="center" mb="xs">
-        Freezer Tracker
+        FreezerMan
       </Title>
       <Text c="dimmed" size="sm" ta="center" mb="lg">
         Sign in to your account
