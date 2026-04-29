@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
-import { IsArray, IsDateString, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
+import { IsDateString, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
 
 export class ItemQueryDto {
   @ApiPropertyOptional()
@@ -9,10 +9,8 @@ export class ItemQueryDto {
   freezerId?: string;
 
   @ApiPropertyOptional({ type: [String] })
-  @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
   @Transform(({ value }) => (Array.isArray(value) ? value : value ? [value] : undefined))
+  @IsOptional()
   compartmentIds?: string[];
 
   @ApiPropertyOptional()
