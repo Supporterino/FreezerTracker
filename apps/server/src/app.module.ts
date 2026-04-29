@@ -6,6 +6,7 @@ import { CompartmentsModule } from './compartments/compartments.module';
 import configuration from './config/configuration';
 import { validationSchema } from './config/validation.schema';
 import { FreezersModule } from './freezers/freezers.module';
+import { HealthModule } from './health/health.module';
 import { HouseholdsModule } from './households/households.module';
 import { InvitesModule } from './invites/invites.module';
 import { ItemsModule } from './items/items.module';
@@ -28,6 +29,7 @@ import { UsersModule } from './users/users.module';
     CompartmentsModule,
     ChangeLogModule,
     ItemsModule,
+    HealthModule,
   ],
 })
 export class AppModule {}
