@@ -25,7 +25,7 @@
 /* Begin PBXFileReference section */
 		22EA40DD86A38DD9B22612A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2597CFFDD2E55BA724C41BB0 /* main.rs */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.rs; sourceTree = "<group>"; };
-		2ED9CCB72FA21D10002B0B60 /* FreezerMan.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; name = FreezerMan.icon; path = /Users/supporterino/repos/FreezerMan/icon/FreezerMan.icon; sourceTree = "<absolute>"; };
+		2ED9CCB72FA21D10002B0B60 /* FreezerTracker.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; name = FreezerTracker.icon; path = /Users/supporterino/repos/FreezerTracker/icon/FreezerTracker.icon; sourceTree = "<absolute>"; };
 		388931674CB64713714003E0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = SOURCE_ROOT; };
 		45896A6D7DF53B9A7E6A9B33 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		661EA9136F5C5A8ED38DC24F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -90,7 +90,7 @@
 				D4E367EEF3870D65469BB032 /* src */,
 				3B573905F04F5ED68831AAF5 /* Frameworks */,
 				AA99229A272F07DA07B0963B /* Products */,
-				2ED9CCB72FA21D10002B0B60 /* FreezerMan.icon */,
+				2ED9CCB72FA21D10002B0B60 /* FreezerTracker.icon */,
 			);
 			sourceTree = "<group>";
 		};
@@ -210,7 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C52731408B3A439FEFA33AC /* Assets.xcassets in Resources */,
-				2ED9CCB82FA21D10002B0B60 /* FreezerMan.icon in Resources */,
+				2ED9CCB82FA21D10002B0B60 /* FreezerTracker.icon in Resources */,
 				18AAD465D3A9F7BFB4CD61C7 /* LaunchScreen.storyboard in Resources */,
 				3E42C523E0C0B3C783D3EB95 /* assets in Resources */,
 			);
@@ -322,7 +322,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = arm64;
-				ASSETCATALOG_COMPILER_APPICON_NAME = FreezerMan;
+				ASSETCATALOG_COMPILER_APPICON_NAME = FreezerTracker;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = client_iOS/client_iOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -421,7 +421,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = arm64;
-				ASSETCATALOG_COMPILER_APPICON_NAME = FreezerMan;
+				ASSETCATALOG_COMPILER_APPICON_NAME = FreezerTracker;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = client_iOS/client_iOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
