@@ -38,7 +38,6 @@ export function ItemDetailDrawer({
   if (!item) return null;
 
   const handleEdit = () => {
-    onClose();
     openEdit();
   };
 
@@ -104,7 +103,10 @@ export function ItemDetailDrawer({
 
       <ItemModal
         opened={editOpened}
-        onClose={closeEdit}
+        onClose={() => {
+          closeEdit();
+          onClose();
+        }}
         householdId={householdId}
         item={item}
         defaultFreezerId={item.freezerId}
