@@ -153,6 +153,10 @@ if [[ "$SKIP_BUILD" == true ]]; then
   echo ""
   echo "Done. Don't forget to push the git tag:"
   echo "  git push origin main --tags"
+  echo ""
+  echo "Pushing the tag will trigger the client-release CI workflow,"
+  echo "which builds unsigned binaries for Linux, Windows, and macOS"
+  echo "and publishes them as a GitHub Release."
   exit 0
 fi
 
@@ -235,3 +239,7 @@ echo ""
 echo "==> Release v${NEW_VERSION} complete."
 echo "    Don't forget to push the git tag:"
 echo "      git push origin main --tags"
+echo ""
+echo "    Pushing the tag will also trigger the client-release CI workflow,"
+echo "    which builds unsigned binaries for Linux, Windows, and macOS"
+echo "    and publishes them as a GitHub Release."
