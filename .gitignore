@@ -11,6 +11,9 @@ apps/client/src-tauri/target/
 .DS_Store
 Thumbs.db
 
+# Documentation build output
+site/
+
 # IDE
 .vscode/
 .idea/

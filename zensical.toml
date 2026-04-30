@@ -1,0 +1,86 @@
+[project]
+site_name = "FreezerMan"
+site_url = "https://supporterino.github.io/FreezerTracker/"
+site_description = "Self-hosted freezer inventory tracking for your household"
+repo_url = "https://github.com/Supporterino/FreezerTracker"
+repo_name = "Supporterino/FreezerTracker"
+edit_uri = "edit/main/docs/"
+
+nav = [
+  { "Home" = "index.md" },
+  { "Getting Started" = [
+    "getting-started/index.md",
+    "getting-started/installation.md",
+    "getting-started/quick-start.md",
+    "getting-started/troubleshooting.md",
+  ] },
+  { "User Guide" = [
+    "user-guide/index.md",
+    "user-guide/households.md",
+    "user-guide/freezers-and-compartments.md",
+    "user-guide/items.md",
+    "user-guide/invites.md",
+    "user-guide/expiry-tracking.md",
+    "user-guide/faq.md",
+  ] },
+  { "API Reference" = [
+    "api/index.md",
+    "api/authentication.md",
+    "api/users.md",
+    "api/households.md",
+    "api/invites.md",
+    "api/freezers.md",
+    "api/compartments.md",
+    "api/items.md",
+    "api/health.md",
+  ] },
+  { "Architecture" = [
+    "architecture/index.md",
+    "architecture/backend.md",
+    "architecture/frontend.md",
+    "architecture/database.md",
+    "architecture/shared-package.md",
+    "architecture/design-decisions.md",
+  ] },
+  { "Configuration" = [
+    "configuration/index.md",
+    "configuration/environment-variables.md",
+    "configuration/client-settings.md",
+  ] },
+  { "Deployment" = [
+    "deployment/index.md",
+    "deployment/docker-compose.md",
+    "deployment/kubernetes.md",
+    "deployment/reverse-proxy.md",
+    "deployment/client-build.md",
+    "deployment/security.md",
+  ] },
+  { "Contributing" = [
+    "contributing/index.md",
+    "contributing/code-style.md",
+    "contributing/testing.md",
+  ] },
+]
+
+[project.theme]
+palette = [
+  { scheme = "default", primary = "indigo", accent = "indigo", toggle = { icon = "material/brightness-7", name = "Switch to dark mode" } },
+  { scheme = "slate", primary = "indigo", accent = "indigo", toggle = { icon = "material/brightness-4", name = "Switch to light mode" } },
+]
+features = [
+  "navigation.instant",
+  "navigation.instant.prefetch",
+  "navigation.instant.progress",
+  "navigation.tracking",
+  "navigation.tabs",
+  "navigation.sections",
+  "navigation.expand",
+  "navigation.path",
+  "navigation.top",
+  "navigation.indexes",
+  "toc.follow",
+  "search.suggest",
+  "search.highlight",
+  "content.code.copy",
+  "content.action.edit",
+]
