@@ -1,44 +1,77 @@
-import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma/prisma.service';
-import type { RegisterDto } from './dto/register.dto';
+import { RegisterDto } from './dto/register.dto';
 
+/**
+ * Handles authentication logic: registration, login, JWT token issuance,
+ * refresh token rotation, and logout (token revocation).
+ */
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger(AuthService.name);
+
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
     private configService: ConfigService,
   ) {}
 
+  /**
+   * Validate user credentials against stored bcrypt hash.
+   * @returns User object (without passwordHash) or null if invalid.
+   */
   async validateUser(email: string, password: string) {
     const user = await this.prisma.user.findUnique({ where: { email } });
-    if (!user) return null;
+    if (!user) {
+      this.logger.warn(`Login attempt for non-existent email: ${email}`);
+      return null;
+    }
     const valid = await bcrypt.compare(password, user.passwordHash);
-    if (!valid) return null;
+    if (!valid) {
+      this.logger.warn(`Invalid password attempt for user ${user.id}`);
+      return null;
+    }
     const { passwordHash: _ph, ...result } = user;
     return result;
   }
 
+  /**
+   * Register a new user account and issue token pair.
+   * @throws ConflictException if email is already in use.
+   */
   async register(dto: RegisterDto) {
     const existing = await this.prisma.user.findUnique({ where: { email: dto.email } });
-    if (existing) throw new ConflictException('Email already in use');
+    if (existing) {
+      this.logger.warn(`Registration attempt with existing email: ${dto.email}`);
+      throw new ConflictException('Email already in use');
+    }
     const passwordHash = await bcrypt.hash(dto.password, 12);
     const user = await this.prisma.user.create({
       data: { email: dto.email, passwordHash, name: dto.name },
     });
+    this.logger.log(`User registered: ${user.id}`);
     return this.issueTokens(user.id, user.email);
   }
 
+  /**
+   * Issue a new token pair for an already-validated user.
+   */
   async login(user: { id: string; email: string }) {
+    this.logger.log(`User logged in: ${user.id}`);
     return this.issueTokens(user.id, user.email);
   }
 
+  /**
+   * Rotate a refresh token: validate the old one, revoke it, and issue a new pair.
+   * @throws UnauthorizedException if the token is invalid, revoked, or expired.
+   */
   async refresh(token: string) {
     const record = await this.prisma.refreshToken.findUnique({ where: { token } });
     if (!record || record.revokedAt || record.expiresAt < new Date()) {
+      this.logger.warn('Invalid refresh token attempt');
       throw new UnauthorizedException('Invalid refresh token');
     }
     // Revoke the old token
@@ -46,17 +79,31 @@ export class AuthService {
       where: { id: record.id },
       data: { revokedAt: new Date() },
     });
-    const user = await this.prisma.user.findUniqueOrThrow({ where: { id: record.userId } });
+
+    const user = await this.prisma.user.findUnique({ where: { id: record.userId } });
+    if (!user) {
+      this.logger.error(`Refresh token references deleted user: ${record.userId}`);
+      throw new UnauthorizedException('User account no longer exists');
+    }
+
+    this.logger.debug(`Token refreshed for user ${user.id}`);
     return this.issueTokens(user.id, user.email);
   }
 
+  /**
+   * Revoke a refresh token (logout).
+   */
   async logout(token: string) {
     await this.prisma.refreshToken.updateMany({
       where: { token, revokedAt: null },
       data: { revokedAt: new Date() },
     });
+    this.logger.log('User logged out (refresh token revoked)');
   }
 
+  /**
+   * Sign and persist a new access + refresh token pair.
+   */
   private async issueTokens(userId: string, email: string) {
     const payload = { sub: userId, email };
     const accessToken = this.jwtService.sign(payload, {

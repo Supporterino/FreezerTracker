@@ -8,7 +8,7 @@ interface HouseholdState {
   setActiveFreezer: (householdId: string, freezerId: string) => void;
 }
 
-export const useHouseholdStore = create<HouseholdState>((set) => ({
+export const useHouseholdStore = create<HouseholdState>((set, get) => ({
   activeHouseholdId: null,
   activeFreezerIdMap: {},
 
@@ -18,11 +18,11 @@ export const useHouseholdStore = create<HouseholdState>((set) => ({
   },
 
   setActiveFreezer: (householdId, freezerId) => {
-    set((state) => ({
-      activeFreezerIdMap: { ...state.activeFreezerIdMap, [householdId]: freezerId },
-    }));
-    tauriStore.get<Record<string, string>>('activeFreezerIdMap').then((map) => {
-      tauriStore.set('activeFreezerIdMap', { ...(map ?? {}), [householdId]: freezerId });
-    });
+    // Update zustand state synchronously (single source of truth)
+    const updatedMap = { ...get().activeFreezerIdMap, [householdId]: freezerId };
+    set({ activeFreezerIdMap: updatedMap });
+    // Persist the full map from the just-updated zustand state to avoid
+    // the async read-then-write race condition with tauriStore.get().
+    tauriStore.set('activeFreezerIdMap', updatedMap);
   },
 }));

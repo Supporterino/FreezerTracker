@@ -5,7 +5,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconLayoutGrid, IconPlus } from '@tabler/icons-react';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { CompartmentManager } from '@/components/compartments/CompartmentManager';
 import { ItemDetailDrawer } from '@/components/items/ItemDetailDrawer';
@@ -26,8 +26,10 @@ function FreezerView() {
   const { hid, fid } = Route.useParams();
   const setActiveFreezer = useHouseholdStore((s) => s.setActiveFreezer);
 
-  // Track active freezer selection
-  setActiveFreezer(hid, fid);
+  // Track active freezer selection (in useEffect to avoid state update during render)
+  useEffect(() => {
+    setActiveFreezer(hid, fid);
+  }, [hid, fid, setActiveFreezer]);
 
   const { data: household } = useHousehold(hid);
   const { data: freezer, isLoading: freezerLoading } = useFreezer(hid, fid);

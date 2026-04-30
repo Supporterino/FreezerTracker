@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, MinLength } from 'class-validator';
+import { IsString, MaxLength, MinLength } from 'class-validator';
 
 export class CreateHouseholdDto {
   @ApiProperty()
   @IsString()
   @MinLength(1)
-  name: string;
+  @MaxLength(100)
+  name!: string;
 }

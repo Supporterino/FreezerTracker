@@ -43,7 +43,7 @@ async function rehydrate(): Promise<void> {
   }
 }
 
-rehydrate().then(() => {
+function renderApp() {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
@@ -55,4 +55,12 @@ rehydrate().then(() => {
       </QueryClientProvider>
     </StrictMode>,
   );
-});
+}
+
+rehydrate()
+  .catch((error) => {
+    // Rehydration failure (e.g. Tauri store unavailable in web context).
+    // Log the error and render the app anyway with default state.
+    console.error('Failed to rehydrate persisted state:', error);
+  })
+  .then(renderApp);

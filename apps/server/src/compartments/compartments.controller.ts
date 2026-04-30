@@ -15,8 +15,8 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { HouseholdMemberGuard } from '../households/guards/household-member.guard';
 import { HouseholdOwnerGuard } from '../households/guards/household-owner.guard';
 import { CompartmentsService } from './compartments.service';
-import type { CreateCompartmentDto } from './dto/create-compartment.dto';
-import type { UpdateCompartmentDto } from './dto/update-compartment.dto';
+import { CreateCompartmentDto } from './dto/create-compartment.dto';
+import { UpdateCompartmentDto } from './dto/update-compartment.dto';
 
 @ApiTags('compartments')
 @ApiBearerAuth()

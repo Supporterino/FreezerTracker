@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { ChangeLogService, type FieldDiff } from '../change-log/change-log.service';
 import { PrismaService } from '../prisma/prisma.service';
 import type { CreateItemDto } from './dto/create-item.dto';
@@ -7,13 +7,20 @@ import type { UpdateItemDto } from './dto/update-item.dto';
 
 const USER_SELECT = { id: true, name: true, email: true, createdAt: true };
 
+/**
+ * Service handling freezer item CRUD with change-log tracking,
+ * soft-delete (archive), and filtered/paginated listing.
+ */
 @Injectable()
 export class ItemsService {
+  private readonly logger = new Logger(ItemsService.name);
+
   constructor(
     private prisma: PrismaService,
     private changeLogService: ChangeLogService,
   ) {}
 
+  /** Verify the freezer->compartment chain belongs to the household. */
   private async verifyFreezerChain(householdId: string, freezerId: string, compartmentId: string) {
     const freezer = await this.prisma.freezer.findFirst({ where: { id: freezerId, householdId } });
     if (!freezer) throw new NotFoundException('Freezer not found');
@@ -23,6 +30,7 @@ export class ItemsService {
     if (!compartment) throw new NotFoundException('Compartment not found');
   }
 
+  /** Create a new item and record the initial change log entry. */
   async create(userId: string, householdId: string, dto: CreateItemDto) {
     await this.verifyFreezerChain(householdId, dto.freezerId, dto.compartmentId);
 
@@ -46,9 +54,11 @@ export class ItemsService {
       { fieldName: 'created', oldValue: null, newValue: item.name },
     ]);
 
+    this.logger.log(`Item ${item.id} created in household ${householdId} by user ${userId}`);
     return item;
   }
 
+  /** List active items with optional filters and pagination. */
   async findAll(householdId: string, query: ItemQueryDto) {
     const {
       freezerId,
@@ -89,6 +99,7 @@ export class ItemsService {
     return { data, total, page, limit };
   }
 
+  /** List archived (soft-deleted) items. */
   async findArchive(householdId: string) {
     return this.prisma.freezerItem.findMany({
       where: { householdId, deletedAt: { not: null } },
@@ -97,6 +108,7 @@ export class ItemsService {
     });
   }
 
+  /** Get a single active item by ID. */
   async findOne(householdId: string, itemId: string) {
     const item = await this.prisma.freezerItem.findFirst({
       where: { id: itemId, householdId, deletedAt: null },
@@ -106,6 +118,7 @@ export class ItemsService {
     return item;
   }
 
+  /** Update an item and record field-level diffs in the change log. */
   async update(userId: string, householdId: string, itemId: string, dto: UpdateItemDto) {
     const current = await this.prisma.freezerItem.findFirst({
       where: { id: itemId, householdId, deletedAt: null },
@@ -120,8 +133,8 @@ export class ItemsService {
       );
     }
 
-    return this.prisma.$transaction(async (tx) => {
-      const updated = await tx.freezerItem.update({
+    const updated = await this.prisma.$transaction(async (tx) => {
+      const result = await tx.freezerItem.update({
         where: { id: itemId },
         data: {
           ...(dto.name !== undefined && { name: dto.name }),
@@ -148,7 +161,7 @@ export class ItemsService {
       ];
       for (const field of trackedFields) {
         const oldVal = current[field];
-        const newVal = (updated as any)[field];
+        const newVal = (result as any)[field];
         const oldStr = oldVal instanceof Date ? oldVal.toISOString() : (oldVal as string | null);
         const newStr = newVal instanceof Date ? newVal.toISOString() : (newVal as string | null);
         if (oldStr !== newStr) {
@@ -157,29 +170,39 @@ export class ItemsService {
       }
 
       await this.changeLogService.recordChanges(itemId, userId, diffs);
-      return updated;
+      return result;
     });
+
+    if (updated) {
+      this.logger.log(`Item ${itemId} updated by user ${userId} in household ${householdId}`);
+    }
+    return updated;
   }
 
+  /** Soft-delete an item (sets deletedAt, moves to archive). */
   async softDelete(householdId: string, itemId: string) {
     const item = await this.prisma.freezerItem.findFirst({
       where: { id: itemId, householdId, deletedAt: null },
     });
     if (!item) throw new NotFoundException('Item not found');
+    this.logger.log(`Item ${itemId} soft-deleted in household ${householdId}`);
     return this.prisma.freezerItem.update({
       where: { id: itemId },
       data: { deletedAt: new Date() },
     });
   }
 
+  /** Permanently delete an item (must already be archived). */
   async hardDelete(householdId: string, itemId: string) {
     const item = await this.prisma.freezerItem.findFirst({
       where: { id: itemId, householdId, deletedAt: { not: null } },
     });
     if (!item) throw new NotFoundException('Item not found in archive');
     await this.prisma.freezerItem.delete({ where: { id: itemId } });
+    this.logger.log(`Item ${itemId} permanently deleted from household ${householdId}`);
   }
 
+  /** Get the change log history for an item. */
   async getHistory(householdId: string, itemId: string) {
     return this.changeLogService.getHistory(itemId, householdId);
   }

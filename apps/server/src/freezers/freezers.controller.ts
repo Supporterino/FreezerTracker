@@ -14,8 +14,8 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { HouseholdMemberGuard } from '../households/guards/household-member.guard';
 import { HouseholdOwnerGuard } from '../households/guards/household-owner.guard';
-import type { CreateFreezerDto } from './dto/create-freezer.dto';
-import type { UpdateFreezerDto } from './dto/update-freezer.dto';
+import { CreateFreezerDto } from './dto/create-freezer.dto';
+import { UpdateFreezerDto } from './dto/update-freezer.dto';
 import { FreezersService } from './freezers.service';
 
 @ApiTags('freezers')

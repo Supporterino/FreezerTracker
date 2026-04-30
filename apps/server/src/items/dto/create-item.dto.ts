@@ -1,28 +1,31 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsDateString, IsOptional, IsString, MinLength } from 'class-validator';
+import { IsDateString, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class CreateItemDto {
   @ApiProperty()
   @IsString()
   @MinLength(1)
-  name: string;
+  @MaxLength(200)
+  name!: string;
 
   @ApiProperty()
   @IsString()
   @MinLength(1)
-  quantity: string;
+  @MaxLength(100)
+  quantity!: string;
 
   @ApiProperty()
   @IsString()
-  freezerId: string;
+  freezerId!: string;
 
   @ApiProperty()
   @IsString()
-  compartmentId: string;
+  compartmentId!: string;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
+  @MaxLength(1000)
   notes?: string;
 
   @ApiPropertyOptional()

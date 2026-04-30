@@ -22,7 +22,9 @@ function AuthenticatedLayout() {
       usersApi
         .getMe()
         .then(setUser)
-        .catch(() => {});
+        .catch((error) => {
+          console.error('Failed to fetch user profile:', error);
+        });
     }
   }, [currentUser, setUser]);
 

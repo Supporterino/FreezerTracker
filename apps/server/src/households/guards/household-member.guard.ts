@@ -3,11 +3,18 @@ import {
   type ExecutionContext,
   ForbiddenException,
   Injectable,
+  Logger,
 } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 
+/**
+ * Guard that verifies the authenticated user is a member of the household
+ * identified by the `:hid` route parameter.
+ */
 @Injectable()
 export class HouseholdMemberGuard implements CanActivate {
+  private readonly logger = new Logger(HouseholdMemberGuard.name);
+
   constructor(private prisma: PrismaService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -21,7 +28,10 @@ export class HouseholdMemberGuard implements CanActivate {
       where: { householdId_userId: { householdId, userId } },
     });
 
-    if (!member) throw new ForbiddenException('You are not a member of this household');
+    if (!member) {
+      this.logger.warn(`Access denied: user ${userId} is not a member of household ${householdId}`);
+      throw new ForbiddenException('You are not a member of this household');
+    }
     return true;
   }
 }

@@ -1,4 +1,11 @@
-import type { CreateItemDto, FreezerItemResponse, UpdateItemDto } from '@freezer-tracker/shared';
+import {
+  type CreateItemDto,
+  createItemSchema,
+  type FreezerItemResponse,
+  type UpdateItemDto,
+  updateItemSchema,
+} from '@freezer-tracker/shared';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Modal, Select, Stack, Textarea, TextInput } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { useMediaQuery } from '@mantine/hooks';
@@ -47,6 +54,9 @@ export function ItemModal({
   const createItem = useCreateItem(householdId);
   const updateItem = useUpdateItem(householdId, item?.id ?? '');
 
+  // Build a form-level Zod schema that relaxes date fields to accept Date objects.
+  // The shared createItemSchema/updateItemSchema expects ISO strings, but the form
+  // uses Date objects for date pickers. We validate the final payload separately.
   const {
     register,
     handleSubmit,
@@ -110,11 +120,23 @@ export function ItemModal({
       expiresAt: toISO(data.expiresAt),
     };
 
+    // Validate the payload against the shared Zod schema before sending
+    const schema = isEdit ? updateItemSchema : createItemSchema;
+    const parsed = schema.safeParse(payload);
+    if (!parsed.success) {
+      notifications.show({
+        title: 'Validation error',
+        message: parsed.error.issues.map((i) => i.message).join(', '),
+        color: 'red',
+      });
+      return;
+    }
+
     try {
       if (isEdit) {
-        await updateItem.mutateAsync(payload as UpdateItemDto);
+        await updateItem.mutateAsync(parsed.data as UpdateItemDto);
       } else {
-        await createItem.mutateAsync(payload as CreateItemDto);
+        await createItem.mutateAsync(parsed.data as CreateItemDto);
       }
       onClose();
     } catch {

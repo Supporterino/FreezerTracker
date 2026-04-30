@@ -29,13 +29,13 @@ serviceAccount:
 podAnnotations: {}
 
 # -- Pod-level security context
-podSecurityContext: {}
-  # fsGroup: 1000
+podSecurityContext:
+  fsGroup: 1000
 
 # -- Container-level security context
-securityContext: {}
-  # runAsNonRoot: true
-  # runAsUser: 1000
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
 
 service:
   # -- Service type
@@ -66,12 +66,21 @@ ingress:
 # deployed by this chart — provide a connection string to your
 # existing PostgreSQL instance.
 # ──────────────────────────────────────────────────────────────
+# TODO: SECURITY — DATABASE_URL, JWT_SECRET, and JWT_REFRESH_SECRET contain
+# sensitive credentials and should be stored in a Kubernetes Secret (not a
+# ConfigMap). Create a Secret manually or via an external secrets operator,
+# then reference them via secretKeyRef in the deployment template instead of
+# the configmap envFrom. The configmap.yaml template currently renders ALL
+# values.env entries as a plain ConfigMap, which is not encrypted at rest.
 env:
   # -- PostgreSQL connection string (required)
+  # SECURITY: Move to a Kubernetes Secret in production
   DATABASE_URL: ""
   # -- JWT access-token signing secret (required)
+  # SECURITY: Move to a Kubernetes Secret in production
   JWT_SECRET: ""
   # -- JWT refresh-token signing secret (required)
+  # SECURITY: Move to a Kubernetes Secret in production
   JWT_REFRESH_SECRET: ""
   # -- Access token lifetime (default: 15m)
   JWT_ACCESS_EXPIRES_IN: "15m"
@@ -81,6 +90,10 @@ env:
   PORT: "3000"
   # -- Node environment
   NODE_ENV: "production"
+  # -- Comma-separated list of allowed CORS origins (required for cross-origin clients)
+  ALLOWED_ORIGINS: ""
+  # -- Base URL for invite QR code links
+  APP_BASE_URL: ""
 
 # -- Resource requests and limits
 resources: {}

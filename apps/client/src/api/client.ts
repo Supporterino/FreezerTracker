@@ -43,8 +43,8 @@ function buildClient(baseUrl: string): KyInstance {
                   headers: Object.fromEntries(newHeaders.entries()),
                   body: request.body ? await request.text() : undefined,
                 }) as unknown as Response;
-              } catch {
-                // Refresh failed — force logout
+              } catch (refreshError) {
+                console.error('Token refresh failed, forcing logout:', refreshError);
               }
             }
             logout();
