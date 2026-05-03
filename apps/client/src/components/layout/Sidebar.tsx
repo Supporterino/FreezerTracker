@@ -1,6 +1,7 @@
 import { AppShell, Avatar, Divider, NavLink, ScrollArea } from '@mantine/core';
 import {
   IconArchive,
+  IconCalendarEvent,
   IconHome,
   IconHomePlus,
   IconList,
@@ -78,6 +79,14 @@ export function Sidebar({ closeNav }: { closeNav: () => void }) {
               leftSection={<IconList size={16} />}
               component={Link}
               to="/households/$hid/items"
+              params={{ hid: h.id } as any}
+              onClick={closeNav}
+            />
+            <NavLink
+              label="Meal Planning"
+              leftSection={<IconCalendarEvent size={16} />}
+              component={Link}
+              to="/households/$hid/meal-plans"
               params={{ hid: h.id } as any}
               onClick={closeNav}
             />

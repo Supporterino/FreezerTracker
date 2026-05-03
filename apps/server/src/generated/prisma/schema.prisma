@@ -39,10 +39,12 @@ model Household {
   ownerId   String
   owner     User     @relation("HouseholdOwner", fields: [ownerId], references: [id])
 
-  members  HouseholdMember[]
-  freezers Freezer[]
-  items    FreezerItem[]
-  invites  HouseholdInvite[]
+  members       HouseholdMember[]
+  freezers      Freezer[]
+  items         FreezerItem[]
+  invites       HouseholdInvite[]
+  mealPlans     MealPlan[]
+  mealPlanItems MealPlanItem[]
 }
 
 model HouseholdMember {
@@ -116,7 +118,8 @@ model FreezerItem {
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 
-  changeLogs ItemChangeLog[]
+  changeLogs   ItemChangeLog[]
+  plannedItems MealPlanItem[]
 }
 
 model ItemChangeLog {
@@ -129,4 +132,34 @@ model ItemChangeLog {
   fieldName   String
   oldValue    String?
   newValue    String?
+}
+
+model MealPlan {
+  id          String    @id @default(cuid())
+  householdId String
+  household   Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  name        String?
+  plannedDate DateTime
+  notes       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  items MealPlanItem[]
+
+  @@index([householdId, plannedDate])
+  @@map("meal_plans")
+}
+
+model MealPlanItem {
+  id          String      @id @default(cuid())
+  mealPlanId  String
+  mealPlan    MealPlan    @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
+  itemId      String
+  item        FreezerItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  householdId String
+  household   Household   @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  createdAt   DateTime    @default(now())
+
+  @@unique([mealPlanId, itemId])
+  @@map("meal_plan_items")
 }

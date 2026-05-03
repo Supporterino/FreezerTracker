@@ -58,6 +58,16 @@ export type FreezerItem = $Result.DefaultSelection<Prisma.$FreezerItemPayload>
  * 
  */
 export type ItemChangeLog = $Result.DefaultSelection<Prisma.$ItemChangeLogPayload>
+/**
+ * Model MealPlan
+ * 
+ */
+export type MealPlan = $Result.DefaultSelection<Prisma.$MealPlanPayload>
+/**
+ * Model MealPlanItem
+ * 
+ */
+export type MealPlanItem = $Result.DefaultSelection<Prisma.$MealPlanItemPayload>
 
 /**
  * Enums
@@ -286,6 +296,26 @@ export class PrismaClient<
     * ```
     */
   get itemChangeLog(): Prisma.ItemChangeLogDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.mealPlan`: Exposes CRUD operations for the **MealPlan** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MealPlans
+    * const mealPlans = await prisma.mealPlan.findMany()
+    * ```
+    */
+  get mealPlan(): Prisma.MealPlanDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.mealPlanItem`: Exposes CRUD operations for the **MealPlanItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MealPlanItems
+    * const mealPlanItems = await prisma.mealPlanItem.findMany()
+    * ```
+    */
+  get mealPlanItem(): Prisma.MealPlanItemDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -728,7 +758,9 @@ export namespace Prisma {
     Freezer: 'Freezer',
     Compartment: 'Compartment',
     FreezerItem: 'FreezerItem',
-    ItemChangeLog: 'ItemChangeLog'
+    ItemChangeLog: 'ItemChangeLog',
+    MealPlan: 'MealPlan',
+    MealPlanItem: 'MealPlanItem'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -744,7 +776,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "refreshToken" | "household" | "householdMember" | "householdInvite" | "freezer" | "compartment" | "freezerItem" | "itemChangeLog"
+      modelProps: "user" | "refreshToken" | "household" | "householdMember" | "householdInvite" | "freezer" | "compartment" | "freezerItem" | "itemChangeLog" | "mealPlan" | "mealPlanItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1414,6 +1446,154 @@ export namespace Prisma {
           }
         }
       }
+      MealPlan: {
+        payload: Prisma.$MealPlanPayload<ExtArgs>
+        fields: Prisma.MealPlanFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MealPlanFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MealPlanFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanPayload>
+          }
+          findFirst: {
+            args: Prisma.MealPlanFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MealPlanFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanPayload>
+          }
+          findMany: {
+            args: Prisma.MealPlanFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanPayload>[]
+          }
+          create: {
+            args: Prisma.MealPlanCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanPayload>
+          }
+          createMany: {
+            args: Prisma.MealPlanCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MealPlanCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanPayload>[]
+          }
+          delete: {
+            args: Prisma.MealPlanDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanPayload>
+          }
+          update: {
+            args: Prisma.MealPlanUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanPayload>
+          }
+          deleteMany: {
+            args: Prisma.MealPlanDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MealPlanUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MealPlanUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanPayload>[]
+          }
+          upsert: {
+            args: Prisma.MealPlanUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanPayload>
+          }
+          aggregate: {
+            args: Prisma.MealPlanAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMealPlan>
+          }
+          groupBy: {
+            args: Prisma.MealPlanGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MealPlanGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MealPlanCountArgs<ExtArgs>
+            result: $Utils.Optional<MealPlanCountAggregateOutputType> | number
+          }
+        }
+      }
+      MealPlanItem: {
+        payload: Prisma.$MealPlanItemPayload<ExtArgs>
+        fields: Prisma.MealPlanItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MealPlanItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MealPlanItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanItemPayload>
+          }
+          findFirst: {
+            args: Prisma.MealPlanItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MealPlanItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanItemPayload>
+          }
+          findMany: {
+            args: Prisma.MealPlanItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanItemPayload>[]
+          }
+          create: {
+            args: Prisma.MealPlanItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanItemPayload>
+          }
+          createMany: {
+            args: Prisma.MealPlanItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MealPlanItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanItemPayload>[]
+          }
+          delete: {
+            args: Prisma.MealPlanItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanItemPayload>
+          }
+          update: {
+            args: Prisma.MealPlanItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.MealPlanItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MealPlanItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MealPlanItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.MealPlanItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MealPlanItemPayload>
+          }
+          aggregate: {
+            args: Prisma.MealPlanItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMealPlanItem>
+          }
+          groupBy: {
+            args: Prisma.MealPlanItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MealPlanItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MealPlanItemCountArgs<ExtArgs>
+            result: $Utils.Optional<MealPlanItemCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1531,6 +1711,8 @@ export namespace Prisma {
     compartment?: CompartmentOmit
     freezerItem?: FreezerItemOmit
     itemChangeLog?: ItemChangeLogOmit
+    mealPlan?: MealPlanOmit
+    mealPlanItem?: MealPlanItemOmit
   }
 
   /* Types for Logging */
@@ -1691,6 +1873,8 @@ export namespace Prisma {
     freezers: number
     items: number
     invites: number
+    mealPlans: number
+    mealPlanItems: number
   }
 
   export type HouseholdCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1698,6 +1882,8 @@ export namespace Prisma {
     freezers?: boolean | HouseholdCountOutputTypeCountFreezersArgs
     items?: boolean | HouseholdCountOutputTypeCountItemsArgs
     invites?: boolean | HouseholdCountOutputTypeCountInvitesArgs
+    mealPlans?: boolean | HouseholdCountOutputTypeCountMealPlansArgs
+    mealPlanItems?: boolean | HouseholdCountOutputTypeCountMealPlanItemsArgs
   }
 
   // Custom InputTypes
@@ -1737,6 +1923,20 @@ export namespace Prisma {
    */
   export type HouseholdCountOutputTypeCountInvitesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: HouseholdInviteWhereInput
+  }
+
+  /**
+   * HouseholdCountOutputType without action
+   */
+  export type HouseholdCountOutputTypeCountMealPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MealPlanWhereInput
+  }
+
+  /**
+   * HouseholdCountOutputType without action
+   */
+  export type HouseholdCountOutputTypeCountMealPlanItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MealPlanItemWhereInput
   }
 
 
@@ -1817,10 +2017,12 @@ export namespace Prisma {
 
   export type FreezerItemCountOutputType = {
     changeLogs: number
+    plannedItems: number
   }
 
   export type FreezerItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     changeLogs?: boolean | FreezerItemCountOutputTypeCountChangeLogsArgs
+    plannedItems?: boolean | FreezerItemCountOutputTypeCountPlannedItemsArgs
   }
 
   // Custom InputTypes
@@ -1839,6 +2041,44 @@ export namespace Prisma {
    */
   export type FreezerItemCountOutputTypeCountChangeLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ItemChangeLogWhereInput
+  }
+
+  /**
+   * FreezerItemCountOutputType without action
+   */
+  export type FreezerItemCountOutputTypeCountPlannedItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MealPlanItemWhereInput
+  }
+
+
+  /**
+   * Count Type MealPlanCountOutputType
+   */
+
+  export type MealPlanCountOutputType = {
+    items: number
+  }
+
+  export type MealPlanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | MealPlanCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MealPlanCountOutputType without action
+   */
+  export type MealPlanCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanCountOutputType
+     */
+    select?: MealPlanCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MealPlanCountOutputType without action
+   */
+  export type MealPlanCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MealPlanItemWhereInput
   }
 
 
@@ -4298,6 +4538,8 @@ export namespace Prisma {
     freezers?: boolean | Household$freezersArgs<ExtArgs>
     items?: boolean | Household$itemsArgs<ExtArgs>
     invites?: boolean | Household$invitesArgs<ExtArgs>
+    mealPlans?: boolean | Household$mealPlansArgs<ExtArgs>
+    mealPlanItems?: boolean | Household$mealPlanItemsArgs<ExtArgs>
     _count?: boolean | HouseholdCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["household"]>
 
@@ -4331,6 +4573,8 @@ export namespace Prisma {
     freezers?: boolean | Household$freezersArgs<ExtArgs>
     items?: boolean | Household$itemsArgs<ExtArgs>
     invites?: boolean | Household$invitesArgs<ExtArgs>
+    mealPlans?: boolean | Household$mealPlansArgs<ExtArgs>
+    mealPlanItems?: boolean | Household$mealPlanItemsArgs<ExtArgs>
     _count?: boolean | HouseholdCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type HouseholdIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4348,6 +4592,8 @@ export namespace Prisma {
       freezers: Prisma.$FreezerPayload<ExtArgs>[]
       items: Prisma.$FreezerItemPayload<ExtArgs>[]
       invites: Prisma.$HouseholdInvitePayload<ExtArgs>[]
+      mealPlans: Prisma.$MealPlanPayload<ExtArgs>[]
+      mealPlanItems: Prisma.$MealPlanItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4753,6 +4999,8 @@ export namespace Prisma {
     freezers<T extends Household$freezersArgs<ExtArgs> = {}>(args?: Subset<T, Household$freezersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FreezerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     items<T extends Household$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Household$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FreezerItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     invites<T extends Household$invitesArgs<ExtArgs> = {}>(args?: Subset<T, Household$invitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HouseholdInvitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    mealPlans<T extends Household$mealPlansArgs<ExtArgs> = {}>(args?: Subset<T, Household$mealPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    mealPlanItems<T extends Household$mealPlanItemsArgs<ExtArgs> = {}>(args?: Subset<T, Household$mealPlanItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5280,6 +5528,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: HouseholdInviteScalarFieldEnum | HouseholdInviteScalarFieldEnum[]
+  }
+
+  /**
+   * Household.mealPlans
+   */
+  export type Household$mealPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlan
+     */
+    select?: MealPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlan
+     */
+    omit?: MealPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanInclude<ExtArgs> | null
+    where?: MealPlanWhereInput
+    orderBy?: MealPlanOrderByWithRelationInput | MealPlanOrderByWithRelationInput[]
+    cursor?: MealPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MealPlanScalarFieldEnum | MealPlanScalarFieldEnum[]
+  }
+
+  /**
+   * Household.mealPlanItems
+   */
+  export type Household$mealPlanItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemInclude<ExtArgs> | null
+    where?: MealPlanItemWhereInput
+    orderBy?: MealPlanItemOrderByWithRelationInput | MealPlanItemOrderByWithRelationInput[]
+    cursor?: MealPlanItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MealPlanItemScalarFieldEnum | MealPlanItemScalarFieldEnum[]
   }
 
   /**
@@ -9938,6 +10234,7 @@ export namespace Prisma {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     updatedBy?: boolean | UserDefaultArgs<ExtArgs>
     changeLogs?: boolean | FreezerItem$changeLogsArgs<ExtArgs>
+    plannedItems?: boolean | FreezerItem$plannedItemsArgs<ExtArgs>
     _count?: boolean | FreezerItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["freezerItem"]>
 
@@ -10010,6 +10307,7 @@ export namespace Prisma {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     updatedBy?: boolean | UserDefaultArgs<ExtArgs>
     changeLogs?: boolean | FreezerItem$changeLogsArgs<ExtArgs>
+    plannedItems?: boolean | FreezerItem$plannedItemsArgs<ExtArgs>
     _count?: boolean | FreezerItemCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FreezerItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10036,6 +10334,7 @@ export namespace Prisma {
       createdBy: Prisma.$UserPayload<ExtArgs>
       updatedBy: Prisma.$UserPayload<ExtArgs>
       changeLogs: Prisma.$ItemChangeLogPayload<ExtArgs>[]
+      plannedItems: Prisma.$MealPlanItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10452,6 +10751,7 @@ export namespace Prisma {
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     updatedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     changeLogs<T extends FreezerItem$changeLogsArgs<ExtArgs> = {}>(args?: Subset<T, FreezerItem$changeLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemChangeLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    plannedItems<T extends FreezerItem$plannedItemsArgs<ExtArgs> = {}>(args?: Subset<T, FreezerItem$plannedItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10917,6 +11217,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ItemChangeLogScalarFieldEnum | ItemChangeLogScalarFieldEnum[]
+  }
+
+  /**
+   * FreezerItem.plannedItems
+   */
+  export type FreezerItem$plannedItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemInclude<ExtArgs> | null
+    where?: MealPlanItemWhereInput
+    orderBy?: MealPlanItemOrderByWithRelationInput | MealPlanItemOrderByWithRelationInput[]
+    cursor?: MealPlanItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MealPlanItemScalarFieldEnum | MealPlanItemScalarFieldEnum[]
   }
 
   /**
@@ -12036,6 +12360,2204 @@ export namespace Prisma {
 
 
   /**
+   * Model MealPlan
+   */
+
+  export type AggregateMealPlan = {
+    _count: MealPlanCountAggregateOutputType | null
+    _min: MealPlanMinAggregateOutputType | null
+    _max: MealPlanMaxAggregateOutputType | null
+  }
+
+  export type MealPlanMinAggregateOutputType = {
+    id: string | null
+    householdId: string | null
+    name: string | null
+    plannedDate: Date | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MealPlanMaxAggregateOutputType = {
+    id: string | null
+    householdId: string | null
+    name: string | null
+    plannedDate: Date | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MealPlanCountAggregateOutputType = {
+    id: number
+    householdId: number
+    name: number
+    plannedDate: number
+    notes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MealPlanMinAggregateInputType = {
+    id?: true
+    householdId?: true
+    name?: true
+    plannedDate?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MealPlanMaxAggregateInputType = {
+    id?: true
+    householdId?: true
+    name?: true
+    plannedDate?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MealPlanCountAggregateInputType = {
+    id?: true
+    householdId?: true
+    name?: true
+    plannedDate?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MealPlanAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MealPlan to aggregate.
+     */
+    where?: MealPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MealPlans to fetch.
+     */
+    orderBy?: MealPlanOrderByWithRelationInput | MealPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MealPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MealPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MealPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MealPlans
+    **/
+    _count?: true | MealPlanCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MealPlanMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MealPlanMaxAggregateInputType
+  }
+
+  export type GetMealPlanAggregateType<T extends MealPlanAggregateArgs> = {
+        [P in keyof T & keyof AggregateMealPlan]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMealPlan[P]>
+      : GetScalarType<T[P], AggregateMealPlan[P]>
+  }
+
+
+
+
+  export type MealPlanGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MealPlanWhereInput
+    orderBy?: MealPlanOrderByWithAggregationInput | MealPlanOrderByWithAggregationInput[]
+    by: MealPlanScalarFieldEnum[] | MealPlanScalarFieldEnum
+    having?: MealPlanScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MealPlanCountAggregateInputType | true
+    _min?: MealPlanMinAggregateInputType
+    _max?: MealPlanMaxAggregateInputType
+  }
+
+  export type MealPlanGroupByOutputType = {
+    id: string
+    householdId: string
+    name: string | null
+    plannedDate: Date
+    notes: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: MealPlanCountAggregateOutputType | null
+    _min: MealPlanMinAggregateOutputType | null
+    _max: MealPlanMaxAggregateOutputType | null
+  }
+
+  type GetMealPlanGroupByPayload<T extends MealPlanGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MealPlanGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MealPlanGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MealPlanGroupByOutputType[P]>
+            : GetScalarType<T[P], MealPlanGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MealPlanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    householdId?: boolean
+    name?: boolean
+    plannedDate?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    household?: boolean | HouseholdDefaultArgs<ExtArgs>
+    items?: boolean | MealPlan$itemsArgs<ExtArgs>
+    _count?: boolean | MealPlanCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mealPlan"]>
+
+  export type MealPlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    householdId?: boolean
+    name?: boolean
+    plannedDate?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    household?: boolean | HouseholdDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mealPlan"]>
+
+  export type MealPlanSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    householdId?: boolean
+    name?: boolean
+    plannedDate?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    household?: boolean | HouseholdDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mealPlan"]>
+
+  export type MealPlanSelectScalar = {
+    id?: boolean
+    householdId?: boolean
+    name?: boolean
+    plannedDate?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MealPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "householdId" | "name" | "plannedDate" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["mealPlan"]>
+  export type MealPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    household?: boolean | HouseholdDefaultArgs<ExtArgs>
+    items?: boolean | MealPlan$itemsArgs<ExtArgs>
+    _count?: boolean | MealPlanCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type MealPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    household?: boolean | HouseholdDefaultArgs<ExtArgs>
+  }
+  export type MealPlanIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    household?: boolean | HouseholdDefaultArgs<ExtArgs>
+  }
+
+  export type $MealPlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MealPlan"
+    objects: {
+      household: Prisma.$HouseholdPayload<ExtArgs>
+      items: Prisma.$MealPlanItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      householdId: string
+      name: string | null
+      plannedDate: Date
+      notes: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["mealPlan"]>
+    composites: {}
+  }
+
+  type MealPlanGetPayload<S extends boolean | null | undefined | MealPlanDefaultArgs> = $Result.GetResult<Prisma.$MealPlanPayload, S>
+
+  type MealPlanCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MealPlanFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MealPlanCountAggregateInputType | true
+    }
+
+  export interface MealPlanDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MealPlan'], meta: { name: 'MealPlan' } }
+    /**
+     * Find zero or one MealPlan that matches the filter.
+     * @param {MealPlanFindUniqueArgs} args - Arguments to find a MealPlan
+     * @example
+     * // Get one MealPlan
+     * const mealPlan = await prisma.mealPlan.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MealPlanFindUniqueArgs>(args: SelectSubset<T, MealPlanFindUniqueArgs<ExtArgs>>): Prisma__MealPlanClient<$Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MealPlan that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MealPlanFindUniqueOrThrowArgs} args - Arguments to find a MealPlan
+     * @example
+     * // Get one MealPlan
+     * const mealPlan = await prisma.mealPlan.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MealPlanFindUniqueOrThrowArgs>(args: SelectSubset<T, MealPlanFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MealPlanClient<$Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MealPlan that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanFindFirstArgs} args - Arguments to find a MealPlan
+     * @example
+     * // Get one MealPlan
+     * const mealPlan = await prisma.mealPlan.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MealPlanFindFirstArgs>(args?: SelectSubset<T, MealPlanFindFirstArgs<ExtArgs>>): Prisma__MealPlanClient<$Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MealPlan that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanFindFirstOrThrowArgs} args - Arguments to find a MealPlan
+     * @example
+     * // Get one MealPlan
+     * const mealPlan = await prisma.mealPlan.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MealPlanFindFirstOrThrowArgs>(args?: SelectSubset<T, MealPlanFindFirstOrThrowArgs<ExtArgs>>): Prisma__MealPlanClient<$Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MealPlans that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MealPlans
+     * const mealPlans = await prisma.mealPlan.findMany()
+     * 
+     * // Get first 10 MealPlans
+     * const mealPlans = await prisma.mealPlan.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mealPlanWithIdOnly = await prisma.mealPlan.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MealPlanFindManyArgs>(args?: SelectSubset<T, MealPlanFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MealPlan.
+     * @param {MealPlanCreateArgs} args - Arguments to create a MealPlan.
+     * @example
+     * // Create one MealPlan
+     * const MealPlan = await prisma.mealPlan.create({
+     *   data: {
+     *     // ... data to create a MealPlan
+     *   }
+     * })
+     * 
+     */
+    create<T extends MealPlanCreateArgs>(args: SelectSubset<T, MealPlanCreateArgs<ExtArgs>>): Prisma__MealPlanClient<$Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MealPlans.
+     * @param {MealPlanCreateManyArgs} args - Arguments to create many MealPlans.
+     * @example
+     * // Create many MealPlans
+     * const mealPlan = await prisma.mealPlan.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MealPlanCreateManyArgs>(args?: SelectSubset<T, MealPlanCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MealPlans and returns the data saved in the database.
+     * @param {MealPlanCreateManyAndReturnArgs} args - Arguments to create many MealPlans.
+     * @example
+     * // Create many MealPlans
+     * const mealPlan = await prisma.mealPlan.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MealPlans and only return the `id`
+     * const mealPlanWithIdOnly = await prisma.mealPlan.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MealPlanCreateManyAndReturnArgs>(args?: SelectSubset<T, MealPlanCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MealPlan.
+     * @param {MealPlanDeleteArgs} args - Arguments to delete one MealPlan.
+     * @example
+     * // Delete one MealPlan
+     * const MealPlan = await prisma.mealPlan.delete({
+     *   where: {
+     *     // ... filter to delete one MealPlan
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MealPlanDeleteArgs>(args: SelectSubset<T, MealPlanDeleteArgs<ExtArgs>>): Prisma__MealPlanClient<$Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MealPlan.
+     * @param {MealPlanUpdateArgs} args - Arguments to update one MealPlan.
+     * @example
+     * // Update one MealPlan
+     * const mealPlan = await prisma.mealPlan.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MealPlanUpdateArgs>(args: SelectSubset<T, MealPlanUpdateArgs<ExtArgs>>): Prisma__MealPlanClient<$Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MealPlans.
+     * @param {MealPlanDeleteManyArgs} args - Arguments to filter MealPlans to delete.
+     * @example
+     * // Delete a few MealPlans
+     * const { count } = await prisma.mealPlan.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MealPlanDeleteManyArgs>(args?: SelectSubset<T, MealPlanDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MealPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MealPlans
+     * const mealPlan = await prisma.mealPlan.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MealPlanUpdateManyArgs>(args: SelectSubset<T, MealPlanUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MealPlans and returns the data updated in the database.
+     * @param {MealPlanUpdateManyAndReturnArgs} args - Arguments to update many MealPlans.
+     * @example
+     * // Update many MealPlans
+     * const mealPlan = await prisma.mealPlan.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MealPlans and only return the `id`
+     * const mealPlanWithIdOnly = await prisma.mealPlan.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MealPlanUpdateManyAndReturnArgs>(args: SelectSubset<T, MealPlanUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MealPlan.
+     * @param {MealPlanUpsertArgs} args - Arguments to update or create a MealPlan.
+     * @example
+     * // Update or create a MealPlan
+     * const mealPlan = await prisma.mealPlan.upsert({
+     *   create: {
+     *     // ... data to create a MealPlan
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MealPlan we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MealPlanUpsertArgs>(args: SelectSubset<T, MealPlanUpsertArgs<ExtArgs>>): Prisma__MealPlanClient<$Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MealPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanCountArgs} args - Arguments to filter MealPlans to count.
+     * @example
+     * // Count the number of MealPlans
+     * const count = await prisma.mealPlan.count({
+     *   where: {
+     *     // ... the filter for the MealPlans we want to count
+     *   }
+     * })
+    **/
+    count<T extends MealPlanCountArgs>(
+      args?: Subset<T, MealPlanCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MealPlanCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MealPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MealPlanAggregateArgs>(args: Subset<T, MealPlanAggregateArgs>): Prisma.PrismaPromise<GetMealPlanAggregateType<T>>
+
+    /**
+     * Group by MealPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MealPlanGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MealPlanGroupByArgs['orderBy'] }
+        : { orderBy?: MealPlanGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MealPlanGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMealPlanGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MealPlan model
+   */
+  readonly fields: MealPlanFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MealPlan.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MealPlanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    household<T extends HouseholdDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HouseholdDefaultArgs<ExtArgs>>): Prisma__HouseholdClient<$Result.GetResult<Prisma.$HouseholdPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    items<T extends MealPlan$itemsArgs<ExtArgs> = {}>(args?: Subset<T, MealPlan$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MealPlan model
+   */
+  interface MealPlanFieldRefs {
+    readonly id: FieldRef<"MealPlan", 'String'>
+    readonly householdId: FieldRef<"MealPlan", 'String'>
+    readonly name: FieldRef<"MealPlan", 'String'>
+    readonly plannedDate: FieldRef<"MealPlan", 'DateTime'>
+    readonly notes: FieldRef<"MealPlan", 'String'>
+    readonly createdAt: FieldRef<"MealPlan", 'DateTime'>
+    readonly updatedAt: FieldRef<"MealPlan", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MealPlan findUnique
+   */
+  export type MealPlanFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlan
+     */
+    select?: MealPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlan
+     */
+    omit?: MealPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which MealPlan to fetch.
+     */
+    where: MealPlanWhereUniqueInput
+  }
+
+  /**
+   * MealPlan findUniqueOrThrow
+   */
+  export type MealPlanFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlan
+     */
+    select?: MealPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlan
+     */
+    omit?: MealPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which MealPlan to fetch.
+     */
+    where: MealPlanWhereUniqueInput
+  }
+
+  /**
+   * MealPlan findFirst
+   */
+  export type MealPlanFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlan
+     */
+    select?: MealPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlan
+     */
+    omit?: MealPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which MealPlan to fetch.
+     */
+    where?: MealPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MealPlans to fetch.
+     */
+    orderBy?: MealPlanOrderByWithRelationInput | MealPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MealPlans.
+     */
+    cursor?: MealPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MealPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MealPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MealPlans.
+     */
+    distinct?: MealPlanScalarFieldEnum | MealPlanScalarFieldEnum[]
+  }
+
+  /**
+   * MealPlan findFirstOrThrow
+   */
+  export type MealPlanFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlan
+     */
+    select?: MealPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlan
+     */
+    omit?: MealPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which MealPlan to fetch.
+     */
+    where?: MealPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MealPlans to fetch.
+     */
+    orderBy?: MealPlanOrderByWithRelationInput | MealPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MealPlans.
+     */
+    cursor?: MealPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MealPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MealPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MealPlans.
+     */
+    distinct?: MealPlanScalarFieldEnum | MealPlanScalarFieldEnum[]
+  }
+
+  /**
+   * MealPlan findMany
+   */
+  export type MealPlanFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlan
+     */
+    select?: MealPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlan
+     */
+    omit?: MealPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which MealPlans to fetch.
+     */
+    where?: MealPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MealPlans to fetch.
+     */
+    orderBy?: MealPlanOrderByWithRelationInput | MealPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MealPlans.
+     */
+    cursor?: MealPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MealPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MealPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MealPlans.
+     */
+    distinct?: MealPlanScalarFieldEnum | MealPlanScalarFieldEnum[]
+  }
+
+  /**
+   * MealPlan create
+   */
+  export type MealPlanCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlan
+     */
+    select?: MealPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlan
+     */
+    omit?: MealPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MealPlan.
+     */
+    data: XOR<MealPlanCreateInput, MealPlanUncheckedCreateInput>
+  }
+
+  /**
+   * MealPlan createMany
+   */
+  export type MealPlanCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MealPlans.
+     */
+    data: MealPlanCreateManyInput | MealPlanCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MealPlan createManyAndReturn
+   */
+  export type MealPlanCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlan
+     */
+    select?: MealPlanSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlan
+     */
+    omit?: MealPlanOmit<ExtArgs> | null
+    /**
+     * The data used to create many MealPlans.
+     */
+    data: MealPlanCreateManyInput | MealPlanCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MealPlan update
+   */
+  export type MealPlanUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlan
+     */
+    select?: MealPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlan
+     */
+    omit?: MealPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MealPlan.
+     */
+    data: XOR<MealPlanUpdateInput, MealPlanUncheckedUpdateInput>
+    /**
+     * Choose, which MealPlan to update.
+     */
+    where: MealPlanWhereUniqueInput
+  }
+
+  /**
+   * MealPlan updateMany
+   */
+  export type MealPlanUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MealPlans.
+     */
+    data: XOR<MealPlanUpdateManyMutationInput, MealPlanUncheckedUpdateManyInput>
+    /**
+     * Filter which MealPlans to update
+     */
+    where?: MealPlanWhereInput
+    /**
+     * Limit how many MealPlans to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MealPlan updateManyAndReturn
+   */
+  export type MealPlanUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlan
+     */
+    select?: MealPlanSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlan
+     */
+    omit?: MealPlanOmit<ExtArgs> | null
+    /**
+     * The data used to update MealPlans.
+     */
+    data: XOR<MealPlanUpdateManyMutationInput, MealPlanUncheckedUpdateManyInput>
+    /**
+     * Filter which MealPlans to update
+     */
+    where?: MealPlanWhereInput
+    /**
+     * Limit how many MealPlans to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MealPlan upsert
+   */
+  export type MealPlanUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlan
+     */
+    select?: MealPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlan
+     */
+    omit?: MealPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MealPlan to update in case it exists.
+     */
+    where: MealPlanWhereUniqueInput
+    /**
+     * In case the MealPlan found by the `where` argument doesn't exist, create a new MealPlan with this data.
+     */
+    create: XOR<MealPlanCreateInput, MealPlanUncheckedCreateInput>
+    /**
+     * In case the MealPlan was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MealPlanUpdateInput, MealPlanUncheckedUpdateInput>
+  }
+
+  /**
+   * MealPlan delete
+   */
+  export type MealPlanDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlan
+     */
+    select?: MealPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlan
+     */
+    omit?: MealPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanInclude<ExtArgs> | null
+    /**
+     * Filter which MealPlan to delete.
+     */
+    where: MealPlanWhereUniqueInput
+  }
+
+  /**
+   * MealPlan deleteMany
+   */
+  export type MealPlanDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MealPlans to delete
+     */
+    where?: MealPlanWhereInput
+    /**
+     * Limit how many MealPlans to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MealPlan.items
+   */
+  export type MealPlan$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemInclude<ExtArgs> | null
+    where?: MealPlanItemWhereInput
+    orderBy?: MealPlanItemOrderByWithRelationInput | MealPlanItemOrderByWithRelationInput[]
+    cursor?: MealPlanItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MealPlanItemScalarFieldEnum | MealPlanItemScalarFieldEnum[]
+  }
+
+  /**
+   * MealPlan without action
+   */
+  export type MealPlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlan
+     */
+    select?: MealPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlan
+     */
+    omit?: MealPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MealPlanItem
+   */
+
+  export type AggregateMealPlanItem = {
+    _count: MealPlanItemCountAggregateOutputType | null
+    _min: MealPlanItemMinAggregateOutputType | null
+    _max: MealPlanItemMaxAggregateOutputType | null
+  }
+
+  export type MealPlanItemMinAggregateOutputType = {
+    id: string | null
+    mealPlanId: string | null
+    itemId: string | null
+    householdId: string | null
+    createdAt: Date | null
+  }
+
+  export type MealPlanItemMaxAggregateOutputType = {
+    id: string | null
+    mealPlanId: string | null
+    itemId: string | null
+    householdId: string | null
+    createdAt: Date | null
+  }
+
+  export type MealPlanItemCountAggregateOutputType = {
+    id: number
+    mealPlanId: number
+    itemId: number
+    householdId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type MealPlanItemMinAggregateInputType = {
+    id?: true
+    mealPlanId?: true
+    itemId?: true
+    householdId?: true
+    createdAt?: true
+  }
+
+  export type MealPlanItemMaxAggregateInputType = {
+    id?: true
+    mealPlanId?: true
+    itemId?: true
+    householdId?: true
+    createdAt?: true
+  }
+
+  export type MealPlanItemCountAggregateInputType = {
+    id?: true
+    mealPlanId?: true
+    itemId?: true
+    householdId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type MealPlanItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MealPlanItem to aggregate.
+     */
+    where?: MealPlanItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MealPlanItems to fetch.
+     */
+    orderBy?: MealPlanItemOrderByWithRelationInput | MealPlanItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MealPlanItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MealPlanItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MealPlanItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MealPlanItems
+    **/
+    _count?: true | MealPlanItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MealPlanItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MealPlanItemMaxAggregateInputType
+  }
+
+  export type GetMealPlanItemAggregateType<T extends MealPlanItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateMealPlanItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMealPlanItem[P]>
+      : GetScalarType<T[P], AggregateMealPlanItem[P]>
+  }
+
+
+
+
+  export type MealPlanItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MealPlanItemWhereInput
+    orderBy?: MealPlanItemOrderByWithAggregationInput | MealPlanItemOrderByWithAggregationInput[]
+    by: MealPlanItemScalarFieldEnum[] | MealPlanItemScalarFieldEnum
+    having?: MealPlanItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MealPlanItemCountAggregateInputType | true
+    _min?: MealPlanItemMinAggregateInputType
+    _max?: MealPlanItemMaxAggregateInputType
+  }
+
+  export type MealPlanItemGroupByOutputType = {
+    id: string
+    mealPlanId: string
+    itemId: string
+    householdId: string
+    createdAt: Date
+    _count: MealPlanItemCountAggregateOutputType | null
+    _min: MealPlanItemMinAggregateOutputType | null
+    _max: MealPlanItemMaxAggregateOutputType | null
+  }
+
+  type GetMealPlanItemGroupByPayload<T extends MealPlanItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MealPlanItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MealPlanItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MealPlanItemGroupByOutputType[P]>
+            : GetScalarType<T[P], MealPlanItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MealPlanItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    mealPlanId?: boolean
+    itemId?: boolean
+    householdId?: boolean
+    createdAt?: boolean
+    mealPlan?: boolean | MealPlanDefaultArgs<ExtArgs>
+    item?: boolean | FreezerItemDefaultArgs<ExtArgs>
+    household?: boolean | HouseholdDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mealPlanItem"]>
+
+  export type MealPlanItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    mealPlanId?: boolean
+    itemId?: boolean
+    householdId?: boolean
+    createdAt?: boolean
+    mealPlan?: boolean | MealPlanDefaultArgs<ExtArgs>
+    item?: boolean | FreezerItemDefaultArgs<ExtArgs>
+    household?: boolean | HouseholdDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mealPlanItem"]>
+
+  export type MealPlanItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    mealPlanId?: boolean
+    itemId?: boolean
+    householdId?: boolean
+    createdAt?: boolean
+    mealPlan?: boolean | MealPlanDefaultArgs<ExtArgs>
+    item?: boolean | FreezerItemDefaultArgs<ExtArgs>
+    household?: boolean | HouseholdDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mealPlanItem"]>
+
+  export type MealPlanItemSelectScalar = {
+    id?: boolean
+    mealPlanId?: boolean
+    itemId?: boolean
+    householdId?: boolean
+    createdAt?: boolean
+  }
+
+  export type MealPlanItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "mealPlanId" | "itemId" | "householdId" | "createdAt", ExtArgs["result"]["mealPlanItem"]>
+  export type MealPlanItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    mealPlan?: boolean | MealPlanDefaultArgs<ExtArgs>
+    item?: boolean | FreezerItemDefaultArgs<ExtArgs>
+    household?: boolean | HouseholdDefaultArgs<ExtArgs>
+  }
+  export type MealPlanItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    mealPlan?: boolean | MealPlanDefaultArgs<ExtArgs>
+    item?: boolean | FreezerItemDefaultArgs<ExtArgs>
+    household?: boolean | HouseholdDefaultArgs<ExtArgs>
+  }
+  export type MealPlanItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    mealPlan?: boolean | MealPlanDefaultArgs<ExtArgs>
+    item?: boolean | FreezerItemDefaultArgs<ExtArgs>
+    household?: boolean | HouseholdDefaultArgs<ExtArgs>
+  }
+
+  export type $MealPlanItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MealPlanItem"
+    objects: {
+      mealPlan: Prisma.$MealPlanPayload<ExtArgs>
+      item: Prisma.$FreezerItemPayload<ExtArgs>
+      household: Prisma.$HouseholdPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      mealPlanId: string
+      itemId: string
+      householdId: string
+      createdAt: Date
+    }, ExtArgs["result"]["mealPlanItem"]>
+    composites: {}
+  }
+
+  type MealPlanItemGetPayload<S extends boolean | null | undefined | MealPlanItemDefaultArgs> = $Result.GetResult<Prisma.$MealPlanItemPayload, S>
+
+  type MealPlanItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MealPlanItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MealPlanItemCountAggregateInputType | true
+    }
+
+  export interface MealPlanItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MealPlanItem'], meta: { name: 'MealPlanItem' } }
+    /**
+     * Find zero or one MealPlanItem that matches the filter.
+     * @param {MealPlanItemFindUniqueArgs} args - Arguments to find a MealPlanItem
+     * @example
+     * // Get one MealPlanItem
+     * const mealPlanItem = await prisma.mealPlanItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MealPlanItemFindUniqueArgs>(args: SelectSubset<T, MealPlanItemFindUniqueArgs<ExtArgs>>): Prisma__MealPlanItemClient<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MealPlanItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MealPlanItemFindUniqueOrThrowArgs} args - Arguments to find a MealPlanItem
+     * @example
+     * // Get one MealPlanItem
+     * const mealPlanItem = await prisma.mealPlanItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MealPlanItemFindUniqueOrThrowArgs>(args: SelectSubset<T, MealPlanItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MealPlanItemClient<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MealPlanItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanItemFindFirstArgs} args - Arguments to find a MealPlanItem
+     * @example
+     * // Get one MealPlanItem
+     * const mealPlanItem = await prisma.mealPlanItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MealPlanItemFindFirstArgs>(args?: SelectSubset<T, MealPlanItemFindFirstArgs<ExtArgs>>): Prisma__MealPlanItemClient<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MealPlanItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanItemFindFirstOrThrowArgs} args - Arguments to find a MealPlanItem
+     * @example
+     * // Get one MealPlanItem
+     * const mealPlanItem = await prisma.mealPlanItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MealPlanItemFindFirstOrThrowArgs>(args?: SelectSubset<T, MealPlanItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__MealPlanItemClient<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MealPlanItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MealPlanItems
+     * const mealPlanItems = await prisma.mealPlanItem.findMany()
+     * 
+     * // Get first 10 MealPlanItems
+     * const mealPlanItems = await prisma.mealPlanItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mealPlanItemWithIdOnly = await prisma.mealPlanItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MealPlanItemFindManyArgs>(args?: SelectSubset<T, MealPlanItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MealPlanItem.
+     * @param {MealPlanItemCreateArgs} args - Arguments to create a MealPlanItem.
+     * @example
+     * // Create one MealPlanItem
+     * const MealPlanItem = await prisma.mealPlanItem.create({
+     *   data: {
+     *     // ... data to create a MealPlanItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends MealPlanItemCreateArgs>(args: SelectSubset<T, MealPlanItemCreateArgs<ExtArgs>>): Prisma__MealPlanItemClient<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MealPlanItems.
+     * @param {MealPlanItemCreateManyArgs} args - Arguments to create many MealPlanItems.
+     * @example
+     * // Create many MealPlanItems
+     * const mealPlanItem = await prisma.mealPlanItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MealPlanItemCreateManyArgs>(args?: SelectSubset<T, MealPlanItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MealPlanItems and returns the data saved in the database.
+     * @param {MealPlanItemCreateManyAndReturnArgs} args - Arguments to create many MealPlanItems.
+     * @example
+     * // Create many MealPlanItems
+     * const mealPlanItem = await prisma.mealPlanItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MealPlanItems and only return the `id`
+     * const mealPlanItemWithIdOnly = await prisma.mealPlanItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MealPlanItemCreateManyAndReturnArgs>(args?: SelectSubset<T, MealPlanItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MealPlanItem.
+     * @param {MealPlanItemDeleteArgs} args - Arguments to delete one MealPlanItem.
+     * @example
+     * // Delete one MealPlanItem
+     * const MealPlanItem = await prisma.mealPlanItem.delete({
+     *   where: {
+     *     // ... filter to delete one MealPlanItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MealPlanItemDeleteArgs>(args: SelectSubset<T, MealPlanItemDeleteArgs<ExtArgs>>): Prisma__MealPlanItemClient<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MealPlanItem.
+     * @param {MealPlanItemUpdateArgs} args - Arguments to update one MealPlanItem.
+     * @example
+     * // Update one MealPlanItem
+     * const mealPlanItem = await prisma.mealPlanItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MealPlanItemUpdateArgs>(args: SelectSubset<T, MealPlanItemUpdateArgs<ExtArgs>>): Prisma__MealPlanItemClient<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MealPlanItems.
+     * @param {MealPlanItemDeleteManyArgs} args - Arguments to filter MealPlanItems to delete.
+     * @example
+     * // Delete a few MealPlanItems
+     * const { count } = await prisma.mealPlanItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MealPlanItemDeleteManyArgs>(args?: SelectSubset<T, MealPlanItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MealPlanItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MealPlanItems
+     * const mealPlanItem = await prisma.mealPlanItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MealPlanItemUpdateManyArgs>(args: SelectSubset<T, MealPlanItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MealPlanItems and returns the data updated in the database.
+     * @param {MealPlanItemUpdateManyAndReturnArgs} args - Arguments to update many MealPlanItems.
+     * @example
+     * // Update many MealPlanItems
+     * const mealPlanItem = await prisma.mealPlanItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MealPlanItems and only return the `id`
+     * const mealPlanItemWithIdOnly = await prisma.mealPlanItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MealPlanItemUpdateManyAndReturnArgs>(args: SelectSubset<T, MealPlanItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MealPlanItem.
+     * @param {MealPlanItemUpsertArgs} args - Arguments to update or create a MealPlanItem.
+     * @example
+     * // Update or create a MealPlanItem
+     * const mealPlanItem = await prisma.mealPlanItem.upsert({
+     *   create: {
+     *     // ... data to create a MealPlanItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MealPlanItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MealPlanItemUpsertArgs>(args: SelectSubset<T, MealPlanItemUpsertArgs<ExtArgs>>): Prisma__MealPlanItemClient<$Result.GetResult<Prisma.$MealPlanItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MealPlanItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanItemCountArgs} args - Arguments to filter MealPlanItems to count.
+     * @example
+     * // Count the number of MealPlanItems
+     * const count = await prisma.mealPlanItem.count({
+     *   where: {
+     *     // ... the filter for the MealPlanItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends MealPlanItemCountArgs>(
+      args?: Subset<T, MealPlanItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MealPlanItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MealPlanItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MealPlanItemAggregateArgs>(args: Subset<T, MealPlanItemAggregateArgs>): Prisma.PrismaPromise<GetMealPlanItemAggregateType<T>>
+
+    /**
+     * Group by MealPlanItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MealPlanItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MealPlanItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MealPlanItemGroupByArgs['orderBy'] }
+        : { orderBy?: MealPlanItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MealPlanItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMealPlanItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MealPlanItem model
+   */
+  readonly fields: MealPlanItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MealPlanItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MealPlanItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    mealPlan<T extends MealPlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MealPlanDefaultArgs<ExtArgs>>): Prisma__MealPlanClient<$Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    item<T extends FreezerItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FreezerItemDefaultArgs<ExtArgs>>): Prisma__FreezerItemClient<$Result.GetResult<Prisma.$FreezerItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    household<T extends HouseholdDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HouseholdDefaultArgs<ExtArgs>>): Prisma__HouseholdClient<$Result.GetResult<Prisma.$HouseholdPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MealPlanItem model
+   */
+  interface MealPlanItemFieldRefs {
+    readonly id: FieldRef<"MealPlanItem", 'String'>
+    readonly mealPlanId: FieldRef<"MealPlanItem", 'String'>
+    readonly itemId: FieldRef<"MealPlanItem", 'String'>
+    readonly householdId: FieldRef<"MealPlanItem", 'String'>
+    readonly createdAt: FieldRef<"MealPlanItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MealPlanItem findUnique
+   */
+  export type MealPlanItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MealPlanItem to fetch.
+     */
+    where: MealPlanItemWhereUniqueInput
+  }
+
+  /**
+   * MealPlanItem findUniqueOrThrow
+   */
+  export type MealPlanItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MealPlanItem to fetch.
+     */
+    where: MealPlanItemWhereUniqueInput
+  }
+
+  /**
+   * MealPlanItem findFirst
+   */
+  export type MealPlanItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MealPlanItem to fetch.
+     */
+    where?: MealPlanItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MealPlanItems to fetch.
+     */
+    orderBy?: MealPlanItemOrderByWithRelationInput | MealPlanItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MealPlanItems.
+     */
+    cursor?: MealPlanItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MealPlanItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MealPlanItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MealPlanItems.
+     */
+    distinct?: MealPlanItemScalarFieldEnum | MealPlanItemScalarFieldEnum[]
+  }
+
+  /**
+   * MealPlanItem findFirstOrThrow
+   */
+  export type MealPlanItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MealPlanItem to fetch.
+     */
+    where?: MealPlanItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MealPlanItems to fetch.
+     */
+    orderBy?: MealPlanItemOrderByWithRelationInput | MealPlanItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MealPlanItems.
+     */
+    cursor?: MealPlanItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MealPlanItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MealPlanItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MealPlanItems.
+     */
+    distinct?: MealPlanItemScalarFieldEnum | MealPlanItemScalarFieldEnum[]
+  }
+
+  /**
+   * MealPlanItem findMany
+   */
+  export type MealPlanItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MealPlanItems to fetch.
+     */
+    where?: MealPlanItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MealPlanItems to fetch.
+     */
+    orderBy?: MealPlanItemOrderByWithRelationInput | MealPlanItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MealPlanItems.
+     */
+    cursor?: MealPlanItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MealPlanItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MealPlanItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MealPlanItems.
+     */
+    distinct?: MealPlanItemScalarFieldEnum | MealPlanItemScalarFieldEnum[]
+  }
+
+  /**
+   * MealPlanItem create
+   */
+  export type MealPlanItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MealPlanItem.
+     */
+    data: XOR<MealPlanItemCreateInput, MealPlanItemUncheckedCreateInput>
+  }
+
+  /**
+   * MealPlanItem createMany
+   */
+  export type MealPlanItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MealPlanItems.
+     */
+    data: MealPlanItemCreateManyInput | MealPlanItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MealPlanItem createManyAndReturn
+   */
+  export type MealPlanItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many MealPlanItems.
+     */
+    data: MealPlanItemCreateManyInput | MealPlanItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MealPlanItem update
+   */
+  export type MealPlanItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MealPlanItem.
+     */
+    data: XOR<MealPlanItemUpdateInput, MealPlanItemUncheckedUpdateInput>
+    /**
+     * Choose, which MealPlanItem to update.
+     */
+    where: MealPlanItemWhereUniqueInput
+  }
+
+  /**
+   * MealPlanItem updateMany
+   */
+  export type MealPlanItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MealPlanItems.
+     */
+    data: XOR<MealPlanItemUpdateManyMutationInput, MealPlanItemUncheckedUpdateManyInput>
+    /**
+     * Filter which MealPlanItems to update
+     */
+    where?: MealPlanItemWhereInput
+    /**
+     * Limit how many MealPlanItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MealPlanItem updateManyAndReturn
+   */
+  export type MealPlanItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * The data used to update MealPlanItems.
+     */
+    data: XOR<MealPlanItemUpdateManyMutationInput, MealPlanItemUncheckedUpdateManyInput>
+    /**
+     * Filter which MealPlanItems to update
+     */
+    where?: MealPlanItemWhereInput
+    /**
+     * Limit how many MealPlanItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MealPlanItem upsert
+   */
+  export type MealPlanItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MealPlanItem to update in case it exists.
+     */
+    where: MealPlanItemWhereUniqueInput
+    /**
+     * In case the MealPlanItem found by the `where` argument doesn't exist, create a new MealPlanItem with this data.
+     */
+    create: XOR<MealPlanItemCreateInput, MealPlanItemUncheckedCreateInput>
+    /**
+     * In case the MealPlanItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MealPlanItemUpdateInput, MealPlanItemUncheckedUpdateInput>
+  }
+
+  /**
+   * MealPlanItem delete
+   */
+  export type MealPlanItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemInclude<ExtArgs> | null
+    /**
+     * Filter which MealPlanItem to delete.
+     */
+    where: MealPlanItemWhereUniqueInput
+  }
+
+  /**
+   * MealPlanItem deleteMany
+   */
+  export type MealPlanItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MealPlanItems to delete
+     */
+    where?: MealPlanItemWhereInput
+    /**
+     * Limit how many MealPlanItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MealPlanItem without action
+   */
+  export type MealPlanItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MealPlanItem
+     */
+    select?: MealPlanItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MealPlanItem
+     */
+    omit?: MealPlanItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealPlanItemInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -12158,6 +14680,30 @@ export namespace Prisma {
   };
 
   export type ItemChangeLogScalarFieldEnum = (typeof ItemChangeLogScalarFieldEnum)[keyof typeof ItemChangeLogScalarFieldEnum]
+
+
+  export const MealPlanScalarFieldEnum: {
+    id: 'id',
+    householdId: 'householdId',
+    name: 'name',
+    plannedDate: 'plannedDate',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MealPlanScalarFieldEnum = (typeof MealPlanScalarFieldEnum)[keyof typeof MealPlanScalarFieldEnum]
+
+
+  export const MealPlanItemScalarFieldEnum: {
+    id: 'id',
+    mealPlanId: 'mealPlanId',
+    itemId: 'itemId',
+    householdId: 'householdId',
+    createdAt: 'createdAt'
+  };
+
+  export type MealPlanItemScalarFieldEnum = (typeof MealPlanItemScalarFieldEnum)[keyof typeof MealPlanItemScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12405,6 +14951,8 @@ export namespace Prisma {
     freezers?: FreezerListRelationFilter
     items?: FreezerItemListRelationFilter
     invites?: HouseholdInviteListRelationFilter
+    mealPlans?: MealPlanListRelationFilter
+    mealPlanItems?: MealPlanItemListRelationFilter
   }
 
   export type HouseholdOrderByWithRelationInput = {
@@ -12417,6 +14965,8 @@ export namespace Prisma {
     freezers?: FreezerOrderByRelationAggregateInput
     items?: FreezerItemOrderByRelationAggregateInput
     invites?: HouseholdInviteOrderByRelationAggregateInput
+    mealPlans?: MealPlanOrderByRelationAggregateInput
+    mealPlanItems?: MealPlanItemOrderByRelationAggregateInput
   }
 
   export type HouseholdWhereUniqueInput = Prisma.AtLeast<{
@@ -12432,6 +14982,8 @@ export namespace Prisma {
     freezers?: FreezerListRelationFilter
     items?: FreezerItemListRelationFilter
     invites?: HouseholdInviteListRelationFilter
+    mealPlans?: MealPlanListRelationFilter
+    mealPlanItems?: MealPlanItemListRelationFilter
   }, "id">
 
   export type HouseholdOrderByWithAggregationInput = {
@@ -12718,6 +15270,7 @@ export namespace Prisma {
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     updatedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     changeLogs?: ItemChangeLogListRelationFilter
+    plannedItems?: MealPlanItemListRelationFilter
   }
 
   export type FreezerItemOrderByWithRelationInput = {
@@ -12741,6 +15294,7 @@ export namespace Prisma {
     createdBy?: UserOrderByWithRelationInput
     updatedBy?: UserOrderByWithRelationInput
     changeLogs?: ItemChangeLogOrderByRelationAggregateInput
+    plannedItems?: MealPlanItemOrderByRelationAggregateInput
   }
 
   export type FreezerItemWhereUniqueInput = Prisma.AtLeast<{
@@ -12767,6 +15321,7 @@ export namespace Prisma {
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     updatedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     changeLogs?: ItemChangeLogListRelationFilter
+    plannedItems?: MealPlanItemListRelationFilter
   }, "id">
 
   export type FreezerItemOrderByWithAggregationInput = {
@@ -12875,6 +15430,136 @@ export namespace Prisma {
     fieldName?: StringWithAggregatesFilter<"ItemChangeLog"> | string
     oldValue?: StringNullableWithAggregatesFilter<"ItemChangeLog"> | string | null
     newValue?: StringNullableWithAggregatesFilter<"ItemChangeLog"> | string | null
+  }
+
+  export type MealPlanWhereInput = {
+    AND?: MealPlanWhereInput | MealPlanWhereInput[]
+    OR?: MealPlanWhereInput[]
+    NOT?: MealPlanWhereInput | MealPlanWhereInput[]
+    id?: StringFilter<"MealPlan"> | string
+    householdId?: StringFilter<"MealPlan"> | string
+    name?: StringNullableFilter<"MealPlan"> | string | null
+    plannedDate?: DateTimeFilter<"MealPlan"> | Date | string
+    notes?: StringNullableFilter<"MealPlan"> | string | null
+    createdAt?: DateTimeFilter<"MealPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"MealPlan"> | Date | string
+    household?: XOR<HouseholdScalarRelationFilter, HouseholdWhereInput>
+    items?: MealPlanItemListRelationFilter
+  }
+
+  export type MealPlanOrderByWithRelationInput = {
+    id?: SortOrder
+    householdId?: SortOrder
+    name?: SortOrderInput | SortOrder
+    plannedDate?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    household?: HouseholdOrderByWithRelationInput
+    items?: MealPlanItemOrderByRelationAggregateInput
+  }
+
+  export type MealPlanWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MealPlanWhereInput | MealPlanWhereInput[]
+    OR?: MealPlanWhereInput[]
+    NOT?: MealPlanWhereInput | MealPlanWhereInput[]
+    householdId?: StringFilter<"MealPlan"> | string
+    name?: StringNullableFilter<"MealPlan"> | string | null
+    plannedDate?: DateTimeFilter<"MealPlan"> | Date | string
+    notes?: StringNullableFilter<"MealPlan"> | string | null
+    createdAt?: DateTimeFilter<"MealPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"MealPlan"> | Date | string
+    household?: XOR<HouseholdScalarRelationFilter, HouseholdWhereInput>
+    items?: MealPlanItemListRelationFilter
+  }, "id">
+
+  export type MealPlanOrderByWithAggregationInput = {
+    id?: SortOrder
+    householdId?: SortOrder
+    name?: SortOrderInput | SortOrder
+    plannedDate?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MealPlanCountOrderByAggregateInput
+    _max?: MealPlanMaxOrderByAggregateInput
+    _min?: MealPlanMinOrderByAggregateInput
+  }
+
+  export type MealPlanScalarWhereWithAggregatesInput = {
+    AND?: MealPlanScalarWhereWithAggregatesInput | MealPlanScalarWhereWithAggregatesInput[]
+    OR?: MealPlanScalarWhereWithAggregatesInput[]
+    NOT?: MealPlanScalarWhereWithAggregatesInput | MealPlanScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MealPlan"> | string
+    householdId?: StringWithAggregatesFilter<"MealPlan"> | string
+    name?: StringNullableWithAggregatesFilter<"MealPlan"> | string | null
+    plannedDate?: DateTimeWithAggregatesFilter<"MealPlan"> | Date | string
+    notes?: StringNullableWithAggregatesFilter<"MealPlan"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"MealPlan"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MealPlan"> | Date | string
+  }
+
+  export type MealPlanItemWhereInput = {
+    AND?: MealPlanItemWhereInput | MealPlanItemWhereInput[]
+    OR?: MealPlanItemWhereInput[]
+    NOT?: MealPlanItemWhereInput | MealPlanItemWhereInput[]
+    id?: StringFilter<"MealPlanItem"> | string
+    mealPlanId?: StringFilter<"MealPlanItem"> | string
+    itemId?: StringFilter<"MealPlanItem"> | string
+    householdId?: StringFilter<"MealPlanItem"> | string
+    createdAt?: DateTimeFilter<"MealPlanItem"> | Date | string
+    mealPlan?: XOR<MealPlanScalarRelationFilter, MealPlanWhereInput>
+    item?: XOR<FreezerItemScalarRelationFilter, FreezerItemWhereInput>
+    household?: XOR<HouseholdScalarRelationFilter, HouseholdWhereInput>
+  }
+
+  export type MealPlanItemOrderByWithRelationInput = {
+    id?: SortOrder
+    mealPlanId?: SortOrder
+    itemId?: SortOrder
+    householdId?: SortOrder
+    createdAt?: SortOrder
+    mealPlan?: MealPlanOrderByWithRelationInput
+    item?: FreezerItemOrderByWithRelationInput
+    household?: HouseholdOrderByWithRelationInput
+  }
+
+  export type MealPlanItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    mealPlanId_itemId?: MealPlanItemMealPlanIdItemIdCompoundUniqueInput
+    AND?: MealPlanItemWhereInput | MealPlanItemWhereInput[]
+    OR?: MealPlanItemWhereInput[]
+    NOT?: MealPlanItemWhereInput | MealPlanItemWhereInput[]
+    mealPlanId?: StringFilter<"MealPlanItem"> | string
+    itemId?: StringFilter<"MealPlanItem"> | string
+    householdId?: StringFilter<"MealPlanItem"> | string
+    createdAt?: DateTimeFilter<"MealPlanItem"> | Date | string
+    mealPlan?: XOR<MealPlanScalarRelationFilter, MealPlanWhereInput>
+    item?: XOR<FreezerItemScalarRelationFilter, FreezerItemWhereInput>
+    household?: XOR<HouseholdScalarRelationFilter, HouseholdWhereInput>
+  }, "id" | "mealPlanId_itemId">
+
+  export type MealPlanItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    mealPlanId?: SortOrder
+    itemId?: SortOrder
+    householdId?: SortOrder
+    createdAt?: SortOrder
+    _count?: MealPlanItemCountOrderByAggregateInput
+    _max?: MealPlanItemMaxOrderByAggregateInput
+    _min?: MealPlanItemMinOrderByAggregateInput
+  }
+
+  export type MealPlanItemScalarWhereWithAggregatesInput = {
+    AND?: MealPlanItemScalarWhereWithAggregatesInput | MealPlanItemScalarWhereWithAggregatesInput[]
+    OR?: MealPlanItemScalarWhereWithAggregatesInput[]
+    NOT?: MealPlanItemScalarWhereWithAggregatesInput | MealPlanItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MealPlanItem"> | string
+    mealPlanId?: StringWithAggregatesFilter<"MealPlanItem"> | string
+    itemId?: StringWithAggregatesFilter<"MealPlanItem"> | string
+    householdId?: StringWithAggregatesFilter<"MealPlanItem"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"MealPlanItem"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -13028,6 +15713,8 @@ export namespace Prisma {
     freezers?: FreezerCreateNestedManyWithoutHouseholdInput
     items?: FreezerItemCreateNestedManyWithoutHouseholdInput
     invites?: HouseholdInviteCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemCreateNestedManyWithoutHouseholdInput
   }
 
   export type HouseholdUncheckedCreateInput = {
@@ -13039,6 +15726,8 @@ export namespace Prisma {
     freezers?: FreezerUncheckedCreateNestedManyWithoutHouseholdInput
     items?: FreezerItemUncheckedCreateNestedManyWithoutHouseholdInput
     invites?: HouseholdInviteUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemUncheckedCreateNestedManyWithoutHouseholdInput
   }
 
   export type HouseholdUpdateInput = {
@@ -13050,6 +15739,8 @@ export namespace Prisma {
     freezers?: FreezerUpdateManyWithoutHouseholdNestedInput
     items?: FreezerItemUpdateManyWithoutHouseholdNestedInput
     invites?: HouseholdInviteUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUpdateManyWithoutHouseholdNestedInput
   }
 
   export type HouseholdUncheckedUpdateInput = {
@@ -13061,6 +15752,8 @@ export namespace Prisma {
     freezers?: FreezerUncheckedUpdateManyWithoutHouseholdNestedInput
     items?: FreezerItemUncheckedUpdateManyWithoutHouseholdNestedInput
     invites?: HouseholdInviteUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUncheckedUpdateManyWithoutHouseholdNestedInput
   }
 
   export type HouseholdCreateManyInput = {
@@ -13337,6 +16030,7 @@ export namespace Prisma {
     createdBy: UserCreateNestedOneWithoutCreatedItemsInput
     updatedBy: UserCreateNestedOneWithoutUpdatedItemsInput
     changeLogs?: ItemChangeLogCreateNestedManyWithoutItemInput
+    plannedItems?: MealPlanItemCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemUncheckedCreateInput = {
@@ -13355,6 +16049,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     changeLogs?: ItemChangeLogUncheckedCreateNestedManyWithoutItemInput
+    plannedItems?: MealPlanItemUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemUpdateInput = {
@@ -13373,6 +16068,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneRequiredWithoutCreatedItemsNestedInput
     updatedBy?: UserUpdateOneRequiredWithoutUpdatedItemsNestedInput
     changeLogs?: ItemChangeLogUpdateManyWithoutItemNestedInput
+    plannedItems?: MealPlanItemUpdateManyWithoutItemNestedInput
   }
 
   export type FreezerItemUncheckedUpdateInput = {
@@ -13391,6 +16087,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     changeLogs?: ItemChangeLogUncheckedUpdateManyWithoutItemNestedInput
+    plannedItems?: MealPlanItemUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type FreezerItemCreateManyInput = {
@@ -13505,6 +16202,132 @@ export namespace Prisma {
     fieldName?: StringFieldUpdateOperationsInput | string
     oldValue?: NullableStringFieldUpdateOperationsInput | string | null
     newValue?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MealPlanCreateInput = {
+    id?: string
+    name?: string | null
+    plannedDate: Date | string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    household: HouseholdCreateNestedOneWithoutMealPlansInput
+    items?: MealPlanItemCreateNestedManyWithoutMealPlanInput
+  }
+
+  export type MealPlanUncheckedCreateInput = {
+    id?: string
+    householdId: string
+    name?: string | null
+    plannedDate: Date | string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: MealPlanItemUncheckedCreateNestedManyWithoutMealPlanInput
+  }
+
+  export type MealPlanUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    household?: HouseholdUpdateOneRequiredWithoutMealPlansNestedInput
+    items?: MealPlanItemUpdateManyWithoutMealPlanNestedInput
+  }
+
+  export type MealPlanUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    householdId?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: MealPlanItemUncheckedUpdateManyWithoutMealPlanNestedInput
+  }
+
+  export type MealPlanCreateManyInput = {
+    id?: string
+    householdId: string
+    name?: string | null
+    plannedDate: Date | string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MealPlanUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MealPlanUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    householdId?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MealPlanItemCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    mealPlan: MealPlanCreateNestedOneWithoutItemsInput
+    item: FreezerItemCreateNestedOneWithoutPlannedItemsInput
+    household: HouseholdCreateNestedOneWithoutMealPlanItemsInput
+  }
+
+  export type MealPlanItemUncheckedCreateInput = {
+    id?: string
+    mealPlanId: string
+    itemId: string
+    householdId: string
+    createdAt?: Date | string
+  }
+
+  export type MealPlanItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mealPlan?: MealPlanUpdateOneRequiredWithoutItemsNestedInput
+    item?: FreezerItemUpdateOneRequiredWithoutPlannedItemsNestedInput
+    household?: HouseholdUpdateOneRequiredWithoutMealPlanItemsNestedInput
+  }
+
+  export type MealPlanItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mealPlanId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    householdId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MealPlanItemCreateManyInput = {
+    id?: string
+    mealPlanId: string
+    itemId: string
+    householdId: string
+    createdAt?: Date | string
+  }
+
+  export type MealPlanItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MealPlanItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mealPlanId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    householdId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -13713,11 +16536,31 @@ export namespace Prisma {
     none?: HouseholdInviteWhereInput
   }
 
+  export type MealPlanListRelationFilter = {
+    every?: MealPlanWhereInput
+    some?: MealPlanWhereInput
+    none?: MealPlanWhereInput
+  }
+
+  export type MealPlanItemListRelationFilter = {
+    every?: MealPlanItemWhereInput
+    some?: MealPlanItemWhereInput
+    none?: MealPlanItemWhereInput
+  }
+
   export type FreezerOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type HouseholdInviteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MealPlanOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MealPlanItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14042,6 +16885,70 @@ export namespace Prisma {
     newValue?: SortOrder
   }
 
+  export type MealPlanCountOrderByAggregateInput = {
+    id?: SortOrder
+    householdId?: SortOrder
+    name?: SortOrder
+    plannedDate?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MealPlanMaxOrderByAggregateInput = {
+    id?: SortOrder
+    householdId?: SortOrder
+    name?: SortOrder
+    plannedDate?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MealPlanMinOrderByAggregateInput = {
+    id?: SortOrder
+    householdId?: SortOrder
+    name?: SortOrder
+    plannedDate?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MealPlanScalarRelationFilter = {
+    is?: MealPlanWhereInput
+    isNot?: MealPlanWhereInput
+  }
+
+  export type MealPlanItemMealPlanIdItemIdCompoundUniqueInput = {
+    mealPlanId: string
+    itemId: string
+  }
+
+  export type MealPlanItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    mealPlanId?: SortOrder
+    itemId?: SortOrder
+    householdId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MealPlanItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    mealPlanId?: SortOrder
+    itemId?: SortOrder
+    householdId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MealPlanItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    mealPlanId?: SortOrder
+    itemId?: SortOrder
+    householdId?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type HouseholdMemberCreateNestedManyWithoutUserInput = {
     create?: XOR<HouseholdMemberCreateWithoutUserInput, HouseholdMemberUncheckedCreateWithoutUserInput> | HouseholdMemberCreateWithoutUserInput[] | HouseholdMemberUncheckedCreateWithoutUserInput[]
     connectOrCreate?: HouseholdMemberCreateOrConnectWithoutUserInput | HouseholdMemberCreateOrConnectWithoutUserInput[]
@@ -14354,6 +17261,20 @@ export namespace Prisma {
     connect?: HouseholdInviteWhereUniqueInput | HouseholdInviteWhereUniqueInput[]
   }
 
+  export type MealPlanCreateNestedManyWithoutHouseholdInput = {
+    create?: XOR<MealPlanCreateWithoutHouseholdInput, MealPlanUncheckedCreateWithoutHouseholdInput> | MealPlanCreateWithoutHouseholdInput[] | MealPlanUncheckedCreateWithoutHouseholdInput[]
+    connectOrCreate?: MealPlanCreateOrConnectWithoutHouseholdInput | MealPlanCreateOrConnectWithoutHouseholdInput[]
+    createMany?: MealPlanCreateManyHouseholdInputEnvelope
+    connect?: MealPlanWhereUniqueInput | MealPlanWhereUniqueInput[]
+  }
+
+  export type MealPlanItemCreateNestedManyWithoutHouseholdInput = {
+    create?: XOR<MealPlanItemCreateWithoutHouseholdInput, MealPlanItemUncheckedCreateWithoutHouseholdInput> | MealPlanItemCreateWithoutHouseholdInput[] | MealPlanItemUncheckedCreateWithoutHouseholdInput[]
+    connectOrCreate?: MealPlanItemCreateOrConnectWithoutHouseholdInput | MealPlanItemCreateOrConnectWithoutHouseholdInput[]
+    createMany?: MealPlanItemCreateManyHouseholdInputEnvelope
+    connect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+  }
+
   export type HouseholdMemberUncheckedCreateNestedManyWithoutHouseholdInput = {
     create?: XOR<HouseholdMemberCreateWithoutHouseholdInput, HouseholdMemberUncheckedCreateWithoutHouseholdInput> | HouseholdMemberCreateWithoutHouseholdInput[] | HouseholdMemberUncheckedCreateWithoutHouseholdInput[]
     connectOrCreate?: HouseholdMemberCreateOrConnectWithoutHouseholdInput | HouseholdMemberCreateOrConnectWithoutHouseholdInput[]
@@ -14380,6 +17301,20 @@ export namespace Prisma {
     connectOrCreate?: HouseholdInviteCreateOrConnectWithoutHouseholdInput | HouseholdInviteCreateOrConnectWithoutHouseholdInput[]
     createMany?: HouseholdInviteCreateManyHouseholdInputEnvelope
     connect?: HouseholdInviteWhereUniqueInput | HouseholdInviteWhereUniqueInput[]
+  }
+
+  export type MealPlanUncheckedCreateNestedManyWithoutHouseholdInput = {
+    create?: XOR<MealPlanCreateWithoutHouseholdInput, MealPlanUncheckedCreateWithoutHouseholdInput> | MealPlanCreateWithoutHouseholdInput[] | MealPlanUncheckedCreateWithoutHouseholdInput[]
+    connectOrCreate?: MealPlanCreateOrConnectWithoutHouseholdInput | MealPlanCreateOrConnectWithoutHouseholdInput[]
+    createMany?: MealPlanCreateManyHouseholdInputEnvelope
+    connect?: MealPlanWhereUniqueInput | MealPlanWhereUniqueInput[]
+  }
+
+  export type MealPlanItemUncheckedCreateNestedManyWithoutHouseholdInput = {
+    create?: XOR<MealPlanItemCreateWithoutHouseholdInput, MealPlanItemUncheckedCreateWithoutHouseholdInput> | MealPlanItemCreateWithoutHouseholdInput[] | MealPlanItemUncheckedCreateWithoutHouseholdInput[]
+    connectOrCreate?: MealPlanItemCreateOrConnectWithoutHouseholdInput | MealPlanItemCreateOrConnectWithoutHouseholdInput[]
+    createMany?: MealPlanItemCreateManyHouseholdInputEnvelope
+    connect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutOwnedHouseholdsNestedInput = {
@@ -14446,6 +17381,34 @@ export namespace Prisma {
     deleteMany?: HouseholdInviteScalarWhereInput | HouseholdInviteScalarWhereInput[]
   }
 
+  export type MealPlanUpdateManyWithoutHouseholdNestedInput = {
+    create?: XOR<MealPlanCreateWithoutHouseholdInput, MealPlanUncheckedCreateWithoutHouseholdInput> | MealPlanCreateWithoutHouseholdInput[] | MealPlanUncheckedCreateWithoutHouseholdInput[]
+    connectOrCreate?: MealPlanCreateOrConnectWithoutHouseholdInput | MealPlanCreateOrConnectWithoutHouseholdInput[]
+    upsert?: MealPlanUpsertWithWhereUniqueWithoutHouseholdInput | MealPlanUpsertWithWhereUniqueWithoutHouseholdInput[]
+    createMany?: MealPlanCreateManyHouseholdInputEnvelope
+    set?: MealPlanWhereUniqueInput | MealPlanWhereUniqueInput[]
+    disconnect?: MealPlanWhereUniqueInput | MealPlanWhereUniqueInput[]
+    delete?: MealPlanWhereUniqueInput | MealPlanWhereUniqueInput[]
+    connect?: MealPlanWhereUniqueInput | MealPlanWhereUniqueInput[]
+    update?: MealPlanUpdateWithWhereUniqueWithoutHouseholdInput | MealPlanUpdateWithWhereUniqueWithoutHouseholdInput[]
+    updateMany?: MealPlanUpdateManyWithWhereWithoutHouseholdInput | MealPlanUpdateManyWithWhereWithoutHouseholdInput[]
+    deleteMany?: MealPlanScalarWhereInput | MealPlanScalarWhereInput[]
+  }
+
+  export type MealPlanItemUpdateManyWithoutHouseholdNestedInput = {
+    create?: XOR<MealPlanItemCreateWithoutHouseholdInput, MealPlanItemUncheckedCreateWithoutHouseholdInput> | MealPlanItemCreateWithoutHouseholdInput[] | MealPlanItemUncheckedCreateWithoutHouseholdInput[]
+    connectOrCreate?: MealPlanItemCreateOrConnectWithoutHouseholdInput | MealPlanItemCreateOrConnectWithoutHouseholdInput[]
+    upsert?: MealPlanItemUpsertWithWhereUniqueWithoutHouseholdInput | MealPlanItemUpsertWithWhereUniqueWithoutHouseholdInput[]
+    createMany?: MealPlanItemCreateManyHouseholdInputEnvelope
+    set?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    disconnect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    delete?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    connect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    update?: MealPlanItemUpdateWithWhereUniqueWithoutHouseholdInput | MealPlanItemUpdateWithWhereUniqueWithoutHouseholdInput[]
+    updateMany?: MealPlanItemUpdateManyWithWhereWithoutHouseholdInput | MealPlanItemUpdateManyWithWhereWithoutHouseholdInput[]
+    deleteMany?: MealPlanItemScalarWhereInput | MealPlanItemScalarWhereInput[]
+  }
+
   export type HouseholdMemberUncheckedUpdateManyWithoutHouseholdNestedInput = {
     create?: XOR<HouseholdMemberCreateWithoutHouseholdInput, HouseholdMemberUncheckedCreateWithoutHouseholdInput> | HouseholdMemberCreateWithoutHouseholdInput[] | HouseholdMemberUncheckedCreateWithoutHouseholdInput[]
     connectOrCreate?: HouseholdMemberCreateOrConnectWithoutHouseholdInput | HouseholdMemberCreateOrConnectWithoutHouseholdInput[]
@@ -14500,6 +17463,34 @@ export namespace Prisma {
     update?: HouseholdInviteUpdateWithWhereUniqueWithoutHouseholdInput | HouseholdInviteUpdateWithWhereUniqueWithoutHouseholdInput[]
     updateMany?: HouseholdInviteUpdateManyWithWhereWithoutHouseholdInput | HouseholdInviteUpdateManyWithWhereWithoutHouseholdInput[]
     deleteMany?: HouseholdInviteScalarWhereInput | HouseholdInviteScalarWhereInput[]
+  }
+
+  export type MealPlanUncheckedUpdateManyWithoutHouseholdNestedInput = {
+    create?: XOR<MealPlanCreateWithoutHouseholdInput, MealPlanUncheckedCreateWithoutHouseholdInput> | MealPlanCreateWithoutHouseholdInput[] | MealPlanUncheckedCreateWithoutHouseholdInput[]
+    connectOrCreate?: MealPlanCreateOrConnectWithoutHouseholdInput | MealPlanCreateOrConnectWithoutHouseholdInput[]
+    upsert?: MealPlanUpsertWithWhereUniqueWithoutHouseholdInput | MealPlanUpsertWithWhereUniqueWithoutHouseholdInput[]
+    createMany?: MealPlanCreateManyHouseholdInputEnvelope
+    set?: MealPlanWhereUniqueInput | MealPlanWhereUniqueInput[]
+    disconnect?: MealPlanWhereUniqueInput | MealPlanWhereUniqueInput[]
+    delete?: MealPlanWhereUniqueInput | MealPlanWhereUniqueInput[]
+    connect?: MealPlanWhereUniqueInput | MealPlanWhereUniqueInput[]
+    update?: MealPlanUpdateWithWhereUniqueWithoutHouseholdInput | MealPlanUpdateWithWhereUniqueWithoutHouseholdInput[]
+    updateMany?: MealPlanUpdateManyWithWhereWithoutHouseholdInput | MealPlanUpdateManyWithWhereWithoutHouseholdInput[]
+    deleteMany?: MealPlanScalarWhereInput | MealPlanScalarWhereInput[]
+  }
+
+  export type MealPlanItemUncheckedUpdateManyWithoutHouseholdNestedInput = {
+    create?: XOR<MealPlanItemCreateWithoutHouseholdInput, MealPlanItemUncheckedCreateWithoutHouseholdInput> | MealPlanItemCreateWithoutHouseholdInput[] | MealPlanItemUncheckedCreateWithoutHouseholdInput[]
+    connectOrCreate?: MealPlanItemCreateOrConnectWithoutHouseholdInput | MealPlanItemCreateOrConnectWithoutHouseholdInput[]
+    upsert?: MealPlanItemUpsertWithWhereUniqueWithoutHouseholdInput | MealPlanItemUpsertWithWhereUniqueWithoutHouseholdInput[]
+    createMany?: MealPlanItemCreateManyHouseholdInputEnvelope
+    set?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    disconnect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    delete?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    connect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    update?: MealPlanItemUpdateWithWhereUniqueWithoutHouseholdInput | MealPlanItemUpdateWithWhereUniqueWithoutHouseholdInput[]
+    updateMany?: MealPlanItemUpdateManyWithWhereWithoutHouseholdInput | MealPlanItemUpdateManyWithWhereWithoutHouseholdInput[]
+    deleteMany?: MealPlanItemScalarWhereInput | MealPlanItemScalarWhereInput[]
   }
 
   export type HouseholdCreateNestedOneWithoutMembersInput = {
@@ -14751,11 +17742,25 @@ export namespace Prisma {
     connect?: ItemChangeLogWhereUniqueInput | ItemChangeLogWhereUniqueInput[]
   }
 
+  export type MealPlanItemCreateNestedManyWithoutItemInput = {
+    create?: XOR<MealPlanItemCreateWithoutItemInput, MealPlanItemUncheckedCreateWithoutItemInput> | MealPlanItemCreateWithoutItemInput[] | MealPlanItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: MealPlanItemCreateOrConnectWithoutItemInput | MealPlanItemCreateOrConnectWithoutItemInput[]
+    createMany?: MealPlanItemCreateManyItemInputEnvelope
+    connect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+  }
+
   export type ItemChangeLogUncheckedCreateNestedManyWithoutItemInput = {
     create?: XOR<ItemChangeLogCreateWithoutItemInput, ItemChangeLogUncheckedCreateWithoutItemInput> | ItemChangeLogCreateWithoutItemInput[] | ItemChangeLogUncheckedCreateWithoutItemInput[]
     connectOrCreate?: ItemChangeLogCreateOrConnectWithoutItemInput | ItemChangeLogCreateOrConnectWithoutItemInput[]
     createMany?: ItemChangeLogCreateManyItemInputEnvelope
     connect?: ItemChangeLogWhereUniqueInput | ItemChangeLogWhereUniqueInput[]
+  }
+
+  export type MealPlanItemUncheckedCreateNestedManyWithoutItemInput = {
+    create?: XOR<MealPlanItemCreateWithoutItemInput, MealPlanItemUncheckedCreateWithoutItemInput> | MealPlanItemCreateWithoutItemInput[] | MealPlanItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: MealPlanItemCreateOrConnectWithoutItemInput | MealPlanItemCreateOrConnectWithoutItemInput[]
+    createMany?: MealPlanItemCreateManyItemInputEnvelope
+    connect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
   }
 
   export type HouseholdUpdateOneRequiredWithoutItemsNestedInput = {
@@ -14812,6 +17817,20 @@ export namespace Prisma {
     deleteMany?: ItemChangeLogScalarWhereInput | ItemChangeLogScalarWhereInput[]
   }
 
+  export type MealPlanItemUpdateManyWithoutItemNestedInput = {
+    create?: XOR<MealPlanItemCreateWithoutItemInput, MealPlanItemUncheckedCreateWithoutItemInput> | MealPlanItemCreateWithoutItemInput[] | MealPlanItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: MealPlanItemCreateOrConnectWithoutItemInput | MealPlanItemCreateOrConnectWithoutItemInput[]
+    upsert?: MealPlanItemUpsertWithWhereUniqueWithoutItemInput | MealPlanItemUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: MealPlanItemCreateManyItemInputEnvelope
+    set?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    disconnect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    delete?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    connect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    update?: MealPlanItemUpdateWithWhereUniqueWithoutItemInput | MealPlanItemUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: MealPlanItemUpdateManyWithWhereWithoutItemInput | MealPlanItemUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: MealPlanItemScalarWhereInput | MealPlanItemScalarWhereInput[]
+  }
+
   export type ItemChangeLogUncheckedUpdateManyWithoutItemNestedInput = {
     create?: XOR<ItemChangeLogCreateWithoutItemInput, ItemChangeLogUncheckedCreateWithoutItemInput> | ItemChangeLogCreateWithoutItemInput[] | ItemChangeLogUncheckedCreateWithoutItemInput[]
     connectOrCreate?: ItemChangeLogCreateOrConnectWithoutItemInput | ItemChangeLogCreateOrConnectWithoutItemInput[]
@@ -14824,6 +17843,20 @@ export namespace Prisma {
     update?: ItemChangeLogUpdateWithWhereUniqueWithoutItemInput | ItemChangeLogUpdateWithWhereUniqueWithoutItemInput[]
     updateMany?: ItemChangeLogUpdateManyWithWhereWithoutItemInput | ItemChangeLogUpdateManyWithWhereWithoutItemInput[]
     deleteMany?: ItemChangeLogScalarWhereInput | ItemChangeLogScalarWhereInput[]
+  }
+
+  export type MealPlanItemUncheckedUpdateManyWithoutItemNestedInput = {
+    create?: XOR<MealPlanItemCreateWithoutItemInput, MealPlanItemUncheckedCreateWithoutItemInput> | MealPlanItemCreateWithoutItemInput[] | MealPlanItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: MealPlanItemCreateOrConnectWithoutItemInput | MealPlanItemCreateOrConnectWithoutItemInput[]
+    upsert?: MealPlanItemUpsertWithWhereUniqueWithoutItemInput | MealPlanItemUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: MealPlanItemCreateManyItemInputEnvelope
+    set?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    disconnect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    delete?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    connect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    update?: MealPlanItemUpdateWithWhereUniqueWithoutItemInput | MealPlanItemUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: MealPlanItemUpdateManyWithWhereWithoutItemInput | MealPlanItemUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: MealPlanItemScalarWhereInput | MealPlanItemScalarWhereInput[]
   }
 
   export type FreezerItemCreateNestedOneWithoutChangeLogsInput = {
@@ -14852,6 +17885,104 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutChangeLogsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutChangeLogsInput, UserUpdateWithoutChangeLogsInput>, UserUncheckedUpdateWithoutChangeLogsInput>
+  }
+
+  export type HouseholdCreateNestedOneWithoutMealPlansInput = {
+    create?: XOR<HouseholdCreateWithoutMealPlansInput, HouseholdUncheckedCreateWithoutMealPlansInput>
+    connectOrCreate?: HouseholdCreateOrConnectWithoutMealPlansInput
+    connect?: HouseholdWhereUniqueInput
+  }
+
+  export type MealPlanItemCreateNestedManyWithoutMealPlanInput = {
+    create?: XOR<MealPlanItemCreateWithoutMealPlanInput, MealPlanItemUncheckedCreateWithoutMealPlanInput> | MealPlanItemCreateWithoutMealPlanInput[] | MealPlanItemUncheckedCreateWithoutMealPlanInput[]
+    connectOrCreate?: MealPlanItemCreateOrConnectWithoutMealPlanInput | MealPlanItemCreateOrConnectWithoutMealPlanInput[]
+    createMany?: MealPlanItemCreateManyMealPlanInputEnvelope
+    connect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+  }
+
+  export type MealPlanItemUncheckedCreateNestedManyWithoutMealPlanInput = {
+    create?: XOR<MealPlanItemCreateWithoutMealPlanInput, MealPlanItemUncheckedCreateWithoutMealPlanInput> | MealPlanItemCreateWithoutMealPlanInput[] | MealPlanItemUncheckedCreateWithoutMealPlanInput[]
+    connectOrCreate?: MealPlanItemCreateOrConnectWithoutMealPlanInput | MealPlanItemCreateOrConnectWithoutMealPlanInput[]
+    createMany?: MealPlanItemCreateManyMealPlanInputEnvelope
+    connect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+  }
+
+  export type HouseholdUpdateOneRequiredWithoutMealPlansNestedInput = {
+    create?: XOR<HouseholdCreateWithoutMealPlansInput, HouseholdUncheckedCreateWithoutMealPlansInput>
+    connectOrCreate?: HouseholdCreateOrConnectWithoutMealPlansInput
+    upsert?: HouseholdUpsertWithoutMealPlansInput
+    connect?: HouseholdWhereUniqueInput
+    update?: XOR<XOR<HouseholdUpdateToOneWithWhereWithoutMealPlansInput, HouseholdUpdateWithoutMealPlansInput>, HouseholdUncheckedUpdateWithoutMealPlansInput>
+  }
+
+  export type MealPlanItemUpdateManyWithoutMealPlanNestedInput = {
+    create?: XOR<MealPlanItemCreateWithoutMealPlanInput, MealPlanItemUncheckedCreateWithoutMealPlanInput> | MealPlanItemCreateWithoutMealPlanInput[] | MealPlanItemUncheckedCreateWithoutMealPlanInput[]
+    connectOrCreate?: MealPlanItemCreateOrConnectWithoutMealPlanInput | MealPlanItemCreateOrConnectWithoutMealPlanInput[]
+    upsert?: MealPlanItemUpsertWithWhereUniqueWithoutMealPlanInput | MealPlanItemUpsertWithWhereUniqueWithoutMealPlanInput[]
+    createMany?: MealPlanItemCreateManyMealPlanInputEnvelope
+    set?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    disconnect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    delete?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    connect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    update?: MealPlanItemUpdateWithWhereUniqueWithoutMealPlanInput | MealPlanItemUpdateWithWhereUniqueWithoutMealPlanInput[]
+    updateMany?: MealPlanItemUpdateManyWithWhereWithoutMealPlanInput | MealPlanItemUpdateManyWithWhereWithoutMealPlanInput[]
+    deleteMany?: MealPlanItemScalarWhereInput | MealPlanItemScalarWhereInput[]
+  }
+
+  export type MealPlanItemUncheckedUpdateManyWithoutMealPlanNestedInput = {
+    create?: XOR<MealPlanItemCreateWithoutMealPlanInput, MealPlanItemUncheckedCreateWithoutMealPlanInput> | MealPlanItemCreateWithoutMealPlanInput[] | MealPlanItemUncheckedCreateWithoutMealPlanInput[]
+    connectOrCreate?: MealPlanItemCreateOrConnectWithoutMealPlanInput | MealPlanItemCreateOrConnectWithoutMealPlanInput[]
+    upsert?: MealPlanItemUpsertWithWhereUniqueWithoutMealPlanInput | MealPlanItemUpsertWithWhereUniqueWithoutMealPlanInput[]
+    createMany?: MealPlanItemCreateManyMealPlanInputEnvelope
+    set?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    disconnect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    delete?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    connect?: MealPlanItemWhereUniqueInput | MealPlanItemWhereUniqueInput[]
+    update?: MealPlanItemUpdateWithWhereUniqueWithoutMealPlanInput | MealPlanItemUpdateWithWhereUniqueWithoutMealPlanInput[]
+    updateMany?: MealPlanItemUpdateManyWithWhereWithoutMealPlanInput | MealPlanItemUpdateManyWithWhereWithoutMealPlanInput[]
+    deleteMany?: MealPlanItemScalarWhereInput | MealPlanItemScalarWhereInput[]
+  }
+
+  export type MealPlanCreateNestedOneWithoutItemsInput = {
+    create?: XOR<MealPlanCreateWithoutItemsInput, MealPlanUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: MealPlanCreateOrConnectWithoutItemsInput
+    connect?: MealPlanWhereUniqueInput
+  }
+
+  export type FreezerItemCreateNestedOneWithoutPlannedItemsInput = {
+    create?: XOR<FreezerItemCreateWithoutPlannedItemsInput, FreezerItemUncheckedCreateWithoutPlannedItemsInput>
+    connectOrCreate?: FreezerItemCreateOrConnectWithoutPlannedItemsInput
+    connect?: FreezerItemWhereUniqueInput
+  }
+
+  export type HouseholdCreateNestedOneWithoutMealPlanItemsInput = {
+    create?: XOR<HouseholdCreateWithoutMealPlanItemsInput, HouseholdUncheckedCreateWithoutMealPlanItemsInput>
+    connectOrCreate?: HouseholdCreateOrConnectWithoutMealPlanItemsInput
+    connect?: HouseholdWhereUniqueInput
+  }
+
+  export type MealPlanUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<MealPlanCreateWithoutItemsInput, MealPlanUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: MealPlanCreateOrConnectWithoutItemsInput
+    upsert?: MealPlanUpsertWithoutItemsInput
+    connect?: MealPlanWhereUniqueInput
+    update?: XOR<XOR<MealPlanUpdateToOneWithWhereWithoutItemsInput, MealPlanUpdateWithoutItemsInput>, MealPlanUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type FreezerItemUpdateOneRequiredWithoutPlannedItemsNestedInput = {
+    create?: XOR<FreezerItemCreateWithoutPlannedItemsInput, FreezerItemUncheckedCreateWithoutPlannedItemsInput>
+    connectOrCreate?: FreezerItemCreateOrConnectWithoutPlannedItemsInput
+    upsert?: FreezerItemUpsertWithoutPlannedItemsInput
+    connect?: FreezerItemWhereUniqueInput
+    update?: XOR<XOR<FreezerItemUpdateToOneWithWhereWithoutPlannedItemsInput, FreezerItemUpdateWithoutPlannedItemsInput>, FreezerItemUncheckedUpdateWithoutPlannedItemsInput>
+  }
+
+  export type HouseholdUpdateOneRequiredWithoutMealPlanItemsNestedInput = {
+    create?: XOR<HouseholdCreateWithoutMealPlanItemsInput, HouseholdUncheckedCreateWithoutMealPlanItemsInput>
+    connectOrCreate?: HouseholdCreateOrConnectWithoutMealPlanItemsInput
+    upsert?: HouseholdUpsertWithoutMealPlanItemsInput
+    connect?: HouseholdWhereUniqueInput
+    update?: XOR<XOR<HouseholdUpdateToOneWithWhereWithoutMealPlanItemsInput, HouseholdUpdateWithoutMealPlanItemsInput>, HouseholdUncheckedUpdateWithoutMealPlanItemsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -15064,6 +18195,8 @@ export namespace Prisma {
     freezers?: FreezerCreateNestedManyWithoutHouseholdInput
     items?: FreezerItemCreateNestedManyWithoutHouseholdInput
     invites?: HouseholdInviteCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemCreateNestedManyWithoutHouseholdInput
   }
 
   export type HouseholdUncheckedCreateWithoutOwnerInput = {
@@ -15074,6 +18207,8 @@ export namespace Prisma {
     freezers?: FreezerUncheckedCreateNestedManyWithoutHouseholdInput
     items?: FreezerItemUncheckedCreateNestedManyWithoutHouseholdInput
     invites?: HouseholdInviteUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemUncheckedCreateNestedManyWithoutHouseholdInput
   }
 
   export type HouseholdCreateOrConnectWithoutOwnerInput = {
@@ -15127,6 +18262,7 @@ export namespace Prisma {
     compartment: CompartmentCreateNestedOneWithoutItemsInput
     updatedBy: UserCreateNestedOneWithoutUpdatedItemsInput
     changeLogs?: ItemChangeLogCreateNestedManyWithoutItemInput
+    plannedItems?: MealPlanItemCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemUncheckedCreateWithoutCreatedByInput = {
@@ -15144,6 +18280,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     changeLogs?: ItemChangeLogUncheckedCreateNestedManyWithoutItemInput
+    plannedItems?: MealPlanItemUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemCreateOrConnectWithoutCreatedByInput = {
@@ -15171,6 +18308,7 @@ export namespace Prisma {
     compartment: CompartmentCreateNestedOneWithoutItemsInput
     createdBy: UserCreateNestedOneWithoutCreatedItemsInput
     changeLogs?: ItemChangeLogCreateNestedManyWithoutItemInput
+    plannedItems?: MealPlanItemCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemUncheckedCreateWithoutUpdatedByInput = {
@@ -15188,6 +18326,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     changeLogs?: ItemChangeLogUncheckedCreateNestedManyWithoutItemInput
+    plannedItems?: MealPlanItemUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemCreateOrConnectWithoutUpdatedByInput = {
@@ -15556,6 +18695,7 @@ export namespace Prisma {
     createdBy: UserCreateNestedOneWithoutCreatedItemsInput
     updatedBy: UserCreateNestedOneWithoutUpdatedItemsInput
     changeLogs?: ItemChangeLogCreateNestedManyWithoutItemInput
+    plannedItems?: MealPlanItemCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemUncheckedCreateWithoutHouseholdInput = {
@@ -15573,6 +18713,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     changeLogs?: ItemChangeLogUncheckedCreateNestedManyWithoutItemInput
+    plannedItems?: MealPlanItemUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemCreateOrConnectWithoutHouseholdInput = {
@@ -15610,6 +18751,60 @@ export namespace Prisma {
 
   export type HouseholdInviteCreateManyHouseholdInputEnvelope = {
     data: HouseholdInviteCreateManyHouseholdInput | HouseholdInviteCreateManyHouseholdInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MealPlanCreateWithoutHouseholdInput = {
+    id?: string
+    name?: string | null
+    plannedDate: Date | string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: MealPlanItemCreateNestedManyWithoutMealPlanInput
+  }
+
+  export type MealPlanUncheckedCreateWithoutHouseholdInput = {
+    id?: string
+    name?: string | null
+    plannedDate: Date | string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: MealPlanItemUncheckedCreateNestedManyWithoutMealPlanInput
+  }
+
+  export type MealPlanCreateOrConnectWithoutHouseholdInput = {
+    where: MealPlanWhereUniqueInput
+    create: XOR<MealPlanCreateWithoutHouseholdInput, MealPlanUncheckedCreateWithoutHouseholdInput>
+  }
+
+  export type MealPlanCreateManyHouseholdInputEnvelope = {
+    data: MealPlanCreateManyHouseholdInput | MealPlanCreateManyHouseholdInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MealPlanItemCreateWithoutHouseholdInput = {
+    id?: string
+    createdAt?: Date | string
+    mealPlan: MealPlanCreateNestedOneWithoutItemsInput
+    item: FreezerItemCreateNestedOneWithoutPlannedItemsInput
+  }
+
+  export type MealPlanItemUncheckedCreateWithoutHouseholdInput = {
+    id?: string
+    mealPlanId: string
+    itemId: string
+    createdAt?: Date | string
+  }
+
+  export type MealPlanItemCreateOrConnectWithoutHouseholdInput = {
+    where: MealPlanItemWhereUniqueInput
+    create: XOR<MealPlanItemCreateWithoutHouseholdInput, MealPlanItemUncheckedCreateWithoutHouseholdInput>
+  }
+
+  export type MealPlanItemCreateManyHouseholdInputEnvelope = {
+    data: MealPlanItemCreateManyHouseholdInput | MealPlanItemCreateManyHouseholdInput[]
     skipDuplicates?: boolean
   }
 
@@ -15738,6 +18933,62 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"HouseholdInvite"> | Date | string
   }
 
+  export type MealPlanUpsertWithWhereUniqueWithoutHouseholdInput = {
+    where: MealPlanWhereUniqueInput
+    update: XOR<MealPlanUpdateWithoutHouseholdInput, MealPlanUncheckedUpdateWithoutHouseholdInput>
+    create: XOR<MealPlanCreateWithoutHouseholdInput, MealPlanUncheckedCreateWithoutHouseholdInput>
+  }
+
+  export type MealPlanUpdateWithWhereUniqueWithoutHouseholdInput = {
+    where: MealPlanWhereUniqueInput
+    data: XOR<MealPlanUpdateWithoutHouseholdInput, MealPlanUncheckedUpdateWithoutHouseholdInput>
+  }
+
+  export type MealPlanUpdateManyWithWhereWithoutHouseholdInput = {
+    where: MealPlanScalarWhereInput
+    data: XOR<MealPlanUpdateManyMutationInput, MealPlanUncheckedUpdateManyWithoutHouseholdInput>
+  }
+
+  export type MealPlanScalarWhereInput = {
+    AND?: MealPlanScalarWhereInput | MealPlanScalarWhereInput[]
+    OR?: MealPlanScalarWhereInput[]
+    NOT?: MealPlanScalarWhereInput | MealPlanScalarWhereInput[]
+    id?: StringFilter<"MealPlan"> | string
+    householdId?: StringFilter<"MealPlan"> | string
+    name?: StringNullableFilter<"MealPlan"> | string | null
+    plannedDate?: DateTimeFilter<"MealPlan"> | Date | string
+    notes?: StringNullableFilter<"MealPlan"> | string | null
+    createdAt?: DateTimeFilter<"MealPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"MealPlan"> | Date | string
+  }
+
+  export type MealPlanItemUpsertWithWhereUniqueWithoutHouseholdInput = {
+    where: MealPlanItemWhereUniqueInput
+    update: XOR<MealPlanItemUpdateWithoutHouseholdInput, MealPlanItemUncheckedUpdateWithoutHouseholdInput>
+    create: XOR<MealPlanItemCreateWithoutHouseholdInput, MealPlanItemUncheckedCreateWithoutHouseholdInput>
+  }
+
+  export type MealPlanItemUpdateWithWhereUniqueWithoutHouseholdInput = {
+    where: MealPlanItemWhereUniqueInput
+    data: XOR<MealPlanItemUpdateWithoutHouseholdInput, MealPlanItemUncheckedUpdateWithoutHouseholdInput>
+  }
+
+  export type MealPlanItemUpdateManyWithWhereWithoutHouseholdInput = {
+    where: MealPlanItemScalarWhereInput
+    data: XOR<MealPlanItemUpdateManyMutationInput, MealPlanItemUncheckedUpdateManyWithoutHouseholdInput>
+  }
+
+  export type MealPlanItemScalarWhereInput = {
+    AND?: MealPlanItemScalarWhereInput | MealPlanItemScalarWhereInput[]
+    OR?: MealPlanItemScalarWhereInput[]
+    NOT?: MealPlanItemScalarWhereInput | MealPlanItemScalarWhereInput[]
+    id?: StringFilter<"MealPlanItem"> | string
+    mealPlanId?: StringFilter<"MealPlanItem"> | string
+    itemId?: StringFilter<"MealPlanItem"> | string
+    householdId?: StringFilter<"MealPlanItem"> | string
+    createdAt?: DateTimeFilter<"MealPlanItem"> | Date | string
+  }
+
   export type HouseholdCreateWithoutMembersInput = {
     id?: string
     name: string
@@ -15746,6 +18997,8 @@ export namespace Prisma {
     freezers?: FreezerCreateNestedManyWithoutHouseholdInput
     items?: FreezerItemCreateNestedManyWithoutHouseholdInput
     invites?: HouseholdInviteCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemCreateNestedManyWithoutHouseholdInput
   }
 
   export type HouseholdUncheckedCreateWithoutMembersInput = {
@@ -15756,6 +19009,8 @@ export namespace Prisma {
     freezers?: FreezerUncheckedCreateNestedManyWithoutHouseholdInput
     items?: FreezerItemUncheckedCreateNestedManyWithoutHouseholdInput
     invites?: HouseholdInviteUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemUncheckedCreateNestedManyWithoutHouseholdInput
   }
 
   export type HouseholdCreateOrConnectWithoutMembersInput = {
@@ -15813,6 +19068,8 @@ export namespace Prisma {
     freezers?: FreezerUpdateManyWithoutHouseholdNestedInput
     items?: FreezerItemUpdateManyWithoutHouseholdNestedInput
     invites?: HouseholdInviteUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUpdateManyWithoutHouseholdNestedInput
   }
 
   export type HouseholdUncheckedUpdateWithoutMembersInput = {
@@ -15823,6 +19080,8 @@ export namespace Prisma {
     freezers?: FreezerUncheckedUpdateManyWithoutHouseholdNestedInput
     items?: FreezerItemUncheckedUpdateManyWithoutHouseholdNestedInput
     invites?: HouseholdInviteUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUncheckedUpdateManyWithoutHouseholdNestedInput
   }
 
   export type UserUpsertWithoutMembershipsInput = {
@@ -15870,6 +19129,8 @@ export namespace Prisma {
     members?: HouseholdMemberCreateNestedManyWithoutHouseholdInput
     freezers?: FreezerCreateNestedManyWithoutHouseholdInput
     items?: FreezerItemCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemCreateNestedManyWithoutHouseholdInput
   }
 
   export type HouseholdUncheckedCreateWithoutInvitesInput = {
@@ -15880,6 +19141,8 @@ export namespace Prisma {
     members?: HouseholdMemberUncheckedCreateNestedManyWithoutHouseholdInput
     freezers?: FreezerUncheckedCreateNestedManyWithoutHouseholdInput
     items?: FreezerItemUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemUncheckedCreateNestedManyWithoutHouseholdInput
   }
 
   export type HouseholdCreateOrConnectWithoutInvitesInput = {
@@ -15906,6 +19169,8 @@ export namespace Prisma {
     members?: HouseholdMemberUpdateManyWithoutHouseholdNestedInput
     freezers?: FreezerUpdateManyWithoutHouseholdNestedInput
     items?: FreezerItemUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUpdateManyWithoutHouseholdNestedInput
   }
 
   export type HouseholdUncheckedUpdateWithoutInvitesInput = {
@@ -15916,6 +19181,8 @@ export namespace Prisma {
     members?: HouseholdMemberUncheckedUpdateManyWithoutHouseholdNestedInput
     freezers?: FreezerUncheckedUpdateManyWithoutHouseholdNestedInput
     items?: FreezerItemUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUncheckedUpdateManyWithoutHouseholdNestedInput
   }
 
   export type HouseholdCreateWithoutFreezersInput = {
@@ -15926,6 +19193,8 @@ export namespace Prisma {
     members?: HouseholdMemberCreateNestedManyWithoutHouseholdInput
     items?: FreezerItemCreateNestedManyWithoutHouseholdInput
     invites?: HouseholdInviteCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemCreateNestedManyWithoutHouseholdInput
   }
 
   export type HouseholdUncheckedCreateWithoutFreezersInput = {
@@ -15936,6 +19205,8 @@ export namespace Prisma {
     members?: HouseholdMemberUncheckedCreateNestedManyWithoutHouseholdInput
     items?: FreezerItemUncheckedCreateNestedManyWithoutHouseholdInput
     invites?: HouseholdInviteUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemUncheckedCreateNestedManyWithoutHouseholdInput
   }
 
   export type HouseholdCreateOrConnectWithoutFreezersInput = {
@@ -15982,6 +19253,7 @@ export namespace Prisma {
     createdBy: UserCreateNestedOneWithoutCreatedItemsInput
     updatedBy: UserCreateNestedOneWithoutUpdatedItemsInput
     changeLogs?: ItemChangeLogCreateNestedManyWithoutItemInput
+    plannedItems?: MealPlanItemCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemUncheckedCreateWithoutFreezerInput = {
@@ -15999,6 +19271,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     changeLogs?: ItemChangeLogUncheckedCreateNestedManyWithoutItemInput
+    plannedItems?: MealPlanItemUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemCreateOrConnectWithoutFreezerInput = {
@@ -16030,6 +19303,8 @@ export namespace Prisma {
     members?: HouseholdMemberUpdateManyWithoutHouseholdNestedInput
     items?: FreezerItemUpdateManyWithoutHouseholdNestedInput
     invites?: HouseholdInviteUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUpdateManyWithoutHouseholdNestedInput
   }
 
   export type HouseholdUncheckedUpdateWithoutFreezersInput = {
@@ -16040,6 +19315,8 @@ export namespace Prisma {
     members?: HouseholdMemberUncheckedUpdateManyWithoutHouseholdNestedInput
     items?: FreezerItemUncheckedUpdateManyWithoutHouseholdNestedInput
     invites?: HouseholdInviteUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUncheckedUpdateManyWithoutHouseholdNestedInput
   }
 
   export type CompartmentUpsertWithWhereUniqueWithoutFreezerInput = {
@@ -16122,6 +19399,7 @@ export namespace Prisma {
     createdBy: UserCreateNestedOneWithoutCreatedItemsInput
     updatedBy: UserCreateNestedOneWithoutUpdatedItemsInput
     changeLogs?: ItemChangeLogCreateNestedManyWithoutItemInput
+    plannedItems?: MealPlanItemCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemUncheckedCreateWithoutCompartmentInput = {
@@ -16139,6 +19417,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     changeLogs?: ItemChangeLogUncheckedCreateNestedManyWithoutItemInput
+    plannedItems?: MealPlanItemUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemCreateOrConnectWithoutCompartmentInput = {
@@ -16204,6 +19483,8 @@ export namespace Prisma {
     members?: HouseholdMemberCreateNestedManyWithoutHouseholdInput
     freezers?: FreezerCreateNestedManyWithoutHouseholdInput
     invites?: HouseholdInviteCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemCreateNestedManyWithoutHouseholdInput
   }
 
   export type HouseholdUncheckedCreateWithoutItemsInput = {
@@ -16214,6 +19495,8 @@ export namespace Prisma {
     members?: HouseholdMemberUncheckedCreateNestedManyWithoutHouseholdInput
     freezers?: FreezerUncheckedCreateNestedManyWithoutHouseholdInput
     invites?: HouseholdInviteUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemUncheckedCreateNestedManyWithoutHouseholdInput
   }
 
   export type HouseholdCreateOrConnectWithoutItemsInput = {
@@ -16353,6 +19636,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MealPlanItemCreateWithoutItemInput = {
+    id?: string
+    createdAt?: Date | string
+    mealPlan: MealPlanCreateNestedOneWithoutItemsInput
+    household: HouseholdCreateNestedOneWithoutMealPlanItemsInput
+  }
+
+  export type MealPlanItemUncheckedCreateWithoutItemInput = {
+    id?: string
+    mealPlanId: string
+    householdId: string
+    createdAt?: Date | string
+  }
+
+  export type MealPlanItemCreateOrConnectWithoutItemInput = {
+    where: MealPlanItemWhereUniqueInput
+    create: XOR<MealPlanItemCreateWithoutItemInput, MealPlanItemUncheckedCreateWithoutItemInput>
+  }
+
+  export type MealPlanItemCreateManyItemInputEnvelope = {
+    data: MealPlanItemCreateManyItemInput | MealPlanItemCreateManyItemInput[]
+    skipDuplicates?: boolean
+  }
+
   export type HouseholdUpsertWithoutItemsInput = {
     update: XOR<HouseholdUpdateWithoutItemsInput, HouseholdUncheckedUpdateWithoutItemsInput>
     create: XOR<HouseholdCreateWithoutItemsInput, HouseholdUncheckedCreateWithoutItemsInput>
@@ -16372,6 +19679,8 @@ export namespace Prisma {
     members?: HouseholdMemberUpdateManyWithoutHouseholdNestedInput
     freezers?: FreezerUpdateManyWithoutHouseholdNestedInput
     invites?: HouseholdInviteUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUpdateManyWithoutHouseholdNestedInput
   }
 
   export type HouseholdUncheckedUpdateWithoutItemsInput = {
@@ -16382,6 +19691,8 @@ export namespace Prisma {
     members?: HouseholdMemberUncheckedUpdateManyWithoutHouseholdNestedInput
     freezers?: FreezerUncheckedUpdateManyWithoutHouseholdNestedInput
     invites?: HouseholdInviteUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUncheckedUpdateManyWithoutHouseholdNestedInput
   }
 
   export type FreezerUpsertWithoutItemsInput = {
@@ -16528,6 +19839,22 @@ export namespace Prisma {
     data: XOR<ItemChangeLogUpdateManyMutationInput, ItemChangeLogUncheckedUpdateManyWithoutItemInput>
   }
 
+  export type MealPlanItemUpsertWithWhereUniqueWithoutItemInput = {
+    where: MealPlanItemWhereUniqueInput
+    update: XOR<MealPlanItemUpdateWithoutItemInput, MealPlanItemUncheckedUpdateWithoutItemInput>
+    create: XOR<MealPlanItemCreateWithoutItemInput, MealPlanItemUncheckedCreateWithoutItemInput>
+  }
+
+  export type MealPlanItemUpdateWithWhereUniqueWithoutItemInput = {
+    where: MealPlanItemWhereUniqueInput
+    data: XOR<MealPlanItemUpdateWithoutItemInput, MealPlanItemUncheckedUpdateWithoutItemInput>
+  }
+
+  export type MealPlanItemUpdateManyWithWhereWithoutItemInput = {
+    where: MealPlanItemScalarWhereInput
+    data: XOR<MealPlanItemUpdateManyMutationInput, MealPlanItemUncheckedUpdateManyWithoutItemInput>
+  }
+
   export type FreezerItemCreateWithoutChangeLogsInput = {
     id?: string
     name: string
@@ -16543,6 +19870,7 @@ export namespace Prisma {
     compartment: CompartmentCreateNestedOneWithoutItemsInput
     createdBy: UserCreateNestedOneWithoutCreatedItemsInput
     updatedBy: UserCreateNestedOneWithoutUpdatedItemsInput
+    plannedItems?: MealPlanItemCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemUncheckedCreateWithoutChangeLogsInput = {
@@ -16560,6 +19888,7 @@ export namespace Prisma {
     updatedById: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    plannedItems?: MealPlanItemUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type FreezerItemCreateOrConnectWithoutChangeLogsInput = {
@@ -16624,6 +19953,7 @@ export namespace Prisma {
     compartment?: CompartmentUpdateOneRequiredWithoutItemsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedItemsNestedInput
     updatedBy?: UserUpdateOneRequiredWithoutUpdatedItemsNestedInput
+    plannedItems?: MealPlanItemUpdateManyWithoutItemNestedInput
   }
 
   export type FreezerItemUncheckedUpdateWithoutChangeLogsInput = {
@@ -16641,6 +19971,7 @@ export namespace Prisma {
     updatedById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plannedItems?: MealPlanItemUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type UserUpsertWithoutChangeLogsInput = {
@@ -16678,6 +20009,318 @@ export namespace Prisma {
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     createdItems?: FreezerItemUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedItems?: FreezerItemUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type HouseholdCreateWithoutMealPlansInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    owner: UserCreateNestedOneWithoutOwnedHouseholdsInput
+    members?: HouseholdMemberCreateNestedManyWithoutHouseholdInput
+    freezers?: FreezerCreateNestedManyWithoutHouseholdInput
+    items?: FreezerItemCreateNestedManyWithoutHouseholdInput
+    invites?: HouseholdInviteCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemCreateNestedManyWithoutHouseholdInput
+  }
+
+  export type HouseholdUncheckedCreateWithoutMealPlansInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    ownerId: string
+    members?: HouseholdMemberUncheckedCreateNestedManyWithoutHouseholdInput
+    freezers?: FreezerUncheckedCreateNestedManyWithoutHouseholdInput
+    items?: FreezerItemUncheckedCreateNestedManyWithoutHouseholdInput
+    invites?: HouseholdInviteUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlanItems?: MealPlanItemUncheckedCreateNestedManyWithoutHouseholdInput
+  }
+
+  export type HouseholdCreateOrConnectWithoutMealPlansInput = {
+    where: HouseholdWhereUniqueInput
+    create: XOR<HouseholdCreateWithoutMealPlansInput, HouseholdUncheckedCreateWithoutMealPlansInput>
+  }
+
+  export type MealPlanItemCreateWithoutMealPlanInput = {
+    id?: string
+    createdAt?: Date | string
+    item: FreezerItemCreateNestedOneWithoutPlannedItemsInput
+    household: HouseholdCreateNestedOneWithoutMealPlanItemsInput
+  }
+
+  export type MealPlanItemUncheckedCreateWithoutMealPlanInput = {
+    id?: string
+    itemId: string
+    householdId: string
+    createdAt?: Date | string
+  }
+
+  export type MealPlanItemCreateOrConnectWithoutMealPlanInput = {
+    where: MealPlanItemWhereUniqueInput
+    create: XOR<MealPlanItemCreateWithoutMealPlanInput, MealPlanItemUncheckedCreateWithoutMealPlanInput>
+  }
+
+  export type MealPlanItemCreateManyMealPlanInputEnvelope = {
+    data: MealPlanItemCreateManyMealPlanInput | MealPlanItemCreateManyMealPlanInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type HouseholdUpsertWithoutMealPlansInput = {
+    update: XOR<HouseholdUpdateWithoutMealPlansInput, HouseholdUncheckedUpdateWithoutMealPlansInput>
+    create: XOR<HouseholdCreateWithoutMealPlansInput, HouseholdUncheckedCreateWithoutMealPlansInput>
+    where?: HouseholdWhereInput
+  }
+
+  export type HouseholdUpdateToOneWithWhereWithoutMealPlansInput = {
+    where?: HouseholdWhereInput
+    data: XOR<HouseholdUpdateWithoutMealPlansInput, HouseholdUncheckedUpdateWithoutMealPlansInput>
+  }
+
+  export type HouseholdUpdateWithoutMealPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutOwnedHouseholdsNestedInput
+    members?: HouseholdMemberUpdateManyWithoutHouseholdNestedInput
+    freezers?: FreezerUpdateManyWithoutHouseholdNestedInput
+    items?: FreezerItemUpdateManyWithoutHouseholdNestedInput
+    invites?: HouseholdInviteUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUpdateManyWithoutHouseholdNestedInput
+  }
+
+  export type HouseholdUncheckedUpdateWithoutMealPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    members?: HouseholdMemberUncheckedUpdateManyWithoutHouseholdNestedInput
+    freezers?: FreezerUncheckedUpdateManyWithoutHouseholdNestedInput
+    items?: FreezerItemUncheckedUpdateManyWithoutHouseholdNestedInput
+    invites?: HouseholdInviteUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUncheckedUpdateManyWithoutHouseholdNestedInput
+  }
+
+  export type MealPlanItemUpsertWithWhereUniqueWithoutMealPlanInput = {
+    where: MealPlanItemWhereUniqueInput
+    update: XOR<MealPlanItemUpdateWithoutMealPlanInput, MealPlanItemUncheckedUpdateWithoutMealPlanInput>
+    create: XOR<MealPlanItemCreateWithoutMealPlanInput, MealPlanItemUncheckedCreateWithoutMealPlanInput>
+  }
+
+  export type MealPlanItemUpdateWithWhereUniqueWithoutMealPlanInput = {
+    where: MealPlanItemWhereUniqueInput
+    data: XOR<MealPlanItemUpdateWithoutMealPlanInput, MealPlanItemUncheckedUpdateWithoutMealPlanInput>
+  }
+
+  export type MealPlanItemUpdateManyWithWhereWithoutMealPlanInput = {
+    where: MealPlanItemScalarWhereInput
+    data: XOR<MealPlanItemUpdateManyMutationInput, MealPlanItemUncheckedUpdateManyWithoutMealPlanInput>
+  }
+
+  export type MealPlanCreateWithoutItemsInput = {
+    id?: string
+    name?: string | null
+    plannedDate: Date | string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    household: HouseholdCreateNestedOneWithoutMealPlansInput
+  }
+
+  export type MealPlanUncheckedCreateWithoutItemsInput = {
+    id?: string
+    householdId: string
+    name?: string | null
+    plannedDate: Date | string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MealPlanCreateOrConnectWithoutItemsInput = {
+    where: MealPlanWhereUniqueInput
+    create: XOR<MealPlanCreateWithoutItemsInput, MealPlanUncheckedCreateWithoutItemsInput>
+  }
+
+  export type FreezerItemCreateWithoutPlannedItemsInput = {
+    id?: string
+    name: string
+    quantity: string
+    notes?: string | null
+    storedAt?: Date | string
+    expiresAt?: Date | string | null
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    household: HouseholdCreateNestedOneWithoutItemsInput
+    freezer: FreezerCreateNestedOneWithoutItemsInput
+    compartment: CompartmentCreateNestedOneWithoutItemsInput
+    createdBy: UserCreateNestedOneWithoutCreatedItemsInput
+    updatedBy: UserCreateNestedOneWithoutUpdatedItemsInput
+    changeLogs?: ItemChangeLogCreateNestedManyWithoutItemInput
+  }
+
+  export type FreezerItemUncheckedCreateWithoutPlannedItemsInput = {
+    id?: string
+    householdId: string
+    freezerId: string
+    compartmentId: string
+    name: string
+    quantity: string
+    notes?: string | null
+    storedAt?: Date | string
+    expiresAt?: Date | string | null
+    deletedAt?: Date | string | null
+    createdById: string
+    updatedById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    changeLogs?: ItemChangeLogUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type FreezerItemCreateOrConnectWithoutPlannedItemsInput = {
+    where: FreezerItemWhereUniqueInput
+    create: XOR<FreezerItemCreateWithoutPlannedItemsInput, FreezerItemUncheckedCreateWithoutPlannedItemsInput>
+  }
+
+  export type HouseholdCreateWithoutMealPlanItemsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    owner: UserCreateNestedOneWithoutOwnedHouseholdsInput
+    members?: HouseholdMemberCreateNestedManyWithoutHouseholdInput
+    freezers?: FreezerCreateNestedManyWithoutHouseholdInput
+    items?: FreezerItemCreateNestedManyWithoutHouseholdInput
+    invites?: HouseholdInviteCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanCreateNestedManyWithoutHouseholdInput
+  }
+
+  export type HouseholdUncheckedCreateWithoutMealPlanItemsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    ownerId: string
+    members?: HouseholdMemberUncheckedCreateNestedManyWithoutHouseholdInput
+    freezers?: FreezerUncheckedCreateNestedManyWithoutHouseholdInput
+    items?: FreezerItemUncheckedCreateNestedManyWithoutHouseholdInput
+    invites?: HouseholdInviteUncheckedCreateNestedManyWithoutHouseholdInput
+    mealPlans?: MealPlanUncheckedCreateNestedManyWithoutHouseholdInput
+  }
+
+  export type HouseholdCreateOrConnectWithoutMealPlanItemsInput = {
+    where: HouseholdWhereUniqueInput
+    create: XOR<HouseholdCreateWithoutMealPlanItemsInput, HouseholdUncheckedCreateWithoutMealPlanItemsInput>
+  }
+
+  export type MealPlanUpsertWithoutItemsInput = {
+    update: XOR<MealPlanUpdateWithoutItemsInput, MealPlanUncheckedUpdateWithoutItemsInput>
+    create: XOR<MealPlanCreateWithoutItemsInput, MealPlanUncheckedCreateWithoutItemsInput>
+    where?: MealPlanWhereInput
+  }
+
+  export type MealPlanUpdateToOneWithWhereWithoutItemsInput = {
+    where?: MealPlanWhereInput
+    data: XOR<MealPlanUpdateWithoutItemsInput, MealPlanUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type MealPlanUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    household?: HouseholdUpdateOneRequiredWithoutMealPlansNestedInput
+  }
+
+  export type MealPlanUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    householdId?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FreezerItemUpsertWithoutPlannedItemsInput = {
+    update: XOR<FreezerItemUpdateWithoutPlannedItemsInput, FreezerItemUncheckedUpdateWithoutPlannedItemsInput>
+    create: XOR<FreezerItemCreateWithoutPlannedItemsInput, FreezerItemUncheckedCreateWithoutPlannedItemsInput>
+    where?: FreezerItemWhereInput
+  }
+
+  export type FreezerItemUpdateToOneWithWhereWithoutPlannedItemsInput = {
+    where?: FreezerItemWhereInput
+    data: XOR<FreezerItemUpdateWithoutPlannedItemsInput, FreezerItemUncheckedUpdateWithoutPlannedItemsInput>
+  }
+
+  export type FreezerItemUpdateWithoutPlannedItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    storedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    household?: HouseholdUpdateOneRequiredWithoutItemsNestedInput
+    freezer?: FreezerUpdateOneRequiredWithoutItemsNestedInput
+    compartment?: CompartmentUpdateOneRequiredWithoutItemsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedItemsNestedInput
+    updatedBy?: UserUpdateOneRequiredWithoutUpdatedItemsNestedInput
+    changeLogs?: ItemChangeLogUpdateManyWithoutItemNestedInput
+  }
+
+  export type FreezerItemUncheckedUpdateWithoutPlannedItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    householdId?: StringFieldUpdateOperationsInput | string
+    freezerId?: StringFieldUpdateOperationsInput | string
+    compartmentId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    storedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    updatedById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    changeLogs?: ItemChangeLogUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type HouseholdUpsertWithoutMealPlanItemsInput = {
+    update: XOR<HouseholdUpdateWithoutMealPlanItemsInput, HouseholdUncheckedUpdateWithoutMealPlanItemsInput>
+    create: XOR<HouseholdCreateWithoutMealPlanItemsInput, HouseholdUncheckedCreateWithoutMealPlanItemsInput>
+    where?: HouseholdWhereInput
+  }
+
+  export type HouseholdUpdateToOneWithWhereWithoutMealPlanItemsInput = {
+    where?: HouseholdWhereInput
+    data: XOR<HouseholdUpdateWithoutMealPlanItemsInput, HouseholdUncheckedUpdateWithoutMealPlanItemsInput>
+  }
+
+  export type HouseholdUpdateWithoutMealPlanItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutOwnedHouseholdsNestedInput
+    members?: HouseholdMemberUpdateManyWithoutHouseholdNestedInput
+    freezers?: FreezerUpdateManyWithoutHouseholdNestedInput
+    items?: FreezerItemUpdateManyWithoutHouseholdNestedInput
+    invites?: HouseholdInviteUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUpdateManyWithoutHouseholdNestedInput
+  }
+
+  export type HouseholdUncheckedUpdateWithoutMealPlanItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    members?: HouseholdMemberUncheckedUpdateManyWithoutHouseholdNestedInput
+    freezers?: FreezerUncheckedUpdateManyWithoutHouseholdNestedInput
+    items?: FreezerItemUncheckedUpdateManyWithoutHouseholdNestedInput
+    invites?: HouseholdInviteUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUncheckedUpdateManyWithoutHouseholdNestedInput
   }
 
   export type HouseholdMemberCreateManyUserInput = {
@@ -16771,6 +20414,8 @@ export namespace Prisma {
     freezers?: FreezerUpdateManyWithoutHouseholdNestedInput
     items?: FreezerItemUpdateManyWithoutHouseholdNestedInput
     invites?: HouseholdInviteUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUpdateManyWithoutHouseholdNestedInput
   }
 
   export type HouseholdUncheckedUpdateWithoutOwnerInput = {
@@ -16781,6 +20426,8 @@ export namespace Prisma {
     freezers?: FreezerUncheckedUpdateManyWithoutHouseholdNestedInput
     items?: FreezerItemUncheckedUpdateManyWithoutHouseholdNestedInput
     invites?: HouseholdInviteUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlans?: MealPlanUncheckedUpdateManyWithoutHouseholdNestedInput
+    mealPlanItems?: MealPlanItemUncheckedUpdateManyWithoutHouseholdNestedInput
   }
 
   export type HouseholdUncheckedUpdateManyWithoutOwnerInput = {
@@ -16828,6 +20475,7 @@ export namespace Prisma {
     compartment?: CompartmentUpdateOneRequiredWithoutItemsNestedInput
     updatedBy?: UserUpdateOneRequiredWithoutUpdatedItemsNestedInput
     changeLogs?: ItemChangeLogUpdateManyWithoutItemNestedInput
+    plannedItems?: MealPlanItemUpdateManyWithoutItemNestedInput
   }
 
   export type FreezerItemUncheckedUpdateWithoutCreatedByInput = {
@@ -16845,6 +20493,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     changeLogs?: ItemChangeLogUncheckedUpdateManyWithoutItemNestedInput
+    plannedItems?: MealPlanItemUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type FreezerItemUncheckedUpdateManyWithoutCreatedByInput = {
@@ -16878,6 +20527,7 @@ export namespace Prisma {
     compartment?: CompartmentUpdateOneRequiredWithoutItemsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedItemsNestedInput
     changeLogs?: ItemChangeLogUpdateManyWithoutItemNestedInput
+    plannedItems?: MealPlanItemUpdateManyWithoutItemNestedInput
   }
 
   export type FreezerItemUncheckedUpdateWithoutUpdatedByInput = {
@@ -16895,6 +20545,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     changeLogs?: ItemChangeLogUncheckedUpdateManyWithoutItemNestedInput
+    plannedItems?: MealPlanItemUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type FreezerItemUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -16979,6 +20630,22 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type MealPlanCreateManyHouseholdInput = {
+    id?: string
+    name?: string | null
+    plannedDate: Date | string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MealPlanItemCreateManyHouseholdInput = {
+    id?: string
+    mealPlanId: string
+    itemId: string
+    createdAt?: Date | string
+  }
+
   export type HouseholdMemberUpdateWithoutHouseholdInput = {
     id?: StringFieldUpdateOperationsInput | string
     role?: EnumHouseholdRoleFieldUpdateOperationsInput | $Enums.HouseholdRole
@@ -17040,6 +20707,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneRequiredWithoutCreatedItemsNestedInput
     updatedBy?: UserUpdateOneRequiredWithoutUpdatedItemsNestedInput
     changeLogs?: ItemChangeLogUpdateManyWithoutItemNestedInput
+    plannedItems?: MealPlanItemUpdateManyWithoutItemNestedInput
   }
 
   export type FreezerItemUncheckedUpdateWithoutHouseholdInput = {
@@ -17057,6 +20725,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     changeLogs?: ItemChangeLogUncheckedUpdateManyWithoutItemNestedInput
+    plannedItems?: MealPlanItemUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type FreezerItemUncheckedUpdateManyWithoutHouseholdInput = {
@@ -17099,6 +20768,56 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     usedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MealPlanUpdateWithoutHouseholdInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: MealPlanItemUpdateManyWithoutMealPlanNestedInput
+  }
+
+  export type MealPlanUncheckedUpdateWithoutHouseholdInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: MealPlanItemUncheckedUpdateManyWithoutMealPlanNestedInput
+  }
+
+  export type MealPlanUncheckedUpdateManyWithoutHouseholdInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    plannedDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MealPlanItemUpdateWithoutHouseholdInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mealPlan?: MealPlanUpdateOneRequiredWithoutItemsNestedInput
+    item?: FreezerItemUpdateOneRequiredWithoutPlannedItemsNestedInput
+  }
+
+  export type MealPlanItemUncheckedUpdateWithoutHouseholdInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mealPlanId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MealPlanItemUncheckedUpdateManyWithoutHouseholdInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mealPlanId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -17159,6 +20878,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneRequiredWithoutCreatedItemsNestedInput
     updatedBy?: UserUpdateOneRequiredWithoutUpdatedItemsNestedInput
     changeLogs?: ItemChangeLogUpdateManyWithoutItemNestedInput
+    plannedItems?: MealPlanItemUpdateManyWithoutItemNestedInput
   }
 
   export type FreezerItemUncheckedUpdateWithoutFreezerInput = {
@@ -17176,6 +20896,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     changeLogs?: ItemChangeLogUncheckedUpdateManyWithoutItemNestedInput
+    plannedItems?: MealPlanItemUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type FreezerItemUncheckedUpdateManyWithoutFreezerInput = {
@@ -17225,6 +20946,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneRequiredWithoutCreatedItemsNestedInput
     updatedBy?: UserUpdateOneRequiredWithoutUpdatedItemsNestedInput
     changeLogs?: ItemChangeLogUpdateManyWithoutItemNestedInput
+    plannedItems?: MealPlanItemUpdateManyWithoutItemNestedInput
   }
 
   export type FreezerItemUncheckedUpdateWithoutCompartmentInput = {
@@ -17242,6 +20964,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     changeLogs?: ItemChangeLogUncheckedUpdateManyWithoutItemNestedInput
+    plannedItems?: MealPlanItemUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type FreezerItemUncheckedUpdateManyWithoutCompartmentInput = {
@@ -17269,6 +20992,13 @@ export namespace Prisma {
     newValue?: string | null
   }
 
+  export type MealPlanItemCreateManyItemInput = {
+    id?: string
+    mealPlanId: string
+    householdId: string
+    createdAt?: Date | string
+  }
+
   export type ItemChangeLogUpdateWithoutItemInput = {
     id?: StringFieldUpdateOperationsInput | string
     changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17294,6 +21024,55 @@ export namespace Prisma {
     fieldName?: StringFieldUpdateOperationsInput | string
     oldValue?: NullableStringFieldUpdateOperationsInput | string | null
     newValue?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MealPlanItemUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mealPlan?: MealPlanUpdateOneRequiredWithoutItemsNestedInput
+    household?: HouseholdUpdateOneRequiredWithoutMealPlanItemsNestedInput
+  }
+
+  export type MealPlanItemUncheckedUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mealPlanId?: StringFieldUpdateOperationsInput | string
+    householdId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MealPlanItemUncheckedUpdateManyWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mealPlanId?: StringFieldUpdateOperationsInput | string
+    householdId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MealPlanItemCreateManyMealPlanInput = {
+    id?: string
+    itemId: string
+    householdId: string
+    createdAt?: Date | string
+  }
+
+  export type MealPlanItemUpdateWithoutMealPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    item?: FreezerItemUpdateOneRequiredWithoutPlannedItemsNestedInput
+    household?: HouseholdUpdateOneRequiredWithoutMealPlanItemsNestedInput
+  }
+
+  export type MealPlanItemUncheckedUpdateWithoutMealPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    householdId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MealPlanItemUncheckedUpdateManyWithoutMealPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    householdId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

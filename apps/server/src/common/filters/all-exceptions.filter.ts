@@ -4,8 +4,8 @@ import {
   type ExceptionFilter,
   HttpException,
   HttpStatus,
+  Logger,
 } from '@nestjs/common';
-import { PinoLogger } from 'nestjs-pino';
 
 /**
  * Catch-all exception filter that ensures every unhandled error is logged
@@ -16,9 +16,8 @@ import { PinoLogger } from 'nestjs-pino';
  */
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
-  constructor(private readonly logger: PinoLogger) {
-    this.logger.setContext('AllExceptionsFilter');
-  }
+  private readonly logger = new Logger(AllExceptionsFilter.name);
+  constructor() {}
 
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();

@@ -1,1 +1,7 @@
 run_pack query="FreezerTracker overview" packed_tokens=246 reduction_pct=53.32 included=22 excluded=0
+run_pack query="FreezerTracker overview" packed_tokens=239 reduction_pct=-1.27 included=21 excluded=0
+run_pack query="Fixed scrolling issue" packed_tokens=252 reduction_pct=66.84 included=21 excluded=0
+run_pack query="" packed_tokens=161 reduction_pct=59.95 included=14 excluded=0
+run_pack query="Planing a new feature for backend and frontend" packed_tokens=322 reduction_pct=29.23 included=31 excluded=0
+run_pack query="Planning a new feature for backend and frontend" packed_tokens=325 reduction_pct=39.25 included=31 excluded=0
+run_pack query="meal planning" packed_tokens=164 reduction_pct=91.23 included=14 excluded=0

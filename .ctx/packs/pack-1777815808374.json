@@ -1,0 +1,24 @@
+{
+  "original_estimated_tokens": 1871,
+  "packed_tokens": 164,
+  "reduction_pct": 91.23463388562266,
+  "included": [
+    "query included: priority=Query tokens=4 ref=",
+    "recent_diff included: priority=RecentDiff tokens=11 ref=",
+    "memory included: priority=DirectiveMemory tokens=15 ref=project",
+    "memory included: priority=DirectiveMemory tokens=13 ref=project",
+    "memory included: priority=DirectiveMemory tokens=12 ref=project",
+    "memory included: priority=DirectiveMemory tokens=13 ref=project",
+    "memory included: priority=DirectiveMemory tokens=15 ref=project",
+    "memory included: priority=DirectiveMemory tokens=12 ref=project",
+    "memory included: priority=DirectiveMemory tokens=13 ref=project",
+    "memory included: priority=DirectiveMemory tokens=12 ref=project",
+    "memory included: priority=DirectiveMemory tokens=13 ref=project",
+    "memory included: priority=DirectiveMemory tokens=13 ref=project",
+    "memory included: priority=DirectiveMemory tokens=13 ref=project",
+    "memory included: priority=DirectiveMemory tokens=13 ref=project"
+  ],
+  "excluded": [],
+  "pack_path": "/Users/supporterino/repos/FreezerTracker/.ctx/packs/pack-1777815808374.json",
+  "compact_context": "query: meal planning\nrecent_diff: diff_files:.ctx/audit.log,apps/client/src/components/layout/Sidebar.tsx,... changed_symbols:() changes:+57/-4\nmemory: markdown:agents.56] Resources: **Canonical Go integration**: [`examples/agent/main.go`](../examples/agent/main.go) @project\nmemory: markdown:agents.55] Resources: **Plugin protocol**: [`docs/plugin-protocol.md`](plugin-protocol.md) @project\nmemory: markdown:agents.54] Resources: **Benchmarks**: [`docs/benchmarks.md`](benchmarks.md) @project\nmemory: markdown:agents.53] Resources: **API stability**: [`docs/api-stability.md`](api-stability.md) @project\nmemory: markdown:agents.52] Resources: **Strategy / why**: [`GRAYMATTER_PLAYBOOK.md`](../GRAYMATTER_PLAYBOOK.md) @project\nmemory: markdown:agents.51] Resources: **Releases**: <https://github.com/angelnicolasc/graymatter/releases> @project\nmemory: markdown:agents.50] Resources: **Go docs**: <https://pkg.go.dev/github.com/angelnicolasc/graymatter> @project\nmemory: markdown:agents.49] Resources: **GrayMatter GitHub**: <https://github.com/angelnicolasc/graymatter> @project\nmemory: markdown:agents.48] Session-end checklist: `memory_reflect action=forget` for ... @project\nmemory: markdown:agents.47] Session-end checklist: `checkpoint_save` if the ... @project\nmemory: markdown:agents.46] Session-end checklist: `memory_reflect action=update` for ... @project\nmemory: markdown:agents.45] Session-end checklist: `memory_add` for each ... @project"
+}

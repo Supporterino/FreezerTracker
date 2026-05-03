@@ -14,6 +14,7 @@ import { HealthModule } from './health/health.module';
 import { HouseholdsModule } from './households/households.module';
 import { InvitesModule } from './invites/invites.module';
 import { ItemsModule } from './items/items.module';
+import { MealPlansModule } from './meal-plans/meal-plans.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 
@@ -66,6 +67,7 @@ import { UsersModule } from './users/users.module';
     CompartmentsModule,
     ChangeLogModule,
     ItemsModule,
+    MealPlansModule,
     HealthModule,
   ],
   providers: [LoggingInterceptor, { provide: APP_GUARD, useClass: ThrottlerGuard }],

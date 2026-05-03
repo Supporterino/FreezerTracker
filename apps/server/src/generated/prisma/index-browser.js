@@ -204,6 +204,24 @@ exports.Prisma.ItemChangeLogScalarFieldEnum = {
   newValue: 'newValue'
 };
 
+exports.Prisma.MealPlanScalarFieldEnum = {
+  id: 'id',
+  householdId: 'householdId',
+  name: 'name',
+  plannedDate: 'plannedDate',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MealPlanItemScalarFieldEnum = {
+  id: 'id',
+  mealPlanId: 'mealPlanId',
+  itemId: 'itemId',
+  householdId: 'householdId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -232,7 +250,9 @@ exports.Prisma.ModelName = {
   Freezer: 'Freezer',
   Compartment: 'Compartment',
   FreezerItem: 'FreezerItem',
-  ItemChangeLog: 'ItemChangeLog'
+  ItemChangeLog: 'ItemChangeLog',
+  MealPlan: 'MealPlan',
+  MealPlanItem: 'MealPlanItem'
 };
 
 /**

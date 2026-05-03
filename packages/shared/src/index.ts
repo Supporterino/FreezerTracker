@@ -77,6 +77,28 @@ export interface UpdateUserDto {
   name?: string;
 }
 
+export interface CreateMealPlanDto {
+  name?: string;
+  plannedDate: string;
+  notes?: string;
+  itemIds: string[];
+}
+
+export interface UpdateMealPlanDto {
+  name?: string;
+  plannedDate?: string;
+  notes?: string;
+}
+
+export interface AddPlannedItemDto {
+  itemId: string;
+}
+
+export interface MealPlanQueryDto {
+  from?: string;
+  to?: string;
+}
+
 export interface ItemQueryDto {
   freezerId?: string;
   compartmentIds?: string[];
@@ -173,6 +195,24 @@ export interface ChangeLogEntryResponse {
   changedBy: UserResponse;
 }
 
+export interface PlannedItemResponse {
+  id: string;
+  itemId: string;
+  item: FreezerItemResponse;
+  createdAt: string;
+}
+
+export interface MealPlanResponse {
+  id: string;
+  householdId: string;
+  name: string | null;
+  plannedDate: string;
+  notes: string | null;
+  items: PlannedItemResponse[];
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface PaginatedResponse<T> {
   data: T[];
   total: number;
@@ -239,4 +279,21 @@ export const updateItemSchema = createItemSchema.partial();
 
 export const updateUserSchema = z.object({
   name: z.string().min(2).optional(),
+});
+
+export const createMealPlanSchema = z.object({
+  name: z.string().min(1).optional(),
+  plannedDate: z.string().min(1),
+  notes: z.string().optional(),
+  itemIds: z.array(z.string().min(1)).min(1),
+});
+
+export const updateMealPlanSchema = z.object({
+  name: z.string().min(1).optional(),
+  plannedDate: z.string().min(1).optional(),
+  notes: z.string().optional(),
+});
+
+export const addPlannedItemSchema = z.object({
+  itemId: z.string().min(1),
 });

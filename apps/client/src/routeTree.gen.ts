@@ -20,6 +20,7 @@ import { Route as AuthenticatedHouseholdsHidRouteRouteImport } from './routes/_a
 import { Route as AuthenticatedHouseholdsHidSettingsRouteImport } from './routes/_authenticated/households/$hid/settings'
 import { Route as AuthenticatedHouseholdsHidOverviewRouteImport } from './routes/_authenticated/households/$hid/overview'
 import { Route as AuthenticatedHouseholdsHidArchiveRouteImport } from './routes/_authenticated/households/$hid/archive'
+import { Route as AuthenticatedHouseholdsHidMealPlansIndexRouteImport } from './routes/_authenticated/households/$hid/meal-plans/index'
 import { Route as AuthenticatedHouseholdsHidItemsIndexRouteImport } from './routes/_authenticated/households/$hid/items/index'
 import { Route as AuthenticatedHouseholdsHidFreezersFidRouteImport } from './routes/_authenticated/households/$hid/freezers/$fid'
 
@@ -83,6 +84,12 @@ const AuthenticatedHouseholdsHidArchiveRoute =
     path: '/archive',
     getParentRoute: () => AuthenticatedHouseholdsHidRouteRoute,
   } as any)
+const AuthenticatedHouseholdsHidMealPlansIndexRoute =
+  AuthenticatedHouseholdsHidMealPlansIndexRouteImport.update({
+    id: '/meal-plans/',
+    path: '/meal-plans/',
+    getParentRoute: () => AuthenticatedHouseholdsHidRouteRoute,
+  } as any)
 const AuthenticatedHouseholdsHidItemsIndexRoute =
   AuthenticatedHouseholdsHidItemsIndexRouteImport.update({
     id: '/items/',
@@ -109,6 +116,7 @@ export interface FileRoutesByFullPath {
   '/households/$hid/settings': typeof AuthenticatedHouseholdsHidSettingsRoute
   '/households/$hid/freezers/$fid': typeof AuthenticatedHouseholdsHidFreezersFidRoute
   '/households/$hid/items/': typeof AuthenticatedHouseholdsHidItemsIndexRoute
+  '/households/$hid/meal-plans/': typeof AuthenticatedHouseholdsHidMealPlansIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -123,6 +131,7 @@ export interface FileRoutesByTo {
   '/households/$hid/settings': typeof AuthenticatedHouseholdsHidSettingsRoute
   '/households/$hid/freezers/$fid': typeof AuthenticatedHouseholdsHidFreezersFidRoute
   '/households/$hid/items': typeof AuthenticatedHouseholdsHidItemsIndexRoute
+  '/households/$hid/meal-plans': typeof AuthenticatedHouseholdsHidMealPlansIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -139,6 +148,7 @@ export interface FileRoutesById {
   '/_authenticated/households/$hid/settings': typeof AuthenticatedHouseholdsHidSettingsRoute
   '/_authenticated/households/$hid/freezers/$fid': typeof AuthenticatedHouseholdsHidFreezersFidRoute
   '/_authenticated/households/$hid/items/': typeof AuthenticatedHouseholdsHidItemsIndexRoute
+  '/_authenticated/households/$hid/meal-plans/': typeof AuthenticatedHouseholdsHidMealPlansIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/households/$hid/settings'
     | '/households/$hid/freezers/$fid'
     | '/households/$hid/items/'
+    | '/households/$hid/meal-plans/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/households/$hid/settings'
     | '/households/$hid/freezers/$fid'
     | '/households/$hid/items'
+    | '/households/$hid/meal-plans'
   id:
     | '__root__'
     | '/'
@@ -184,6 +196,7 @@ export interface FileRouteTypes {
     | '/_authenticated/households/$hid/settings'
     | '/_authenticated/households/$hid/freezers/$fid'
     | '/_authenticated/households/$hid/items/'
+    | '/_authenticated/households/$hid/meal-plans/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -272,6 +285,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHouseholdsHidArchiveRouteImport
       parentRoute: typeof AuthenticatedHouseholdsHidRouteRoute
     }
+    '/_authenticated/households/$hid/meal-plans/': {
+      id: '/_authenticated/households/$hid/meal-plans/'
+      path: '/meal-plans'
+      fullPath: '/households/$hid/meal-plans/'
+      preLoaderRoute: typeof AuthenticatedHouseholdsHidMealPlansIndexRouteImport
+      parentRoute: typeof AuthenticatedHouseholdsHidRouteRoute
+    }
     '/_authenticated/households/$hid/items/': {
       id: '/_authenticated/households/$hid/items/'
       path: '/items'
@@ -295,6 +315,7 @@ interface AuthenticatedHouseholdsHidRouteRouteChildren {
   AuthenticatedHouseholdsHidSettingsRoute: typeof AuthenticatedHouseholdsHidSettingsRoute
   AuthenticatedHouseholdsHidFreezersFidRoute: typeof AuthenticatedHouseholdsHidFreezersFidRoute
   AuthenticatedHouseholdsHidItemsIndexRoute: typeof AuthenticatedHouseholdsHidItemsIndexRoute
+  AuthenticatedHouseholdsHidMealPlansIndexRoute: typeof AuthenticatedHouseholdsHidMealPlansIndexRoute
 }
 
 const AuthenticatedHouseholdsHidRouteRouteChildren: AuthenticatedHouseholdsHidRouteRouteChildren =
@@ -309,6 +330,8 @@ const AuthenticatedHouseholdsHidRouteRouteChildren: AuthenticatedHouseholdsHidRo
       AuthenticatedHouseholdsHidFreezersFidRoute,
     AuthenticatedHouseholdsHidItemsIndexRoute:
       AuthenticatedHouseholdsHidItemsIndexRoute,
+    AuthenticatedHouseholdsHidMealPlansIndexRoute:
+      AuthenticatedHouseholdsHidMealPlansIndexRoute,
   }
 
 const AuthenticatedHouseholdsHidRouteRouteWithChildren =
