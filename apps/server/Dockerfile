@@ -31,10 +31,6 @@ FROM oven/bun:1.3.13-slim AS runtime
 LABEL org.opencontainers.image.source="https://github.com/Supporterino/FreezerTracker"
 LABEL org.opencontainers.image.description="FreezerMan server API"
 
-# Run as non-root user for security
-RUN addgroup --system --gid 10001 appgroup && \
-    adduser --system --uid 10001 --ingroup appgroup appuser
-
 WORKDIR /app
 
 # Copy the fully-prepared workspace from builder
@@ -44,8 +40,6 @@ COPY --from=builder /app/packages/shared/ ./packages/shared/
 COPY --from=builder /app/apps/server/ ./apps/server/
 
 WORKDIR /app/apps/server
-
-USER appuser
 
 EXPOSE 3000
 
