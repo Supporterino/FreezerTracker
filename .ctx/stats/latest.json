@@ -1,0 +1,12 @@
+{
+  "original_tokens": 527,
+  "packed_tokens": 246,
+  "reduction_pct": 53.32068311195446,
+  "latency_ms": 0,
+  "agent": null,
+  "command": null,
+  "status": null,
+  "exit_code": null,
+  "fallback_used": false,
+  "pack_path": "/Users/supporterino/repos/FreezerTracker/.ctx/packs/pack-1777813746351.json"
+}
