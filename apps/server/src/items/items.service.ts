@@ -66,7 +66,7 @@ export class ItemsService {
       search,
       expiresBefore,
       page = 1,
-      limit = 20,
+      limit = 50,
     } = query;
     // Coerce defensively: NestJS may deliver a plain string when only one query param is sent
     const compartmentIds = rawCompartmentIds
