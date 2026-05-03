@@ -6,6 +6,7 @@ import { useAuthStore } from '@/store/authStore';
 // baseUrl is injected via reinitialiseClient() called from main.tsx.
 
 let _baseUrl = '';
+let refreshPromise: Promise<{ accessToken: string; refreshToken: string }> | null = null;
 
 let apiClient: KyInstance = buildClient(_baseUrl);
 
@@ -24,30 +25,47 @@ function buildClient(baseUrl: string): KyInstance {
         async ({ request, response }) => {
           if (response.status === 401) {
             const { refreshToken, setTokens, logout } = useAuthStore.getState();
-            if (refreshToken) {
-              try {
-                const res = await tauriFetch(`${_baseUrl}/api/v1/auth/refresh`, {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ refreshToken }),
-                });
-                const refreshed = (await (res as Response).json()) as {
-                  accessToken: string;
-                  refreshToken: string;
-                };
-                setTokens(refreshed);
-                const newHeaders = new Headers(request.headers);
-                newHeaders.set('Authorization', `Bearer ${refreshed.accessToken}`);
-                return tauriFetch(request.url, {
-                  method: request.method,
-                  headers: Object.fromEntries(newHeaders.entries()),
-                  body: request.body ? await request.text() : undefined,
-                }) as unknown as Response;
-              } catch (refreshError) {
-                console.error('Token refresh failed, forcing logout:', refreshError);
-              }
+            if (!refreshToken) {
+              logout();
+              return;
             }
-            logout();
+
+            if (!refreshPromise) {
+              refreshPromise = tauriFetch(`${_baseUrl}/api/v1/auth/refresh`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ refreshToken }),
+              })
+                .then((res) => {
+                  if (!res.ok) throw new Error('Refresh failed');
+                  return res.json() as Promise<{ accessToken: string; refreshToken: string }>;
+                })
+                .then((tokens) => {
+                  setTokens(tokens);
+                  return tokens;
+                })
+                .catch((err) => {
+                  console.error('Token refresh failed, forcing logout:', err);
+                  logout();
+                  throw err;
+                })
+                .finally(() => {
+                  refreshPromise = null;
+                });
+            }
+
+            try {
+              const refreshed = await refreshPromise;
+              const newHeaders = new Headers(request.headers);
+              newHeaders.set('Authorization', `Bearer ${refreshed.accessToken}`);
+              return tauriFetch(request.url, {
+                method: request.method,
+                headers: Object.fromEntries(newHeaders.entries()),
+                body: request.body ? await request.text() : undefined,
+              }) as unknown as Response;
+            } catch {
+              // logout already triggered by the shared promise
+            }
           }
         },
       ],

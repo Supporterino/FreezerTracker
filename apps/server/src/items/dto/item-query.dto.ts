@@ -31,11 +31,11 @@ export class ItemQueryDto {
   @Min(1)
   page?: number = 1;
 
-  @ApiPropertyOptional({ default: 20 })
+  @ApiPropertyOptional({ default: 50 })
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
   @Min(1)
   @Max(100)
-  limit?: number = 20;
+  limit?: number = 50;
 }
