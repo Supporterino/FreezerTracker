@@ -2,8 +2,8 @@ apiVersion: v2
 name: freezer-tracker-chart
 description: Helm chart for the FreezerMan NestJS backend API
 type: application
-version: "0.2.3"
-appVersion: "0.2.0"
+version: "0.2.4"
+appVersion: "0.2.1"
 annotations:
   org.opencontainers.image.source: https://github.com/Supporterino/FreezerTracker
   org.opencontainers.image.description: Helm chart for the FreezerMan server
